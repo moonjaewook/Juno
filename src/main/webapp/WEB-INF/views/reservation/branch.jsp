@@ -4,6 +4,10 @@
 <!-- header.jsp 내용 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+
+<!--  나는 신정 -->
+
+
 <body>
 	<div id="container" class="reservation_wrap">
 		<div class="sub_visual">
