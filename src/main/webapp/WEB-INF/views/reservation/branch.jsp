@@ -3,7 +3,7 @@
 
 <!-- header.jsp 내용 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-
+너무어렵다.
 <body>
 	<div id="container" class="reservation_wrap">
 		<div class="sub_visual">
