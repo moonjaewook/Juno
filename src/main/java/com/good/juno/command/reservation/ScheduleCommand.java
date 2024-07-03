@@ -20,7 +20,7 @@ public class ScheduleCommand implements Command {
 	}
 
 	 @Override
-	    public void execute(Model model, int branchId, int designerId, ReservationIDao dao) {
+	    public void execute(Model model, int branchId, String designerId, ReservationIDao dao) {
 	        DesignerDto designerInfo = dao.selectedDesignerInfo(designerId);
 	        model.addAttribute("designerInfo", designerInfo);
 
@@ -40,12 +40,20 @@ public class ScheduleCommand implements Command {
 	        List<String> currentMonthDays = getDays(firstDayCurrent, lastDayCurrent);
 	        List<String> nextMonthDays = getDays(firstDayNext, lastDayNext);
 
+	        model.addAttribute("currentMonth", currentMonth);
+	        model.addAttribute("nextMonth", nextMonth);
 	        model.addAttribute("currentMonthDays", currentMonthDays);
 	        model.addAttribute("nextMonthDays", nextMonthDays);
+	        
+//	        int branchId = Integer.parseInt(model.getParameter("branchId"));
 
 	        // 예약된 시간을 가져와서 모델에 추가
 //	        String reservationDate = currentDate.getYear() + "-" + (currentDate.getMonthValue() < 10 ? "0" + currentDate.getMonthValue() : currentDate.getMonthValue()) + "-%";
-//	        List<ReservationDto> bookedTimes = dao.getBookedTimes(designerId, reservationDate);
+//	        List<ReservationDto> bookedTimesList = dao.getBookedTimes(designerId, reservationDate);
+//	        List<String> bookedTimes = new ArrayList<String>();
+//	        for (ReservationDto dto : bookedTimesList) {
+//	            bookedTimes.add(dto.getReservationTime().toLocalDateTime().toLocalTime().toString());
+//	        }
 //	        model.addAttribute("bookedTimes", bookedTimes);
 	    }
 

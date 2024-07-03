@@ -2,17 +2,17 @@ package com.good.juno.dto;
 
 public class DesignerDto {
 	
-	private int designerId;
+	private String designerId;
     private String designerName;
     private String introduce;
     private String designerPath; // 디자이너 사진
     private String branchId; // FK(branch 테이블)
     
     // getter setter
-	public int getDesignerId() {
+	public String getDesignerId() {
 		return designerId;
 	}
-	public void setDesignerId(int designerId) {
+	public void setDesignerId(String designerId) {
 		this.designerId = designerId;
 	}
 	public String getDesignerName() {
