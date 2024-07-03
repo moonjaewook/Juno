@@ -1,5 +1,7 @@
 package com.good.juno.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,9 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.good.juno.command.product.BCommand;
+import com.good.juno.command.admin.BCommand;
+import com.good.juno.command.admin.BranchRegister;
+import com.good.juno.command.admin.DesignerRegister;
 import com.good.juno.dao.AdminDao;
+import com.good.juno.dto.DesignerDto;
 
 @Controller
 public class AdminController {
@@ -58,7 +66,7 @@ public class AdminController {
 		System.out.println("id: " + request.getParameter("id"));
 		System.out.println("pw: " + request.getParameter("pw"));
 		System.out.println("admin: " + dao.admin(request.getParameter("id")));
-		
+
 		if (dao.membercheck(request.getParameter("id"), request.getParameter("pw")) == 1) {
 			session.setAttribute("id", request.getParameter("id"));
 			session.setAttribute("name", request.getParameter("name"));
@@ -67,20 +75,76 @@ public class AdminController {
 			System.out.println(1);
 			return "home";
 		} else {
-		System.out.println(2);
-		model.addAttribute("errorMessage", "ID 혹은 PW가 일치하지 않습니다!");
-		return "Join_Login/Login";
+			System.out.println(2);
+			model.addAttribute("errorMessage", "ID 혹은 PW가 일치하지 않습니다!");
+			return "Join_Login/Login";
 		}
 	}
-	
-	
-	
+
 	@RequestMapping("/admin")
 	public String admin() {
 
 		return "admin/admin";
 	}
-	
+
+	@RequestMapping("/register2")
+	public String register2() {
+
+		return "admin/branch_register";
+	}
+
+	@RequestMapping("/RegisterBranchAction")
+	public String RegisterBranchAction(MultipartHttpServletRequest request,
+			@RequestParam("branch_img") MultipartFile branch_img, Model model) {
+		System.out.println("지점 등록 컨트롤러");
+
+		model.addAttribute("request", request);
+		model.addAttribute("branch_img", branch_img);
+
+		command = new BranchRegister(sqlSession);
+		command.execute(model);
+
+		return "redirect:branch";
+	}
+
+	@RequestMapping("/register1")
+	public String register1(Model model) {
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		List<String> branches = dao.branchlist();
+		model.addAttribute("branches", branches);
+		return "admin/designer_register";
+	}
+
+	@RequestMapping("/RegisterManagerAction")
+	public String RegisterManagerAction(MultipartHttpServletRequest request,
+			@RequestParam("profile") MultipartFile profile, Model model) {
+		System.out.println("디자이너 등록 컨트롤러");
+
+		model.addAttribute("request", request);
+		model.addAttribute("profile", profile);
+
+		command = new DesignerRegister(sqlSession);
+		command.execute(model);
+
+		return "admin/admin";
+	}
+
+	@RequestMapping("designerall")
+	public String designerall(HttpServletRequest request, Model model, HttpSession session) {
+		System.out.println("desingerall");
+
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		List<DesignerDto> designer_all = dao.desingerall();
+		model.addAttribute("designer_all", designer_all);
+		return "admin/designer_all";
+	}
+
+	@RequestMapping("/adminqna")
+	public String qna() {
+
+		return "admin/qna";
+	}
+
 	@RequestMapping("/Logout")
 	public String logoutAction(HttpServletRequest request, Model model, HttpSession session) {
 
@@ -89,7 +153,7 @@ public class AdminController {
 		if (session != null) {
 			session.invalidate();
 		}
-		
+
 		return "home";
 	}
 

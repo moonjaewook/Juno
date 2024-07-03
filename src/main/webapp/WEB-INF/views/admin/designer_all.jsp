@@ -4,10 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	class=" js no-touch csstransforms csstransforms3d csstransitions"
 	style="">
-<script type="text/javascript" async=""
-	src="https://www.google-analytics.com/analytics.js"></script>
-<script type="text/javascript" async=""
-	src="https://www.googletagmanager.com/gtag/js?id=G-DBGPMGH101&amp;l=dataLayer&amp;cx=c"></script>
 <head>
 
 <link rel="shortcut icon"
@@ -36,15 +32,14 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
 <meta http-equiv="imagetoolbar" content="no">
-
-
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
-if(!wcs_add) var wcs_add = {};
-wcs_add["wa"] = "fce44f52888e1";
-if(window.wcs) {
-wcs_do();
-}
+	if (!wcs_add)
+		var wcs_add = {};
+	wcs_add["wa"] = "fce44f52888e1";
+	if (window.wcs) {
+		wcs_do();
+	}
 </script>
 <title>준오헤어</title>
 <link rel="stylesheet"
@@ -56,17 +51,19 @@ wcs_do();
 <link rel="stylesheet"
 	href="https://www.junohair.com/static_resources/css/junohair/sub_common.css?rscVer=0333">
 <link rel="stylesheet"
-	href="https://www.junohair.com/static_resources/css/junohair/sub_style2.css?rscVer=0333">
-<link rel="stylesheet"
-	href="https://www.junohair.com/static_resources/css/junohair/reservation.css?rscVer=0333">
+	href="https://www.junohair.com/static_resources/css/myjuno/join.css?rscVer=0333">
 <script
 	src="https://www.junohair.com/static_resources/lib/jquery/1.12.4/jquery.min.js?rscVer=0333"></script>
 <script
-	src="https://www.junohair.com/static_resources/js/viewportchecker.js?rscVer=0333"></script>
+	src="https://www.junohair.com/static_resources/js/imagesloaded.3.2.x.pkgd.min.js?rscVer=0333"></script>
+<script
+	src="https://www.junohair.com/static_resources/js/isotope.min.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/modernizr.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/smoothscroll.js?rscVer=0333"></script>
+<script
+	src="https://www.junohair.com/static_resources/js/viewportchecker.js?rscVer=0333"></script>
 
 <link rel="stylesheet"
 	href="https://www.junohair.com/static_resources/css/contents.display.none.css?rscVer=0333">
@@ -82,80 +79,101 @@ wcs_do();
 	src="https://www.junohair.com/static_resources/js/common.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
+
+<script
+	src="https://www.junohair.com/static_resources/js/myjuno/juno_sub_ui.js?rscVer=0333"></script>
+
+<link rel="stylesheet" type="text/css" href="./resources/join_css.css">
+<script type="text/javascript" src="./resources/verify.js"
+	charset="utf-8"></script>
+
+
 </head>
 
 
 <!-- header.jsp 내용 -->
 <jsp:include page="/WEB-INF/views/common/header2.jsp" />
 
-<body>
+<body class="join">
+	<div id="wrap">
 
-	<div id="container" class="reservation_wrap">
-		<div class="sub_visual">
-			<div class="sub_visual_bg"
-				style="background-image: url('https://www.junohair.com/static_resources/images/junohair/sub/reservation/reser_visual.jpg')"></div>
-			<div class="sub_visual_text">
-				<strong>관리자 화면</strong>
-				<p class="sub_visual_sub_text">
-					<span>JUNO HAIR, 체계적인 관리의 시작</span>
-				</p>
+		<script>
+			function gotoMyjuno() {
+				if ("" != "CUST") {
+					alert("로그인후 이용이 가능합니다.");
+				}
+				location.href = "/myjuno/member_info";
+			}
+		</script>
+
+		<div id="container">
+			<div class="sub_visual">
+				<div class="sub_visual_bg"
+					style="background-image: url('https://www.junohair.com/static_resources/images/myjuno/intro_visual.jpg')"></div>
+				<div class="sub_visual_text">디자이너 조회</div>
 			</div>
-		</div>
+			<div class="sub_menu"></div>
 
-		<div id="contents" style="height: 900px;">
-			<div class="inner">
-				<div class="reservation_intro" style="height: 200px;">
-					<div class="box recomm">
-						<a href="./register2">
-							<p class="tit">지점 등록</p>
-							<p class="desc">
-								<span>JUNO HAIR 점포를</span> <span>등록합니다. </span>
-							</p>
-						</a>
-					</div>
-					<div class="box recomm">
-						<a href="./adminqna">
-							<p class="tit">문의답변</p>
-							<p class="desc">
-								<span>고객의 목소리를</span> <span>경청합니다. </span>
-							</p>
-						</a>
-					</div>
-					
-					<div class="box reser">
-						<a href="./register1">
-							<p class="tit">디자이너 등록</p>
-							<p class="desc">
-								<span>최고의 미용 전문가를</span> <span>선별합니다</span>
-							</p>
-						</a>
-					</div>
-					
-					<div class="box reser">
-						<a href="./designerall">
-							<p class="tit">디자이너 조회·삭제</p>
-							<p class="desc">
-								<span>최고의 미용 전문가를</span> <span>확인해보세요</span>
-							</p>
-						</a>
-					</div>
-					
-					<div class="box recomm">
-						<a href="./ProductAddTest">
-							<p class="tit">판매 물품 등록</p>
-							<p class="desc">
-								<span>고객님의 헤어를 책임지는</span> <span>제품을 등록합니다. </span>
-							</p>
-						</a>
-					</div>
-					
-					
+			<!-- 	<div id="contents">
+				
+					<div class="inner"> -->
+			<div class="section1">
+				<div class="section_tit">
+					<span class="bar"></span> <strong class="tit">디자이너 조회</strong>
 				</div>
-				<div class="intro_noti"></div>
+			</div>
+			</br> </br>
+
+
+
+			<div id="contents">
+				<div class="board_list">
+					<div class="table">
+						<div class="thead tr">
+							<div class="th" style="width: 130px;">ID</div>
+							<div class="th" style="width: 130px;">이름</div>
+							<div class="th">자기소개</div>
+							<div class="th">프로필사진</div>
+							<div class="th">지점</div>
+							<div class="th">비고</div>
+						</div>
+
+						<!-- 게시물이 없는 경우 처리 -->
+						<c:if test="${empty designer_all}">
+							<div class="tr noPost">
+								<div class="td" colspan="6">
+									<p>디자이너가 없습니다.</p>
+								</div>
+							</div>
+						</c:if>
+
+						<!-- 게시물이 있는 경우 -->
+						<c:forEach var="member" items="${designer_all}">
+							<div class="tr">
+								<div class="td">${member.designerId}</div>
+								<div class="td consult-title">${member.designerName}</div>
+								<div class="td">${member.introduce}</div>
+								<div class="td">
+									<img src="./resources/productupload/${member.designerPath}"
+										alt="프로필 사진">
+								</div>
+								<div class="td">${member.branchName}</div>
+								<div class="td">
+									<a href="./memberdelete.ad?userid=${member.designerId}"
+										class="btn-delete">디자이너 삭제</a>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
 
-		</div>
 
+
+
+
+			</br> </br> </br>
+		</div>
 	</div>
 
 	<div id="footer">
@@ -256,28 +274,29 @@ wcs_do();
 			</div>
 		</div>
 	</div>
+	<div class="idCheckLayer">
+		<p class="ttl">아이디 중복 체크</p>
+		<div class="layer_content">
+			<div class="search_wrap">
+				<input type="text" name="id_val" maxlength="14"> <a
+					href="#juno" onclick="idDplChkLayerPop.goCheck()">중복확인</a>
+			</div>
+			<div class="search_error">
+				<span></span>은(는) 사용이 불가한 아이디 입니다.
+			</div>
+			<div class="search_success">
+				<p>
+					입력하신 아이디 <span></span>은(는)<br> 사용하실 수 있습니다.
+				</p>
+				<a href="#juno" onclick="idDplChkLayerPop.use()">사용하기</a>
+			</div>
+		</div>
+		<a href="#juno" class="btn_close" onclick="idDplChkLayerPop.close()"><span
+			class="blind">팝업닫기</span></a>
 	</div>
-	<script>
-	function startReservation(){
-		
-		
- 		if("CUST" != "CUST"){
-			alert("로그인 후 이용이 가능합니다.");
-			return
-		}
-		location.href="/junohair/reservation/process01_branch";
-	}
-	
-	function startRsvRecmnd(){
-		
-
-		if("CUST" != "CUST"){
-			alert("로그인 후 이용이 가능합니다.");
-			return
-		}
-		location.href="/junohair/reservation/ai_process01_info";
-	}
-</script>
+	<div class="overlay1" onclick="idDplChkLayerPop.close()"></div>
+	<div class="overlaycomm"></div>
+	</div>
 
 </body>
 </html>

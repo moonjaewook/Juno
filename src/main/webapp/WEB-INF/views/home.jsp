@@ -156,7 +156,7 @@
 						<c:choose>
 							<c:when test="${sessionScope.admin eq '관리자'}">
 							<dd class="login">
-								<a href="./Adminview">관리자</a> &nbsp;| &nbsp;
+								<a href="./admin">관리자</a> &nbsp;| &nbsp;
 							</dd>
     </c:when>
 						</c:choose>
