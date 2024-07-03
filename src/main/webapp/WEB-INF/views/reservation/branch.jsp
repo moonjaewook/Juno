@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- header.jsp 내용 -->
 <jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
@@ -12,8 +12,8 @@
 			<div class="sub_visual_text">
 				<strong>RESERVATION</strong>
 				<p class="sub_visual_sub_text">
-					<span>실시간 매장 예약을 통해 <br class="m">편리한 매장 이용을 도와드리며,</span><br> 
-					<span>AI기반의 디자이너 추천 기능을 제공합니다.</span>
+					<span>실시간 매장 예약을 통해 <br class="m">편리한 매장 이용을 도와드리며,
+					</span><br> <span>AI기반의 디자이너 추천 기능을 제공합니다.</span>
 				</p>
 			</div>
 		</div>
@@ -26,103 +26,113 @@
 					<li><span class="num">03</span> <span>일정 및 시술 선택</span></li>
 					<li><span class="num">04</span> <span>예약 확인</span></li>
 				</ul>
-		</div>
-
-		<div class="shop_search">
-			<div class="inner">
-				<ul class="search_form">
-					<li class="area_sido"><strong class="depth"><a
-							href="#juno">광역시/도</a></strong>
-						<div id="sidoList" class="area_list_wrap" style="display: none;">
-							<ul class="sido_list">
-								<li class="sido_item" @click="selectedSido(sido)" v-for="sido in sidoList" :key="sido.sidoCode">{{ sido.sidoName }}</li>
-							</ul>
-						</div></li>
-					<li class="area_gugun"><strong class="depth"> <a
-							href="#juno">구/군</a></strong>
-						<div id="gugunList" class="area_list_wrap" style="display: none;">
-							<ul class="gugun_list">
-								<li class="gugun_item" @click="selectedGugun(gugun)" v-for="gugun in gugunList" :key="gugun.gugunCode">{{ gugun.gugunName }}</li>
-							</ul>
-						</div></li>
-					<li class="search_input"><input type="text"
-						placeholder="지역 또는 매장을 입력하세요"></li>
-					<li class="search_btn"><a href="#juno"><img
-							src="https://www.junohair.com/static_resources/images/junohair/sub/subMenu_search_btn.png"
-							alt="매장검색"></a></li>
-				</ul>
 			</div>
-		</div>
-		
-		
-		
-		<div class="clear"></div>
-    <div class="section">
-        <div class="inner">
-            <div class="shop_result">
-                <div class="shop_result_list">
-                    <c:forEach var="branch" items="${branch}">
-                        <div class="shop_item">
-                            <div class="si_img">
-                                <a href="#juno">
-                                    <%-- <div class="si_img_bg" style="background-image: url('${branch.branchPath}');"></div> --%>
-                                    <div class="si_img_border"></div>
-                                </a>
-                            </div>
-                            <div class="si_info">
-                                <div class="si_info_inner">
-                                    <a href="#juno">
-                                        <strong>${branch.branchName}</strong>
-                                        <p><span>주소:</span><span>${branch.address}</span></p>
-                                        <p><span>영업:</span><span>${branch.openingTime}</span></p>
-                                        <p><span>주차:</span><span>${branch.parking}</span></p>
-                                        <p><span>전화:</span><span>${branch.contact}</span></p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="si_reservation">
-                                <a href="designer?branchId=${branch.branchId}">
-                                    <div>
-                                        <img src="https://www.junohair.com/static_resources/images/junohair/sub/junohair/shopList_res_dark.png" alt="예약" class="dark"> 
-                                        <img src="https://www.junohair.com/static_resources/images/junohair/sub/junohair/shopList_res_light.png" alt="예약" class="light"> 
-                                        <span>예약하기</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <span class="mline"></span>
-                        </div>
-                    </c:forEach>
-					
-					
-					<div class="pagination">
-						<div>
-							<a href="#juno" class="first">
-								<i aria-hidden="true" class="fa fa-caret-left"></i> 
-								<i aria-hidden="true" class="fa fa-caret-left"></i>
-							</a> 
-							<a href="#juno" class="prev"> <i aria-hidden="true" class="fa fa-caret-left"></i></a> 
-							<a href="#juno" class="cur">1</a>
-							<a href="#juno">2</a>
-							<a href="#juno">3</a>
-							<a href="#juno">4</a>
-							<a href="#juno">5</a> <a href="#juno" class="next"><i
-								aria-hidden="true" class="fa fa-caret-right"></i></a> <a
-								href="#juno" class="last"><i aria-hidden="true"
-								class="fa fa-caret-right"></i> <i aria-hidden="true"
-								class="fa fa-caret-right"></i></a>
+
+			<div class="shop_search">
+				<div class="inner">
+					<ul class="search_form">
+						<li class="area_sido"><strong class="depth"><a
+								href="#juno">광역시/도</a></strong>
+							<div id="sidoList" class="area_list_wrap" style="display: none;">
+								<ul class="sido_list">
+									<li class="sido_item" @click="selectedSido(sido)"
+										v-for="sido in sidoList" :key="sido.sidoCode">{{
+										sido.sidoName }}</li>
+								</ul>
+							</div></li>
+						<li class="area_gugun"><strong class="depth"> <a
+								href="#juno">구/군</a></strong>
+							<div id="gugunList" class="area_list_wrap" style="display: none;">
+								<ul class="gugun_list">
+									<li class="gugun_item" @click="selectedGugun(gugun)"
+										v-for="gugun in gugunList" :key="gugun.gugunCode">{{
+										gugun.gugunName }}</li>
+								</ul>
+							</div></li>
+						<li class="search_input"><input type="text"
+							placeholder="지역 또는 매장을 입력하세요"></li>
+						<li class="search_btn"><a href="#juno"><img
+								src="https://www.junohair.com/static_resources/images/junohair/sub/subMenu_search_btn.png"
+								alt="매장검색"></a></li>
+					</ul>
+				</div>
+			</div>
+
+
+
+			<div class="clear"></div>
+			<div class="section">
+				<div class="inner">
+					<div class="shop_result">
+						<div class="shop_result_list">
+							<c:forEach var="branch" items="${branch}">
+								<div class="shop_item">
+									<div class="si_img">
+										<a href="#juno"> <img class="si_img_bg"
+											src="./resources/productupload/${branch.branchPath}">
+											<div class="si_img_border"></div>
+										</a>
+									</div>
+									<div class="si_info">
+										<div class="si_info_inner">
+											<a href="#juno"> <strong>${branch.branchName}</strong>
+												<p>
+													<span>주소:</span><span>${branch.address}</span>
+												</p>
+												<p>
+													<span>영업:</span><span>${branch.openingTime}</span>
+												</p>
+												<p>
+													<span>주차:</span><span>${branch.parking}</span>
+												</p>
+												<p>
+													<span>전화:</span><span>${branch.contact}</span>
+												</p>
+											</a>
+										</div>
+									</div>
+									<div class="si_reservation">
+										<a href="designer?branchId=${branch.branchId}">
+											<div>
+												<img
+													src="https://www.junohair.com/static_resources/images/junohair/sub/junohair/shopList_res_dark.png"
+													alt="예약" class="dark"> <img
+													src="https://www.junohair.com/static_resources/images/junohair/sub/junohair/shopList_res_light.png"
+													alt="예약" class="light"> <span>예약하기</span>
+											</div>
+										</a>
+									</div>
+									<span class="mline"></span>
+								</div>
+							</c:forEach>
+
+
+							<div class="pagination">
+								<div>
+									<a href="#juno" class="first"> <i aria-hidden="true"
+										class="fa fa-caret-left"></i> <i aria-hidden="true"
+										class="fa fa-caret-left"></i>
+									</a> <a href="#juno" class="prev"> <i aria-hidden="true"
+										class="fa fa-caret-left"></i></a> <a href="#juno" class="cur">1</a>
+									<a href="#juno">2</a> <a href="#juno">3</a> <a href="#juno">4</a>
+									<a href="#juno">5</a> <a href="#juno" class="next"><i
+										aria-hidden="true" class="fa fa-caret-right"></i></a> <a
+										href="#juno" class="last"><i aria-hidden="true"
+										class="fa fa-caret-right"></i> <i aria-hidden="true"
+										class="fa fa-caret-right"></i></a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-</div>
 
-<!-- footer.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<!-- footer.jsp 내용 -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-<script>
+	<script>
 
 
 	
