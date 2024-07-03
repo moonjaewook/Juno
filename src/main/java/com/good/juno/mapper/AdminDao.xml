@@ -6,17 +6,20 @@
 <mapper namespace="com.good.juno.dao.AdminDao">
 
 	<insert id="memberInsert">
-		insert into member VALUES (#{param1}, #{param2}, #{param3},
+		insert into member VALUES (#{param1}, #{param2},
+		#{param3},
 		#{param4},#{param5},#{param6},#{param7});
 	</insert>
 
 	<select id="membercheck" resultType="int">
-		SELECT count(id) FROM member WHERE id = #{param1} AND pw = #{param2}
+		SELECT count(id) FROM member
+		WHERE id = #{param1} AND pw = #{param2}
 	</select>
 
 
 	<select id="getInfo" resultType="com.good.juno.dto.LoginDto">
-		select * from member where id = #{param1}
+		select * from member where id =
+		#{param1}
 	</select>
 
 	<select id="memberall" resultType="com.good.juno.dto.LoginDto">
@@ -24,11 +27,41 @@
 	</select>
 
 	<select id="admin" resultType="String">
-		SELECT admin FROM member where id = #{param1}
+		SELECT admin FROM member where id
+		= #{param1}
 	</select>
 
 	<delete id="memberDel">
 		delete from shop_member where id= #{param1}
 	</delete>
+
+	<insert id="branch_register">
+		INSERT INTO branch (branchName, address, openingTime,
+		parking, contact,branchPath) VALUES (#{param1}, #{param2}, #{param3},
+		#{param4},#{param5},#{param6});
+	</insert>
+
+	<insert id="designer_register">
+		INSERT INTO designer (designerId, designerName,
+		introduce, designerPath, branchId) VALUES (#{param1}, #{param2},
+		#{param3},
+		#{param4},#{param5});
+	</insert>
+
+	<select id="branchlist" resultType="String">
+		SELECT branchName FROM branch
+	</select>
+
+	<select id="branchid" resultType="int">
+		SELECT branchId FROM branch
+		where branchName = #{param1}
+	</select>
+
+	<select id="desingerall"
+		resultType="com.good.juno.dto.DesignerDto">
+		select a.*, branchName
+		from designer a, branch b
+		where a.branchId = b.branchId
+	</select>
 
 </mapper>

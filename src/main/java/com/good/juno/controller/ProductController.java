@@ -59,7 +59,6 @@ public class ProductController {
 		return "redirect:jmarket";
 	}
 	
-	//»óÇ°¸®½ºÆ®
 	@RequestMapping("/jmarket")
 	public String market(Model model) {
 		
@@ -69,7 +68,6 @@ public class ProductController {
 		return "market/productList";
 	}
 	
-	//»óÇ°»ó¼¼
 	@RequestMapping("/prodview")
 	public String productDetail(@RequestParam("ptype") int ptype, @RequestParam("pid") int pid, Model model) {
 			
@@ -81,7 +79,7 @@ public class ProductController {
 		return "market/productDetail";
 	}
 	
-	//Àå¹Ù±¸´Ï
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½
 	@RequestMapping("/addCart")
 	public String addCart(HttpServletRequest request, Model model) {
 		
@@ -103,15 +101,15 @@ public class ProductController {
 	    boolean existProduct = false;
 	    
 	    for (ProductCartDto item : cart) {
-	        // ±âÁ¸¿¡ ÀÌ¹Ì ÀÖ´Â °æ¿ì ¼ö·® ¾÷µ¥ÀÌÆ®
+	        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	        if (item.getProduct().getProductId() == dto.getProductId() &&
 	            item.getProduct().getProductType() == dto.getProductType()) {
-	            item.setQuantity(item.getQuantity() + quantity); // ¼ö·® Ãß°¡
+	            item.setQuantity(item.getQuantity() + quantity); // ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	            existProduct = true;
 	            break;
 	        }
 	    }
-	    //±âÁ¸¿¡ ¾ø´ø »óÇ°ÀÌ¶ó¸é
+	    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½Ì¶ï¿½ï¿½
 	    if (!existProduct) {
 	        cart.add(new ProductCartDto(dto, quantity));
 	    }
@@ -119,7 +117,7 @@ public class ProductController {
 	    session.setAttribute("cart", cart);
 	    List<ProductCartDto> cart2 = (List<ProductCartDto>) session.getAttribute("cart");
 	    
-	    //Å×½ºÆ®
+	    //ï¿½×½ï¿½Æ®
 	    for (ProductCartDto item : cart2) {
 	    	
 	    	System.out.println(item.getProduct().getName());

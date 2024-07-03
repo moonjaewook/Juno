@@ -7,8 +7,8 @@ public class BranchDto {
     private String address;
     private String openingTime;
     private String parking;
-    private String contact; //¿¬¶ôÃ³
-    private String branchPath; //ÁöÁ¡ »çÁø
+    private String contact; //ï¿½ï¿½ï¿½ï¿½Ã³
+    private String branchPath; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     
     
     // getter setter
