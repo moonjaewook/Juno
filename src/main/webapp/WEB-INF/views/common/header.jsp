@@ -2,7 +2,8 @@
 <%@ page session="false" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
-<html xmlns="http://www.w3.org/1999/xhtml" class=" js no-touch csstransforms csstransforms3d csstransitions" style=""><head>
+<html xmlns="http://www.w3.org/1999/xhtml" class=" js no-touch csstransforms csstransforms3d csstransitions" style="">
+<head>
 
 <link rel="shortcut icon" href="https://www.junohair.com/static_resources/images/junohair.ico">
 <link rel="apple-touch-icon" href="https://www.junohair.com/static_resources/images/apple-touch-icon.png">
