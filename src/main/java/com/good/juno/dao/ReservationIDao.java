@@ -26,13 +26,13 @@ public interface ReservationIDao {
     public BranchDto selectedBranchInfo(int branchId); 
     
     // 선택한 디자이너의 (인적)정보
-    public DesignerDto selectedDesignerInfo(int designerId);
+    public DesignerDto selectedDesignerInfo(String designerId);
     
     // 선택한 디자이너의 (근무)정보
-    public List<DesignerWorkDto> selectedDesignerWorkInfo(int designerId);
+    public List<DesignerWorkDto> selectedDesignerWorkInfo(String designerId);
 
     // 특정 디자이너의 특정 날짜에 대한 예약된 시간 조회
-	public List<ReservationDto> getBookedTimes(int designerId, String reservationDate);
+	public List<ReservationDto> getBookedTimes(String designerId, String reservationDate);
     
  
     

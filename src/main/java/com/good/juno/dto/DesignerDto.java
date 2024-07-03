@@ -16,7 +16,7 @@ public class DesignerDto {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-
+	
 	public String getDesignerId() {
 		return designerId;
 	}

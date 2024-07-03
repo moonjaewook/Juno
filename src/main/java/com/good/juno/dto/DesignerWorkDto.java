@@ -4,18 +4,18 @@ import java.sql.Timestamp;
 
 public class DesignerWorkDto {
 	
-	private int designerId;
+	private String designerId;
     private String workDay;
     private Timestamp workStart;
     private Timestamp workEnd;
     private boolean status;
 
     // Getters and Setters
-    public int getDesignerId() {
+    public String getDesignerId() {
         return designerId;
     }
 
-    public void setDesignerId(int designerId) {
+    public void setDesignerId(String designerId) {
         this.designerId = designerId;
     }
 
