@@ -383,10 +383,10 @@ wcs_do();
 							</div>
 							<div class="prodslideImg owl-carousel owl-theme owl-loaded">
 
-							<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1036px;"><div class="owl-item active" style="width: 518px; margin-right: 0px;"><div class="img" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productImg1}">
-									<img src="https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productImg1}" alt="">
-								</div></div><div class="owl-item" style="width: 518px; margin-right: 0px;"><div class="img" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productImg2}">
-									<img src="https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productImg2}" alt="">
+							<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1036px;"><div class="owl-item active" style="width: 518px; margin-right: 0px;"><div class="img" style="background-image:url(./resources/productupload/${productDetail.productImg1}">
+									<img src="./resources/productupload/${productDetail.productImg1}" alt="">
+								</div></div><div class="owl-item" style="width: 518px; margin-right: 0px;"><div class="img" style="background-image:url(./resources/productupload/${productDetail.productImg2}">
+									<img src="./resources/productupload/${productDetail.productImg2}" alt="">
 								</div></div></div></div><div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div class="owl-dots" style=""><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div></div></div></div>
 						</div>
 					</div>
@@ -418,12 +418,12 @@ wcs_do();
 					 -->
 					 
 					<div class="prodviewEdit">
-						<img src="https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productDetailImg}" alt="">
+						<img src="./resources/productupload/${productDetail.productDetailImg}" alt="">
 					</div>
 					
 					<!-- 2020-05-21 모바일 상품상세설명 -->
 					<div class="mobile_prodviewEdit">
-						<img src="https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productDetailImg}" alt="">
+						<img src="./resources/productupload/${productDetail.productDetailImg}" alt="">
 					</div>
 					<!-- //2020-05-21 모바일 상품상세설명 -->
 				</div>
@@ -505,7 +505,7 @@ wcs_do();
 	            </div>
 	            <c:forEach var="item" items="${sessionScope.cart}">
 	                <div class="prodorder">
-	                    <div class="prodthum" style="background-image: url('https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${item.product.productImg1}');"></div>
+	                    <div class="prodthum" style="background-image: url('./resources/productupload/${item.product.productImg1}');"></div>
 	                    <div class="prodinfo">
 	                        <p class="prodname">${item.product.name}</p>
 	                        <div class="countChk">

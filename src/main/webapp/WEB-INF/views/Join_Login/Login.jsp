@@ -56,12 +56,14 @@
 </script>
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
-	if (!wcs_add)
-		var wcs_add = {};
-	wcs_add["wa"] = "fce44f52888e1";
-	if (window.wcs) {
-		wcs_do();
-	}
+    window.onload = function() {
+        // 서버에서 전달된 loginCheck 변수를 가져옵니다.
+        var loginCheck = "<c:out value='${loginCheck}'/>";
+        // loginCheck 변수가 null이 아닌 경우 알럿을 띄웁니다.
+        if (loginCheck) {
+            alert(loginCheck);
+        }
+    };
 </script>
 <title>준오헤어</title>
 

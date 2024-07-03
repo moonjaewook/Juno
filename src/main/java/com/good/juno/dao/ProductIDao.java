@@ -22,4 +22,11 @@ public interface ProductIDao {
 	 //상품상세
 	 ProductDto productDetail(int ptype, int pid);
 	 
+	 //주문번호찾기
+	 int getOrderNum();
+	 //주문테이블
+	 void insertOrder(int orderId, String id);
+	 //주문상세테이블
+	 void insertOrderDetail(int orderId, String productName, String productId, String quantity);
+	 
 }

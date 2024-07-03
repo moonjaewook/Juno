@@ -44,5 +44,20 @@
   <select id="productDetail" resultType="com.good.juno.dto.ProductDto">
   	select * from junoProduct where productType = #{param1} and productId = #{param2}
   </select>
+  
+  <!-- 주문번호찾기 -->
+  <select id="getOrderNum" resultType="Integer">
+  	select count(*) from orders
+  </select>
+  
+  <!-- 결제테이블인서트 -->
+  <insert id="insertOrder">
+  	insert into orders (orderid, userid) values (#{param1}, #{param2})
+  </insert>
+  
+  <!-- 결제상세테이블인서트 -->
+  <insert id="insertOrderDetail">
+  	insert into orderdetails (orderid, producttype, productid, quantity) values (#{param1}, #{param2}, #{param3}, #{param4})
+  </insert>
 
 </mapper>

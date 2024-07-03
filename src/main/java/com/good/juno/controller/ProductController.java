@@ -18,8 +18,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.good.juno.command.product.BCommand;
 import com.good.juno.command.product.ProductAddTest;
 import com.good.juno.command.product.ProductListCommand;
+import com.good.juno.dao.AdminDao;
 import com.good.juno.dao.ProductDao;
 import com.good.juno.dao.ProductIDao;
+import com.good.juno.dto.LoginDto;
 import com.good.juno.dto.ProductCartDto;
 import com.good.juno.dto.ProductDto;
 
@@ -131,6 +133,7 @@ public class ProductController {
 		return "redirect:jmarket";
 	}
 	
+	//장바구니에서 특정 목록 삭제
 	@RequestMapping("/deleteCart")
 	public String deleteCart(@RequestParam("ptype") int ptype, @RequestParam("pid") int pid, HttpServletRequest request) {
 		
@@ -156,6 +159,64 @@ public class ProductController {
 	    session.setAttribute("cart", cart);
 		
 		return "redirect:jmarket";
+	}
+	
+	//구매하기 페이지1
+	@RequestMapping("/purchase")
+	public String purchase(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		System.out.println("로그인된 id : " + id);
+		
+		if (id == null) {
+			session.setAttribute("loginCheck", "로그인이 필요합니다.");
+			return "Join_Login/Login";
+		}
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		LoginDto user = dao.getInfo(id);
+		model.addAttribute("user", user);
+		
+		List<ProductCartDto> cart = (List<ProductCartDto>) session.getAttribute("cart");
+		
+		return "market/orderStep1";
+	}
+	
+	//주문처리
+	@RequestMapping("/order")
+	public String order(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		
+		ProductIDao dao = sqlSession.getMapper(ProductIDao.class);
+		//결제테이블에서 마지막 주문번호 가져오기
+		int orderId = dao.getOrderNum();
+		orderId++;
+		//결제테이블에 insert
+		dao.insertOrder(orderId, id);
+		
+	    int totalItems = Integer.parseInt(request.getParameter("totalItems")); // 총 상품 개수
+	    
+	    System.out.println("상품 총 개수" + totalItems);
+	    for (int i = 0; i < totalItems; i++) {
+	    	//String productName = request.getParameter("productName_" + i);
+	        String productType = request.getParameter("productType_" + i);
+	        String productId = request.getParameter("productId_" + i);
+	        String quantity = request.getParameter("productQuantity_" + i);
+	        
+	        System.out.println(i + "번째 항목");
+	        System.out.println(orderId);
+	        System.out.println(productType);
+	        System.out.println(productId);
+	        System.out.println(quantity);
+
+	        dao.insertOrderDetail(orderId, productType, productId, quantity);
+
+	    }
+		
+		return "market/orderStep2";
 	}
 	
 
