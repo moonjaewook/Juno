@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+
 <html xmlns="http://www.w3.org/1999/xhtml" class="js no-touch csstransforms csstransforms3d csstransitions">
     <head>
 	<link rel="shortcut icon" href="https://www.junohair.com/static_resources/images/junohair.ico">
@@ -289,8 +289,8 @@
 								        <c:forEach var="product" items="${products1}">
 								            <a href="#juno" class="producthover" onclick="gotoProdView('${product.productType}','${product.productId}')">
 								                <div class="cnt">
-								                    <div class="prodthum" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg1});"></div>
-								                    <div class="prodthum_mo" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg2});"></div>
+								                    <div class="prodthum" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg1});"></div>
+								                    <div class="prodthum_mo" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg2});"></div>
 								                    <div class="prodinfo">
 								                        <div><span class="label">${product.name}</span></div>
 								                        <span class="price">${product.price}원</span>
@@ -311,8 +311,8 @@
 								        <c:forEach var="product" items="${products2}">
 								            <a href="#juno" class="producthover" onclick="gotoProdView('${product.productType}','${product.productId}')">
 								                <div class="cnt">
-								                    <div class="prodthum" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg1});"></div>
-								                    <div class="prodthum_mo" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg2});"></div>
+								                    <div class="prodthum" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg1});"></div>
+								                    <div class="prodthum_mo" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg2});"></div>
 								                    <div class="prodinfo">
 								                        <div><span class="label">${product.name}</span></div>
 								                        <span class="price">${product.price}원</span>
@@ -336,8 +336,8 @@
 								        <c:forEach var="product" items="${products3}">
 								            <a href="#juno" class="producthover" onclick="gotoProdView('${product.productType}','${product.productId}')">
 								                <div class="cnt">
-								                    <div class="prodthum" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg1});"></div>
-								                    <div class="prodthum_mo" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg2});"></div>
+								                    <div class="prodthum" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg1});"></div>
+								                    <div class="prodthum_mo" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg2});"></div>
 								                    <div class="prodinfo">
 								                        <div><span class="label">${product.name}</span></div>
 								                        <span class="price">${product.price}원</span>
@@ -358,8 +358,8 @@
 								        <c:forEach var="product" items="${products4}">
 								            <a href="#juno" class="producthover" onclick="gotoProdView('${product.productType}','${product.productId}')">
 								                <div class="cnt">
-								                    <div class="prodthum" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg1});"></div>
-								                    <div class="prodthum_mo" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg2});"></div>
+								                    <div class="prodthum" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg1});"></div>
+								                    <div class="prodthum_mo" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg2});"></div>
 								                    <div class="prodinfo">
 								                        <div><span class="label">${product.name}</span></div>
 								                        <span class="price">${product.price}원</span>
@@ -376,8 +376,8 @@
 							        <c:forEach var="product" items="${products5}">
 							            <a href="#juno" class="producthover" onclick="gotoProdView('${product.productType}','${product.productId}')">
 							                <div class="cnt">
-							                    <div class="prodthum" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg1});"></div>
-							                    <div class="prodthum_mo" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg2});"></div>
+							                    <div class="prodthum" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg1});"></div>
+							                    <div class="prodthum_mo" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg2});"></div>
 							                    <div class="prodinfo">
 							                        <div><span class="label">${product.name}</span></div>
 							                        <span class="price">${product.price}원</span>
@@ -394,8 +394,8 @@
 							        <c:forEach var="product" items="${products6}">
 							            <a href="#juno" class="producthover" onclick="gotoProdView('${product.productType}','${product.productId}')">
 							                <div class="cnt">
-							                    <div class="prodthum" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg1});"></div>
-							                    <div class="prodthum_mo" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg2});"></div>
+							                    <div class="prodthum" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg1});"></div>
+							                    <div class="prodthum_mo" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg2});"></div>
 							                    <div class="prodinfo">
 							                        <div><span class="label">${product.name}</span></div>
 							                        <span class="price">${product.price}원</span>
@@ -411,8 +411,8 @@
 							        <c:forEach var="product" items="${products7}">
 							            <a href="#juno" class="producthover" onclick="gotoProdView('${product.productType}','${product.productId}')">
 							                <div class="cnt">
-							                    <div class="prodthum" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg1});"></div>
-							                    <div class="prodthum_mo" style="background-image:url(http://localhost:8080/juno/resources/productupload/${product.productImg2});"></div>
+							                    <div class="prodthum" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg1});"></div>
+							                    <div class="prodthum_mo" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${product.productImg2});"></div>
 							                    <div class="prodinfo">
 							                        <div><span class="label">${product.name}</span></div>
 							                        <span class="price">${product.price}원</span>
@@ -493,9 +493,37 @@
 				</div>
 			</div>		
 		</div>
-		
+	<!-- 	
 	<div id="miniCartbox" class="miniCartbox"><div class="box"><div><div class="head"><h2 class="ttl">J MARKET</h2> <span class="price">0원</span></div> </div></div> <a href="#juno" class="lbtn_black">구매하기</a></div>
+	-->
+		
+	<div id="miniCartbox" class="miniCartbox active">
+	    <div class="box">
+	        <div>
+	            <div class="head">
+	                <h2 class="ttl">J MARKET</h2>
+	                <span class="price"></span>
+	            </div>
+	            <c:forEach var="item" items="${sessionScope.cart}">
+	                <div class="prodorder">
+	                    <div class="prodthum" style="background-image: url('https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${item.product.productImg1}');"></div>
+	                    <div class="prodinfo">
+	                        <p class="prodname">${item.product.name}</p>
+	                        <div class="countChk">
+	                            <p class="quantity">수량: ${item.quantity}</p>
+	                            <p class="price">단가: ${item.product.price}원</p>	                            
+	                        </div>
+	                    </div>
+	                    <a href="/juno/deleteCart?ptype=${item.product.productType}&pid=${item.product.productId}" class="btn_delete"><span class="blind">상품 삭제</span></a>
+	                </div>
+	            </c:forEach>
+	        </div>	        
+	    </div>
+	    <a href="./purchase" class="lbtn_black">구매하기</a>
+	</div>
+	
 	<script>
+	/*
 		var minicart_app = new Vue({
 			el : "#miniCartbox",
 			data : {
@@ -565,11 +593,12 @@
 				},
 			}
 		});
+	*/
 	</script>
 	
 	<script>
 		function gotoProdView(ptype, pid){
-			location.href = "/juno/jmarket/prodview?ptype=" + ptype + "&pid=" + pid;
+			location.href = "/juno/prodview?ptype=" + ptype + "&pid=" + pid;
 		}
 	</script>
 	</body></html>

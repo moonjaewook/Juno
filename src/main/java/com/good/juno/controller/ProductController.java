@@ -4,6 +4,7 @@ package com.good.juno.controller;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.good.juno.command.product.ProductAddTest;
 import com.good.juno.command.product.ProductListCommand;
 import com.good.juno.dao.ProductDao;
 import com.good.juno.dao.ProductIDao;
+import com.good.juno.dto.ProductCartDto;
 import com.good.juno.dto.ProductDto;
 
 
@@ -57,7 +59,7 @@ public class ProductController {
 		return "redirect:jmarket";
 	}
 	
-	
+	//상품리스트
 	@RequestMapping("/jmarket")
 	public String market(Model model) {
 		
@@ -67,12 +69,10 @@ public class ProductController {
 		return "market/productList";
 	}
 	
-	@RequestMapping("/jmarket/prodview")
+	//상품상세
+	@RequestMapping("/prodview")
 	public String productDetail(@RequestParam("ptype") int ptype, @RequestParam("pid") int pid, Model model) {
-		
-		System.out.println(ptype);
-		System.out.println(pid);
-		
+			
 		ProductIDao dao = sqlSession.getMapper(ProductIDao.class);
 		ProductDto dto = dao.productDetail(ptype, pid);
 		
@@ -80,4 +80,83 @@ public class ProductController {
 		
 		return "market/productDetail";
 	}
+	
+	//장바구니
+	@RequestMapping("/addCart")
+	public String addCart(HttpServletRequest request, Model model) {
+		
+		int ptype = Integer.parseInt(request.getParameter("productType"));
+		int pid = Integer.parseInt(request.getParameter("productId"));
+		int quantity = Integer.parseInt(request.getParameter("productQuantity"));
+		
+	    
+	    ProductIDao dao = sqlSession.getMapper(ProductIDao.class);
+		ProductDto dto = dao.productDetail(ptype, pid);
+		
+		HttpSession session = request.getSession();
+	    List<ProductCartDto> cart = (List<ProductCartDto>) session.getAttribute("cart");
+	    if (cart == null) {
+	        cart = new ArrayList<ProductCartDto>();
+	        session.setAttribute("cart", cart);
+	    }
+	    
+	    boolean existProduct = false;
+	    
+	    for (ProductCartDto item : cart) {
+	        // 기존에 이미 있는 경우 수량 업데이트
+	        if (item.getProduct().getProductId() == dto.getProductId() &&
+	            item.getProduct().getProductType() == dto.getProductType()) {
+	            item.setQuantity(item.getQuantity() + quantity); // 수량 추가
+	            existProduct = true;
+	            break;
+	        }
+	    }
+	    //기존에 없던 상품이라면
+	    if (!existProduct) {
+	        cart.add(new ProductCartDto(dto, quantity));
+	    }
+		
+	    session.setAttribute("cart", cart);
+	    List<ProductCartDto> cart2 = (List<ProductCartDto>) session.getAttribute("cart");
+	    
+	    //테스트
+	    for (ProductCartDto item : cart2) {
+	    	
+	    	System.out.println(item.getProduct().getName());
+	    	System.out.println(item.getProduct().getPrice());
+	    	System.out.println(item.getQuantity());
+
+	    }
+	    
+		return "redirect:jmarket";
+	}
+	
+	@RequestMapping("/deleteCart")
+	public String deleteCart(@RequestParam("ptype") int ptype, @RequestParam("pid") int pid, HttpServletRequest request) {
+		
+		
+	    ProductIDao dao = sqlSession.getMapper(ProductIDao.class);
+		ProductDto dto = dao.productDetail(ptype, pid);
+		
+		HttpSession session = request.getSession();
+		List<ProductCartDto> cart = (List<ProductCartDto>) session.getAttribute("cart");
+		
+	    if (cart != null) {
+	        Iterator<ProductCartDto> iterator = cart.iterator();
+	        while (iterator.hasNext()) {
+	            ProductCartDto item = iterator.next();
+	            if (item.getProduct().getProductId() == dto.getProductId() &&
+	                item.getProduct().getProductType() == dto.getProductType()) {
+	                iterator.remove();
+	                break;
+	            }
+	        }
+	    }
+	    
+	    session.setAttribute("cart", cart);
+		
+		return "redirect:jmarket";
+	}
+	
+
 }

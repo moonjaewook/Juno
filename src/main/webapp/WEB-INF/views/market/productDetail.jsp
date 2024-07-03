@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <html xmlns="http://www.w3.org/1999/xhtml" class=" js no-touch csstransforms csstransforms3d csstransitions" style=""><head>
 
 <link rel="shortcut icon" href="https://www.junohair.com/static_resources/images/junohair.ico">
@@ -210,6 +209,7 @@ wcs_do();
 			</div>
 		</div>
 		<script>
+		/*
 		function gotoMyjuno(){
 			if("" != "CUST"){
 				alert("로그인후 이용이 가능합니다.");
@@ -251,6 +251,7 @@ wcs_do();
 			}
 			location.href = "/myjuno/withdraw";
 		}
+		*/
 		</script>
 		<div id="container">
 			<div class="sub_visual">
@@ -321,16 +322,45 @@ wcs_do();
 
 							<div class="bottombtns">
 								<div class="btnbox">
-									<select id="productCnt" type="number" class="selectarr">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-									<button class="btnbuy" onclick="add2Cart()">장바구니</button>
-									<button class="btnbuy" onclick="gotoBuy()">바로 구매</button>
+								    <select id="productQuantity" type="number" class="selectarr">
+								        <option value="1">1</option>
+								        <option value="2">2</option>
+								        <option value="3">3</option>
+								        <option value="4">4</option>
+								        <option value="5">5</option>
+								    </select>
+								    <form action="./addCart" method="post" id="addToCartForm">
+								        <input type="hidden" name="productType" value="${productDetail.productType}">
+								        <input type="hidden" name="productId" value="${productDetail.productId}">
+								        <input type="hidden" name="productQuantity" id="quantityInputCart">
+								        <button class="btnbuy" type="submit">장바구니</button>
+								    </form>
+								    <form action="./buyNow" method="post" id="buyNowForm">
+								        <input type="hidden" name="productType" value="${productDetail.productType}">
+								        <input type="hidden" name="productId" value="${productDetail.productId}">
+								        <input type="hidden" name="productQuantity" id="quantityInputBuyNow">
+								        <button class="btnbuy" type="submit">바로 구매</button>
+								    </form>
 								</div>
+								
+								<script>
+								document.getElementById('productQuantity').addEventListener('change', updateQuantityInputs);
+								
+								function updateQuantityInputs() {
+								    var quantity = document.getElementById('productQuantity').value;
+								    document.getElementById('quantityInputCart').value = quantity;
+								    document.getElementById('quantityInputBuyNow').value = quantity;
+								}
+								
+								document.getElementById('addToCartForm').addEventListener('submit', function() {
+								    updateQuantityInputs();
+								});
+								
+								document.getElementById('buyNowForm').addEventListener('submit', function() {
+								    updateQuantityInputs();
+								});
+								</script>
+
 								<div class="popbtns_group">
 									<a href="#none" class="sbtn_arr" onclick="openPop('popSource');return false;"><span>제품 정보 고시</span></a>
 								</div>
@@ -353,10 +383,10 @@ wcs_do();
 							</div>
 							<div class="prodslideImg owl-carousel owl-theme owl-loaded">
 
-							<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1036px;"><div class="owl-item active" style="width: 518px; margin-right: 0px;"><div class="img" style="background-image:url(/upload/marketproduct/202308/fbce62ccabc146bdb618b38a11a8615e.jpg">
-									<img src="http://localhost:8080/juno/resources/productupload/${productDetail.productImg1}" alt="">
-								</div></div><div class="owl-item" style="width: 518px; margin-right: 0px;"><div class="img" style="background-image:url(/upload/marketproduct/202308/f5c5a48a71c64781a19d293d4bc13a0d.jpg">
-									<img src="http://localhost:8080/juno/resources/productupload/${productDetail.productImg2}" alt="">
+							<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1036px;"><div class="owl-item active" style="width: 518px; margin-right: 0px;"><div class="img" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productImg1}">
+									<img src="https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productImg1}" alt="">
+								</div></div><div class="owl-item" style="width: 518px; margin-right: 0px;"><div class="img" style="background-image:url(https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productImg2}">
+									<img src="https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productImg2}" alt="">
 								</div></div></div></div><div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div class="owl-dots" style=""><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div></div></div></div>
 						</div>
 					</div>
@@ -388,12 +418,12 @@ wcs_do();
 					 -->
 					 
 					<div class="prodviewEdit">
-						<img src="http://localhost:8080/juno/resources/productupload/${productDetail.productDetailImg}" alt="">
+						<img src="https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productDetailImg}" alt="">
 					</div>
 					
 					<!-- 2020-05-21 모바일 상품상세설명 -->
 					<div class="mobile_prodviewEdit">
-						<img src="http://localhost:8080/juno/resources/productupload/${productDetail.productDetailImg}" alt="">
+						<img src="https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${productDetail.productDetailImg}" alt="">
 					</div>
 					<!-- //2020-05-21 모바일 상품상세설명 -->
 				</div>
@@ -466,19 +496,33 @@ wcs_do();
 				</div>
 			</div>		
 	</div>
-	
-	<div id="miniCartbox" class="miniCartbox">
-		<div class="box">
-			<div>
-				<div class="head">
-					<h2 class="ttl">J MARKET</h2>
-					<span class="price">0원</span>
-				</div>
-			</div>
-		</div>
-		<a href="#juno" class="lbtn_black">구매하기</a>
+	<div id="miniCartbox" class="miniCartbox active">
+	    <div class="box">
+	        <div>
+	            <div class="head">
+	                <h2 class="ttl">J MARKET</h2>
+	                <span class="price"></span>
+	            </div>
+	            <c:forEach var="item" items="${sessionScope.cart}">
+	                <div class="prodorder">
+	                    <div class="prodthum" style="background-image: url('https://raw.githubusercontent.com/moonjaewook/Juno/master/src/main/resources/productupload/${item.product.productImg1}');"></div>
+	                    <div class="prodinfo">
+	                        <p class="prodname">${item.product.name}</p>
+	                        <div class="countChk">
+	                            <p class="quantity">수량: ${item.quantity}</p>
+	                            <p class="price">단가: ${item.product.price}원</p>	                            
+	                        </div>
+	                    </div>
+	                    <a href="/juno/deleteCart?ptype=${item.product.productType}&pid=${item.product.productId}" class="btn_delete"><span class="blind">상품 삭제</span></a>
+	                </div>
+	            </c:forEach>
+	        </div>	        
+	    </div>
+	    <a href="./purchase" class="lbtn_black">구매하기</a>
 	</div>
+
 <script>
+/*
 	var minicart_app = new Vue({
 		el : "#miniCartbox",
 		data : {
@@ -548,7 +592,9 @@ wcs_do();
 			},
 		}
 	});
+*/
 </script>
+
 <script>
 // 	function openPop(id){
 // 		var _this = $('#' + id);
