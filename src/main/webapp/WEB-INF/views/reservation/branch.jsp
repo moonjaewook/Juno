@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
 
 <body>
 	<div id="container" class="reservation_wrap">
@@ -61,7 +61,7 @@
         <div class="inner">
             <div class="shop_result">
                 <div class="shop_result_list">
-                    <c:forEach var="branch" items="${packages.list}">
+                    <c:forEach var="branch" items="${branch}">
                         <div class="shop_item">
                             <div class="si_img">
                                 <a href="#juno">
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="si_reservation">
-                                <a href="#juno">
+                                <a href="designer?branchId=${branch.branchId}">
                                     <div>
                                         <img src="https://www.junohair.com/static_resources/images/junohair/sub/junohair/shopList_res_dark.png" alt="예약" class="dark"> 
                                         <img src="https://www.junohair.com/static_resources/images/junohair/sub/junohair/shopList_res_light.png" alt="예약" class="light"> 

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
 <!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
 
 <div id="container" class="reservation_wrap">
 	<div class="sub_visual">

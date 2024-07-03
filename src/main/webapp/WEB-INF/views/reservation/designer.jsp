@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
 
 <div id="container" class="reservation_wrap">
 	<div class="sub_visual">
@@ -29,122 +30,48 @@
 		</div>
 
 		<div class="clear"></div>
+            <div class="reser_branchname">
+                <div class="inner">${branchInfo.branchName}</div>
+            </div>
+            <div class="designer_list">
+                <ul>
+                    <li class="recomm"><a href="#juno" onclick="openRecomPop()">
+                        <div class="profileimg">
+                            <img src="https://www.junohair.com/static_resources/images/junohair/sub/reservation/@designer_recomm.jpg"
+                                alt="" class="profileimgsrc">
+                        </div>
+                        <div class="infocont">
+                            <p class="ttl">디자이너 추천 받기</p>
+                            <p class="txt">
+                                <span>고객님의 개인정보 바탕으로</span> <span>최적의 디자이너를 추천해드립니다.</span>
+                            </p>
+                            <span class="btn">추천받기</span>
+                        </div> <span class="line"></span>
+                    </a></li>
 
-		<div class="reser_branchname">
-			<div class="inner">가든강남구청역점</div>
-		</div>
-		<div class="designer_list">
-			<ul>
-				<li class="recomm"><a href="#juno" onclick="openRecomPop()">
-						<div class="profileimg">
-							<img
-								src="https://www.junohair.com/static_resources/images/junohair/sub/reservation/@designer_recomm.jpg"
-								alt="" class="profileimgsrc">
-						</div>
-						<div class="infocont">
-							<p class="ttl">디자이너 추천 받기</p>
-							<p class="txt">
-								<span>고객님의 개인정보 바탕으로</span> <span>최적의 디자이너를 추천해드립니다.</span>
-							</p>
-							<span class="btn">추천받기</span>
-						</div> <span class="line"></span>
-				</a></li>
-
-				<li><a href="#juno" onclick="gotoNext('1093','80')">
-
-
-
-						<div class="profileimg"
-							style="background-image: url('/upload/designer/202007/cec23a1f4708444e8cb9e5c78a8dc744.jpg')"></div>
-
-
-						<div class="infocont">
-							<p class="ttl">정원 수석실장</p>
-							<p class="desc">자연스러움속 트랜디함을 만들어드립니다!</p>
-						</div> <span class="line"></span>
-				</a></li>
-
-				<li><a href="#juno" onclick="gotoNext('1119','80')">
-
-
-
-						<div class="profileimg"
-							style="background-image: url('/upload/designer/202007/77c299d5592546caa4a0e7866d564307.jpg')"></div>
-
-
-						<div class="infocont">
-							<p class="ttl">히로 부원장</p>
-							<p class="desc">&lt;인생을 화보처럼&gt; 매일매일 아름다운 당신을 디자인 합니다</p>
-						</div> <span class="line"></span>
-				</a></li>
-
-				<li><a href="#juno" onclick="gotoNext('2408','80')">
-
-
-
-						<div class="profileimg"
-							style="background-image: url('/upload/designer/202005/085f192f5ee24f53942f0d096f9aba7e.jpeg')"></div>
-
-
-						<div class="infocont">
-							<p class="ttl">오지유 부원장</p>
-							<p class="desc">당신만의 분위기를 담은 디자인</p>
-						</div> <span class="line"></span>
-				</a></li>
-
-				<li><a href="#juno" onclick="gotoNext('884','80')">
-
-
-
-						<div class="profileimg"
-							style="background-image: url('/upload/designer/202005/f132b7cea73148f187efb3aed83d90a9.jpg')"></div>
-
-
-						<div class="infocont">
-							<p class="ttl">효진 원장</p>
-							<p class="desc">평범함 속에 특별함을 디자인 해드립니다</p>
-						</div> <span class="line"></span>
-				</a></li>
-
-				<li><a href="#juno" onclick="gotoNext('9151','80')">
-
-
-
-						<div class="profileimg"
-							style="background-image: url('/upload/designer/202005/a1d8c41b530d4d3e94fbbb9173f46c09.jpeg')"></div>
-
-
-						<div class="infocont">
-							<p class="ttl">조은 수석실장</p>
-							<p class="desc">언제나, 당신과 함께할 디자인</p>
-						</div> <span class="line"></span>
-				</a></li>
-
-				<li><a href="#juno" onclick="gotoNext('9892','80')">
-
-
-						<div class="profileimg"
-							style="background-image: url('https://www.junohair.com/static_resources/images/junohair/sub/reservation/bg_desigerImg.jpg')"></div>
-
-
-
-						<div class="infocont">
-							<p class="ttl">유아 디자이너</p>
-							<p class="desc"></p>
-						</div> <span class="line"></span>
-				</a></li>
-
-			</ul>
-		</div>
-
-		<div class="ai_foot_btns">
-			<a href="javascript:gotoPre();" class="btnbox_line"
-				onclick="gotoPre()">이전</a>
-		</div>
-
-	</div>
-
-</div>
+                    <c:forEach var="designer" items="${designers}">
+					    <li> 
+					        <a href="schedule?designerId=${designer.designerId}&branchId=${branchInfo.branchId}">
+					            <div class="profileimg" style="background-image: url('${designer.designerPath}')"></div>
+					            <div class="infocont">
+					                <p class="ttl">${designer.designerName}</p>
+					                <p class="desc">${designer.introduce}</p>
+					            </div>
+					            <span class="line"></span>
+					        </a>
+					    </li>
+					</c:forEach>
+                </ul>
+            </div>
+            
+            <div class="ai_foot_btns">
+				<a href="javascript:gotoPre();" class="btnbox_line" onclick="gotoPre()">이전</a>
+			</div>
+			
+        </div>
+    </div>
+    
+    
 
 <!-- footer.jsp 내용 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -182,7 +109,7 @@
 					},
 					methods : {
 						selectDesigner : function(designer) {
-							location.href = "/junohair/reservation/process03_date?scode="
+							location.href = "https://www.junohair.com/junohair/reservation/process03_date?scode="
 									+ designer.scode + "&refer=norm";
 						},
 						closePop : function() {
@@ -998,7 +925,7 @@
 								haircate : this.haircate,
 							}
 							cf_call(
-									"/junohair/reservation/process02_designer_recommendDsnr",
+									"https://www.junohair.com/junohair/reservation/process02_designer_recommendDsnr",
 									params, this.gotoRecommendCB);
 						},
 						gotoRecommendCB : function(data) {
@@ -1034,13 +961,13 @@
 	</script>
 	<script>
 		function gotoNext(scode, cpcode) {
-			location.href = "/junohair/reservation/process03_date?scode="
+			location.href = "https://www.junohair.com/junohair/reservation/process03_date?scode="
 					+ scode + "&cpcode=" + cpcode + "&refer=norm";
 		}
 
 		function gotoPre() {
 
-			location.href = "/junohair/reservation/process01_branch?mode=back";
+			location.href = "branch"; // 매장 선택으로 돌아가기
 
 		}
 

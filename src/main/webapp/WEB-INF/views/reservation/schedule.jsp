@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+<jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
 
 
 		<div id="container" class="reservation_wrap">
@@ -46,106 +47,128 @@
 
 				<div class="clear"></div>
 
+
+
 				<div class="designer_namebox">
-					<p class="profileimg">
-					<img src="https://www.junohair.com/upload/designer/202007/cec23a1f4708444e8cb9e5c78a8dc744.jpg" alt="" class="profileimgsrc">	
-					</p>
-					<div class="infocont">
-						<p class="ttl">정원 수석실장<em>-</em><span class="branch">가든강남구청역점</span></p>
-						<p class="desc">자연스러움속 트랜디함을 만들어드립니다!</p>
-					</div>
-					<span class="line"></span>
-				</div>
-				<div class="schedule_box">
-					<div class="calendar_wrap">
-						<div class="head">
-						    <a class="btn_prev" href="#juno" onclick="prevCal()"><span class="blind">이전</span></a>
-						    <span class="title_month">2024.7</span>
-						    <a class="btn_next" href="#juno" onclick="nextCal()"><span class="blind">다음</span></a>
-						</div>
-						<div class="calendarTable">
-							<table border="0" cellpadding="0" cellspacing="0">
-								<thead>
-				                    <tr>
-				                        <th class="sun">일</th>
-				                        <th>월</th>
-				                        <th>화</th>
-				                        <th>수</th>
-				                        <th>목</th>
-				                        <th>금</th>
-				                        <th class="sat">토</th>
-				                    </tr>
-				                </thead>
-				                <tbody id="caltbody"><tr>	<td class="sun">	</td>	<td>	<span class="closeday" id="1_mon_1" day="1">1</span>	</td>	<td>	<a href="#juno" id="1_tue_2" onclick="selectDay(2)" day="2">2</a>	</td>	<td>	<a href="#juno" id="1_wed_3" onclick="selectDay(3)" day="3">3</a>	</td>	<td>	<a href="#juno" id="1_thu_4" onclick="selectDay(4)" day="4">4</a>	</td>	<td>	<a href="#juno" id="1_fri_5" onclick="selectDay(5)" day="5">5</a>	</td>	<td class="sat">	<a href="#juno" id="1_sat_6" onclick="selectDay(6)" day="6">6</a>	</td></tr><tr>	<td class="sun">	<a href="#juno" id="2_sun_7" onclick="selectDay(7)" day="7">7</a>	</td>	<td>	<span class="closeday" id="2_mon_8" day="8">8</span>	</td>	<td>	<a href="#juno" id="2_tue_9" onclick="selectDay(9)" day="9">9</a>	</td>	<td>	<a href="#juno" id="2_wed_10" onclick="selectDay(10)" day="10">10</a>	</td>	<td>	<a href="#juno" id="2_thu_11" onclick="selectDay(11)" day="11">11</a>	</td>	<td>	<a href="#juno" id="2_fri_12" onclick="selectDay(12)" day="12">12</a>	</td>	<td class="sat">	<a href="#juno" id="2_sat_13" onclick="selectDay(13)" day="13">13</a>	</td></tr><tr>	<td class="sun">	<a href="#juno" id="3_sun_14" onclick="selectDay(14)" day="14">14</a>	</td>	<td>	<span class="closeday" id="3_mon_15" day="15">15</span>	</td>	<td>	<a href="#juno" id="3_tue_16" onclick="selectDay(16)" day="16">16</a>	</td>	<td>	<a href="#juno" id="3_wed_17" onclick="selectDay(17)" day="17">17</a>	</td>	<td>	<a href="#juno" id="3_thu_18" onclick="selectDay(18)" day="18">18</a>	</td>	<td>	<a href="#juno" id="3_fri_19" onclick="selectDay(19)" day="19">19</a>	</td>	<td class="sat">	<a href="#juno" id="3_sat_20" onclick="selectDay(20)" day="20">20</a>	</td></tr><tr>	<td class="sun">	<a href="#juno" id="4_sun_21" onclick="selectDay(21)" day="21">21</a>	</td>	<td>	<span class="closeday" id="4_mon_22" day="22">22</span>	</td>	<td>	<a href="#juno" id="4_tue_23" onclick="selectDay(23)" day="23">23</a>	</td>	<td>	<a href="#juno" id="4_wed_24" onclick="selectDay(24)" day="24">24</a>	</td>	<td>	<a href="#juno" id="4_thu_25" onclick="selectDay(25)" day="25">25</a>	</td>	<td>	<a href="#juno" id="4_fri_26" onclick="selectDay(26)" day="26">26</a>	</td>	<td class="sat">	<a href="#juno" id="4_sat_27" onclick="selectDay(27)" day="27">27</a>	</td></tr><tr>	<td class="sun">	<a href="#juno" id="5_sun_28" onclick="selectDay(28)" day="28">28</a>	</td>	<td>	<span class="closeday" id="5_mon_29" day="29">29</span>	</td>	<td>	<a href="#juno" id="5_tue_30" onclick="selectDay(30)" day="30">30</a>	</td>	<td>	<a href="#juno" id="5_wed_31" onclick="selectDay(31)" day="31">31</a>	</td>	<td>	</td>	<td>	</td>	<td class="sat">	</td></tr></tbody>
-							</table>
-							<div class="noti">
-								<p><span>선택</span></p>
-								<p><span>불가</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="timeselectbox">
-						<div class="dateTime">
-							<p class="tit">날짜</p>
-							<p class="txt" id="dateTimeTxt">2024.7.1(월)</p>
-						</div>
-						<div class="dateTime">
-							<p class="tit">시간</p>
-							<p class="timeselect" id="timeselect">시간을 선택해주세요.</p>
-							<p class="m_timeselect" id="m_timeselect"><a href="">시간을 선택해주세요.</a></p>
-						</div>
-						<div class="timeline" id="timeline"></div>
-					</div>
-				</div>
-				<div class="sisul_categorybox">
-
-					<div class="sisul_category cover_scroll">
-						<ul>
-							<li class="active"><a href="#juno" id="shampu" onclick="selectSisulCategory('shampu')">샴푸</a></li>
-							<li><a href="#juno" id="dry" onclick="selectSisulCategory('dry')">드라이</a></li>
-							<li><a href="#juno" id="cut" onclick="selectSisulCategory('cut')">커트</a></li>
-							<li><a href="#juno" id="perm" onclick="selectSisulCategory('perm')">펌</a></li>
-							<li><a href="#juno" id="color" onclick="selectSisulCategory('color')">컬러</a></li>
-							<li><a href="#juno" id="clinic" onclick="selectSisulCategory('clinic')">클리닉</a></li>
-							<li><a href="#juno" id="headspa" onclick="selectSisulCategory('headspa')">헤드스파</a></li>
-						</ul>
-						<span class="cover left"></span>
-						<span class="cover right"></span>
-					</div>
-					
-				</div>
-
-				<div class="sisul_category_detail sisul_cate_items">
-					<ul id="sisuldetails"><li>	<span class="check_type">		<input type="checkbox" id="35c3358b1df396df765f57780b57f710" class="checkbox" onclick="sisulCheckboxOnclick(this);">		<label for="35c3358b1df396df765f57780b57f710">릴렉싱 샴푸</label>	</span>	<div class="pricezone">		<p class="current">20,000<span class="won">원</span></p>	</div></li><li>	<span class="check_type">		<input type="checkbox" id="118170444885ba63df355aa31769bcf9" class="checkbox" onclick="sisulCheckboxOnclick(this);">		<label for="118170444885ba63df355aa31769bcf9">성형 샴푸</label>	</span>	<div class="pricezone">		<p class="current">30,000<span class="won">원</span></p>	</div></li><li>	<span class="check_type">		<input type="checkbox" id="7d5336290f25d6c4c6d1c273f9754d35" class="checkbox" onclick="sisulCheckboxOnclick(this);">		<label for="7d5336290f25d6c4c6d1c273f9754d35">붙임머리 샴푸</label>	</span>	<div class="pricezone">		<p class="current">40,000<span class="won">원</span></p>	</div></li></ul>
-				</div>
-				
-				<div class="recomm_sisul" id="recomm_sisul" style="display: none;">
-				</div>
-
-				<div class="forecast_sisul" style="display:none">
-					<div class="box">
-						<p class="ttl">선택 내역</p>
-						<div class="mysisul">
-							<ul id="mysisullist">
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="sisul_textbox">
-					<textarea id="orderMemo" placeholder="요청사항을 입력하세요 (150자 이내)"></textarea>
-				</div>
-				<div class="ai_foot_btns">
-					<a href="javascript:gotoPre();" class="btnbox_line" onclick="gotoPre()">이전</a>
-					<a href="#juno" class="btnbox_black" onclick="gotoNext()">다음</a>
-				</div>
-			</div>
+			        <p class="profileimg">
+			            <img src="${designerInfo.designerPath}" alt="" class="profileimgsrc">
+			        </p>
+			        <div class="infocont">
+			            <p class="ttl">${designerInfo.designerName}<em>-</em><span class="branch">${branchInfo.branchName}</span></p>
+			            <p class="desc">${designerInfo.introduce}</p>
+			        </div>
+			        <span class="line"></span>
+			    </div>
 			
-		</div>
+			    <div class="schedule_box">
+			        <div class="calendar_wrap">
+			            <div class="head">
+			                <a class="btn_prev" href="designer?branchId=${branch.branchId}" onclick="prevCal()"><span class="blind">이전</span></a>
+			                <span class="title_month">2024.7</span>
+			                <a class="btn_next" href="reservationConfirm" onclick="nextCal()"><span class="blind">다음</span></a>
+			            </div>
+			            <div class="calendarTable">
+			                <table border="0" cellpadding="0" cellspacing="0">
+			                    <thead>
+			                        <tr>
+			                            <th class="sun">일</th>
+			                            <th>월</th>
+			                            <th>화</th>
+			                            <th>수</th>
+			                            <th>목</th>
+			                            <th>금</th>
+			                            <th class="sat">토</th>
+			                        </tr>
+			                     </thead>
+							     <tbody id="caltbody">
+		                             <c:forEach var="day" items="${currentMonthDays}">
+		                                 <tr>
+		                                     <td>${day}</td>
+		                                     <td>
+		                                         <c:if test="${not empty bookedTimes}">
+		                                             <c:forEach var="bookedTime" items="${bookedTimes}">
+		                                                 <c:if test="${bookedTime.reservationDate == day}">
+		                                                     <span class="booked">${day}</span>
+		                                                 </c:if>
+		                                             </c:forEach>
+		                                         </c:if>
+		                                         <c:if test="${empty bookedTimes}">
+		                                             <a href="#" onclick="selectDay('${day}')">${day}</a>
+		                                         </c:if>
+		                                     </td>
+		                                 </tr>
+		                             </c:forEach>
+		                         </tbody>
+				            </table>
+				            <div class="noti">
+				                <p><span>선택</span></p>
+				                <p><span>불가</span></p>
+				            </div>
+				        </div>
+				    </div>
+				    <div class="timeselectbox">
+				        <div class="dateTime">
+				            <p class="tit">날짜</p>
+				            <p class="txt" id="dateTimeTxt">날짜를 선택해주세요</p>
+				        </div>
+				        <div class="dateTime">
+				            <p class="tit">시간</p>
+				            <p class="timeselect" id="timeselect">시간을 선택해주세요.</p>
+				            <p class="m_timeselect" id="m_timeselect"><a href="">시간을 선택해주세요.</a></p>
+				        </div>
+				        <div class="timeline" id="timeline"></div>
+				    </div>
+				</div>
+			
+			    <div class="sisul_categorybox">
+			        <div class="sisul_category cover_scroll">
+			            <ul>
+			                <li class="active"><a href="#juno" id="shampu" onclick="selectSisulCategory('shampu')">샴푸</a></li>
+			                <li><a href="#juno" id="dry" onclick="selectSisulCategory('dry')">드라이</a></li>
+			                <li><a href="#juno" id="cut" onclick="selectSisulCategory('cut')">커트</a></li>
+			                <li><a href="#juno" id="perm" onclick="selectSisulCategory('perm')">펌</a></li>
+			                <li><a href="#juno" id="color" onclick="selectSisulCategory('color')">컬러</a></li>
+			                <li><a href="#juno" id="clinic" onclick="selectSisulCategory('clinic')">클리닉</a></li>
+			                <li><a href="#juno" id="headspa" onclick="selectSisulCategory('headspa')">헤드스파</a></li>
+			            </ul>
+			            <span class="cover left"></span>
+			            <span class="cover right"></span>
+			        </div>
+			    </div>
+			
+			    <div class="sisul_category_detail sisul_cate_items">
+			        <ul id="sisuldetails">
+			            <!-- 시술 목록은 JavaScript로 채워집니다 -->
+			        </ul>
+			    </div>
+			
+			    <div class="recomm_sisul" id="recomm_sisul" style="display: none;"></div>
+			
+			    <div class="forecast_sisul" style="display:none">
+			        <div class="box">
+			            <p class="ttl">선택 내역</p>
+			            <div class="mysisul">
+			                <ul id="mysisullist"></ul>
+			            </div>
+			        </div>
+			    </div>
+			
+			    <div class="sisul_textbox">
+			        <textarea id="orderMemo" placeholder="요청사항을 입력하세요 (150자 이내)"></textarea>
+			    </div>
+			
+			    <div class="ai_foot_btns">
+			        <a href="javascript:gotoPre();" class="btnbox_line">이전</a>
+			        <a href="#juno" class="btnbox_black">다음</a>
+			    </div>
+			    </div>
+
 		
 	<!-- footer.jsp 내용 -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
 	</div>
+	
 	<div class="loading" style="display: none;">
 		<div class="loading_inner">
 			<img src="https://www.junohair.com/static_resources/images/gate_img1.png" alt="JUNO HAIR">
@@ -159,10 +182,9 @@
 			</div>
 		</div>
 	</div>
-<script>
-
-
-		
+	
+	
+<script>	
 var holidayData = [ {
   "sun" : "N",
   "mon" : "Y",
@@ -799,88 +821,88 @@ function removeSelectedSisul(sisulid){
 
 var calendarData;
 function setCalendar(){
-	$("#caltbody").html("");
-	calendarData = buildCalendar();
-	$(".title_month").text(calendarData.year + "." + calendarData.month);
-	
-	var valhtml = "";
-	var sun, mon, tue, wed, thu, fri, sat;
-	for(var i=0; i < calendarData.dayinfo.length; i++){
-		sun = calendarData.dayinfo[i].sun === undefined ? "" : calendarData.dayinfo[i].sun;
-		mon = calendarData.dayinfo[i].mon === undefined ? "" : calendarData.dayinfo[i].mon;
-		tue = calendarData.dayinfo[i].tue === undefined ? "" : calendarData.dayinfo[i].tue;
-		wed = calendarData.dayinfo[i].wed === undefined ? "" : calendarData.dayinfo[i].wed;
-		thu = calendarData.dayinfo[i].thu === undefined ? "" : calendarData.dayinfo[i].thu;
-		fri = calendarData.dayinfo[i].fri === undefined ? "" : calendarData.dayinfo[i].fri;
-		sat = calendarData.dayinfo[i].sat === undefined ? "" : calendarData.dayinfo[i].sat;
-		
-		valhtml += '<tr>';
-		valhtml += '	<td class="sun">';
-		if(sun !== "") {
-			if(holidayData[i].sun !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sun_" + sun + '" onclick="selectDay(' + sun + ')" day="' + sun + '">' + sun + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sun_" + sun + '" day="' + sun + '">' + sun + '</span>';
-			}
-		}				
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(mon !== "") {
-			if(holidayData[i].mon !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_mon_" + mon + '" onclick="selectDay(' + mon + ')" day="' + mon + '">' + mon + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_mon_" + mon + '" day="' + mon + '">' + mon + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(tue !== "") {
-			if(holidayData[i].tue !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_tue_" + tue + '" onclick="selectDay(' + tue + ')" day="' + tue + '">' + tue + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_tue_" + tue + '" day="' + tue + '">' + tue + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(wed !== "") {
-			if(holidayData[i].wed !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_wed_" + wed + '" onclick="selectDay(' + wed + ')" day="' + wed + '">' + wed + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_wed_" + wed + '" day="' + wed + '">' + wed + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(thu !== "") {
-			if(holidayData[i].thu !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_thu_" + thu + '" onclick="selectDay(' + thu + ')" day="' + thu + '">' + thu + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_thu_" + thu + '" day="' + thu + '">' + thu + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(fri !== "") {
-			if(holidayData[i].fri !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_fri_" + fri + '" onclick="selectDay(' + fri + ')" day="' + fri + '">' + fri + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_fri_" + fri + '" day="' + fri + '">' + fri + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td class="sat">';
-		if(sat !== "") {
-			if(holidayData[i].sat !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sat_" + sat + '" onclick="selectDay(' + sat + ')" day="' + sat + '">' + sat + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sat_" + sat + '" day="' + sat + '">' + sat + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '</tr>';
-	}
-	$("#caltbody").html(valhtml);
+    $("#caltbody").html("");
+    calendarData = buildCalendar();
+    $(".title_month").text(calendarData.year + "." + calendarData.month);
+    
+    var valhtml = "";
+    var sun, mon, tue, wed, thu, fri, sat;
+    for(var i=0; i < calendarData.dayinfo.length; i++){
+        sun = calendarData.dayinfo[i].sun === undefined ? "" : calendarData.dayinfo[i].sun;
+        mon = calendarData.dayinfo[i].mon === undefined ? "" : calendarData.dayinfo[i].mon;
+        tue = calendarData.dayinfo[i].tue === undefined ? "" : calendarData.dayinfo[i].tue;
+        wed = calendarData.dayinfo[i].wed === undefined ? "" : calendarData.dayinfo[i].wed;
+        thu = calendarData.dayinfo[i].thu === undefined ? "" : calendarData.dayinfo[i].thu;
+        fri = calendarData.dayinfo[i].fri === undefined ? "" : calendarData.dayinfo[i].fri;
+        sat = calendarData.dayinfo[i].sat === undefined ? "" : calendarData.dayinfo[i].sat;
+        
+        valhtml += '<tr>';
+        valhtml += '    <td class="sun">';
+        if(sun !== "") {
+            if(holidayData[i].sun !== "Y"){
+                valhtml += '    <a href="#juno" id="'+ String(i+1) + "_sun_" + sun + '" onclick="selectDay(' + sun + ')" day="' + sun + '">' + sun + '</a>';
+            } else {
+                valhtml += '    <span class="closeday" id="'+ String(i+1) + "_sun_" + sun + '" day="' + sun + '">' + sun + '</span>';
+            }
+        }                
+        valhtml += '    </td>';
+        valhtml += '    <td>';
+        if(mon !== "") {
+            if(holidayData[i].mon !== "Y"){
+                valhtml += '    <a href="#juno" id="'+ String(i+1) + "_mon_" + mon + '" onclick="selectDay(' + mon + ')" day="' + mon + '">' + mon + '</a>';
+            } else {
+                valhtml += '    <span class="closeday" id="'+ String(i+1) + "_mon_" + mon + '" day="' + mon + '">' + mon + '</span>';
+            }
+        }
+        valhtml += '    </td>';
+        valhtml += '    <td>';
+        if(tue !== "") {
+            if(holidayData[i].tue !== "Y"){
+                valhtml += '    <a href="#juno" id="'+ String(i+1) + "_tue_" + tue + '" onclick="selectDay(' + tue + ')" day="' + tue + '">' + tue + '</a>';
+            } else {
+                valhtml += '    <span class="closeday" id="'+ String(i+1) + "_tue_" + tue + '" day="' + tue + '">' + tue + '</span>';
+            }
+        }
+        valhtml += '    </td>';
+        valhtml += '    <td>';
+        if(wed !== "") {
+            if(holidayData[i].wed !== "Y"){
+                valhtml += '    <a href="#juno" id="'+ String(i+1) + "_wed_" + wed + '" onclick="selectDay(' + wed + ')" day="' + wed + '">' + wed + '</a>';
+            } else {
+                valhtml += '    <span class="closeday" id="'+ String(i+1) + "_wed_" + wed + '" day="' + wed + '">' + wed + '</span>';
+            }
+        }
+        valhtml += '    </td>';
+        valhtml += '    <td>';
+        if(thu !== "") {
+            if(holidayData[i].thu !== "Y"){
+                valhtml += '    <a href="#juno" id="'+ String(i+1) + "_thu_" + thu + '" onclick="selectDay(' + thu + ')" day="' + thu + '">' + thu + '</a>';
+            } else {
+                valhtml += '    <span class="closeday" id="'+ String(i+1) + "_thu_" + thu + '" day="' + thu + '">' + thu + '</span>';
+            }
+        }
+        valhtml += '    </td>';
+        valhtml += '    <td>';
+        if(fri !== "") {
+            if(holidayData[i].fri !== "Y"){
+                valhtml += '    <a href="#juno" id="'+ String(i+1) + "_fri_" + fri + '" onclick="selectDay(' + fri + ')" day="' + fri + '">' + fri + '</a>';
+            } else {
+                valhtml += '    <span class="closeday" id="'+ String(i+1) + "_fri_" + fri + '" day="' + fri + '">' + fri + '</span>';
+            }
+        }
+        valhtml += '    </td>';
+        valhtml += '    <td class="sat">';
+        if(sat !== "") {
+            if(holidayData[i].sat !== "Y"){
+                valhtml += '    <a href="#juno" id="'+ String(i+1) + "_sat_" + sat + '" onclick="selectDay(' + sat + ')" day="' + sat + '">' + sat + '</a>';
+            } else {
+                valhtml += '    <span class="closeday" id="'+ String(i+1) + "_sat_" + sat + '" day="' + sat + '">' + sat + '</span>';
+            }
+        }
+        valhtml += '    </td>';
+        valhtml += '</tr>';
+    }
+    $("#caltbody").html(valhtml);
 }
 
 var oldSelectedDay;
@@ -988,7 +1010,7 @@ function initRsvTime(reservedTimeList){
 
 var targetday = targetDateInstance.getDate();
 	
-function prevCal(){
+/* function prevCal(){
 	prevCalendar();
 	setCalendar();
 	var todayInstance = new Date();
@@ -1010,7 +1032,7 @@ function nextCal(){
 		targetday = 1;
 	}
 	selectDay(targetday);
-}
+} */
 
 function todayCal(){
 	setCalendar();
