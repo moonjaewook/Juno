@@ -37,7 +37,7 @@ public class ReservationController {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// ¿¹¾à - ÁöÁ¡¼±ÅÃ
+	// ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/branch")
 	public String branch(HttpServletRequest request, Model model) {
 		System.out.println("branch()");
@@ -46,14 +46,14 @@ public class ReservationController {
 		String id = (String) session.getAttribute("id");
 		
 		if (id == null) {
-			session.setAttribute("loginCheck", "·Î±×ÀÎÇØÁÖ¼¼¿ä.");
+			session.setAttribute("loginCheck", "ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½.");
 			return "Join_Login/Login";
 		}
 
 		ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
-		model.addAttribute("branch", dao.branchList()); // µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ branch ¸ñ·ÏÀ» °¡Á®¿Í¼­ ³Ñ°ÜÁÖ±â
+		model.addAttribute("branch", dao.branchList()); // ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ branch ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½Ñ°ï¿½ï¿½Ö±ï¿½
 
-		return "/reservation/branch"; // jsp·Î ÀÌµ¿
+		return "/reservation/branch"; // jspï¿½ï¿½ ï¿½Ìµï¿½
 	}
 
 //	// Paging
@@ -65,41 +65,41 @@ public class ReservationController {
 //        return pagingCommand.getPaginatedList(params);
 //    }
 
-	// ¿¹¾à - µğÀÚÀÌ³Ê
+	// ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½
 	@RequestMapping("/designer")
 	public String designer(HttpServletRequest request, Model model) {
 		System.out.println("designer()");
 
-		int branchId = Integer.parseInt(request.getParameter("branchId")); // branchId¸¦ int·Î º¯È¯
+		int branchId = Integer.parseInt(request.getParameter("branchId")); // branchIdï¿½ï¿½ intï¿½ï¿½ ï¿½ï¿½È¯
 
 		ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
 
-		model.addAttribute("designers", dao.designerList(branchId)); // µğÀÚÀÌ³Ê ¸ñ·Ï
-		model.addAttribute("branchInfo", dao.selectedBranchInfo(branchId)); // ¼±ÅÃÇÑ ÁöÁ¡Á¤º¸ -> ÁöÁ¡¸í Ãâ·Â
+		model.addAttribute("designers", dao.designerList(branchId)); // ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½
+		model.addAttribute("branchInfo", dao.selectedBranchInfo(branchId)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 																			// ${branchInfo.branchName}
 
-		return "/reservation/designer"; // jsp·Î ÀÌµ¿
+		return "/reservation/designer"; // jspï¿½ï¿½ ï¿½Ìµï¿½
 	}
 	
 
-	// ¿¹¾à - ½ºÄÉÁÙ
+	// ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping("/schedule")
 	public String schedule(HttpServletRequest request, Model model) {
 		System.out.println("schedule()");
 		
-		int branchId = Integer.parseInt(request.getParameter("branchId")); // branchId¸¦ int·Î º¯È¯
-		String designerId = request.getParameter("designerId"); // ¼±ÅÃÇÑ µğÀÚÀÌ³Ê Id
+		int branchId = Integer.parseInt(request.getParameter("branchId")); // branchIdï¿½ï¿½ intï¿½ï¿½ ï¿½ï¿½È¯
+		String designerId = request.getParameter("designerId"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ Id
 		
 		ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
 
-		model.addAttribute("branchInfo", dao.selectedBranchInfo(branchId)); // ¼±ÅÃÇÑ ÁöÁ¡Á¤º¸ -> ÁöÁ¡¸í Ãâ·Â ${branchInfo.branchName}
-        model.addAttribute("designerInfo", dao.selectedDesignerInfo(designerId)); // ¼±ÅÃÇÑ µğÀÚÀÌ³ÊÀÇ ÀÎÀû Á¤º¸
-        model.addAttribute("designerWorkInfo", dao.selectedDesignerWorkInfo(designerId)); // ¼±ÅÃÇÑ µğÀÚÀÌ³ÊÀÇ ±Ù¹« Á¤º¸
+		model.addAttribute("branchInfo", dao.selectedBranchInfo(branchId)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ${branchInfo.branchName}
+        model.addAttribute("designerInfo", dao.selectedDesignerInfo(designerId)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        model.addAttribute("designerWorkInfo", dao.selectedDesignerWorkInfo(designerId)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ ï¿½Ù¹ï¿½ ï¿½ï¿½ï¿½ï¿½
  
         List<DesignerWorkDto> list = dao.selectedDesignerWorkInfo(designerId);
         
         String[] days= {"0","1","2","3","4","5","6"};
-        String[] strDays= {"ÀÏ","¿ù","È­","¼ö","¸ñ","±İ","Åä"};
+        String[] strDays= {"ì¼","ì›”","í™”","ìˆ˜","ëª©","ê¸ˆ","í† "};
         List<String> dayList = new ArrayList<String>();
         for(DesignerWorkDto dto : list) {
         	for(int i=0; i < strDays.length; i++) {
@@ -109,16 +109,16 @@ public class ReservationController {
         	}
         	
         }
-        model.addAttribute("designerWorkDay", dayList); // ¼±ÅÃÇÑ µğÀÚÀÌ³ÊÀÇ ±Ù¹« Á¤º¸
+        model.addAttribute("designerWorkDay", dayList); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ ï¿½Ù¹ï¿½ ï¿½ï¿½ï¿½ï¿½
         
         
         ScheduleCommand command = new ScheduleCommand();
         command.execute(model, branchId, designerId, dao);
         
-		return "/reservation/schedule"; // jsp·Î ÀÌµ¿
+		return "/reservation/schedule"; // jspï¿½ï¿½ ï¿½Ìµï¿½
 	}
 	
-	// AJAX ¿äÃ»À» Ã³¸®ÇÏ´Â ¸Ş¼­µå Ãß°¡
+	// AJAX ï¿½ï¿½Ã»ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
     @RequestMapping(value = "/getBookedTimes", method = RequestMethod.GET)
     @ResponseBody
     public List<String> getBookedTimes(@RequestParam("designerId") String designerId,
@@ -129,9 +129,9 @@ public class ReservationController {
     	log.info("reservationDate: {}", reservationDate);
     	ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
     	
-        List<ReservationDto> bookedTimes = dao.getBookedTimes(designerId, reservationDate + "%"); // ¿¹¾àµÈ ½Ã°£¸ñ·Ï
+        List<ReservationDto> bookedTimes = dao.getBookedTimes(designerId, reservationDate + "%"); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½
 
-        // ¿¹¾àµÈ ½Ã°£À» String ¸®½ºÆ®·Î º¯È¯
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ String ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È¯
         List<String> bookedTime = new ArrayList<String>(); 
         for (ReservationDto dto : bookedTimes) {
         	 LocalTime localTime = dto.getReservationTime().toLocalDateTime().toLocalTime();
@@ -147,23 +147,23 @@ public class ReservationController {
 //	@RequestMapping("/reservationConfirm")
 //	public String reservationConfirm(HttpServletRequest request, Model model) {
 //		
-//		System.out.println("ÄÁÆ®·Ñ·¯µé¾î¿ÔÂî·Õ");
+//		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 //		
-//		int branchId = Integer.parseInt(request.getParameter("branchId")); // branchId¸¦ int·Î º¯È¯
-//		String designerId = request.getParameter("designerId"); // ¼±ÅÃÇÑ µğÀÚÀÌ³Ê Id
+//		int branchId = Integer.parseInt(request.getParameter("branchId")); // branchIdï¿½ï¿½ intï¿½ï¿½ ï¿½ï¿½È¯
+//		String designerId = request.getParameter("designerId"); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ Id
 //		
 //		ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
 //
-//		model.addAttribute("branchInfo", dao.selectedBranchInfo(branchId)); // ¼±ÅÃÇÑ ÁöÁ¡Á¤º¸ -> ÁöÁ¡¸í Ãâ·Â ${branchInfo.branchName}
-//        model.addAttribute("designerInfo", dao.selectedDesignerInfo(designerId)); // ¼±ÅÃÇÑ µğÀÚÀÌ³ÊÀÇ ÀÎÀû Á¤º¸
+//		model.addAttribute("branchInfo", dao.selectedBranchInfo(branchId)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ${branchInfo.branchName}
+//        model.addAttribute("designerInfo", dao.selectedDesignerInfo(designerId)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //
-//		return "/reservation/reservationConfirm"; // jsp·Î ÀÌµ¿
+//		return "/reservation/reservationConfirm"; // jspï¿½ï¿½ ï¿½Ìµï¿½
 //	}
 	
 	@RequestMapping("/reservationConfirm")
     public String insertReservation(HttpServletRequest request, Model model)  {
 		
-		System.out.println("ÄÁÆ®·Ñ·¯µé¾î¿ÔÂî·Õ");
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		
 		
 		System.out.println(request.getParameter("reservationDate"));
@@ -192,20 +192,20 @@ public class ReservationController {
           model.addAttribute("reservation", reservation);
           
 
-          model.addAttribute("branchInfo", dao.selectedBranchInfo(Integer.parseInt(branchId))); // ¼±ÅÃÇÑ ÁöÁ¡Á¤º¸ -> ÁöÁ¡¸í Ãâ·Â ${branchInfo.branchName}
-          model.addAttribute("designerInfo", dao.selectedDesignerInfo(designerId)); // ¼±ÅÃÇÑ µğÀÚÀÌ³ÊÀÇ ÀÎÀû Á¤º¸
+          model.addAttribute("branchInfo", dao.selectedBranchInfo(Integer.parseInt(branchId))); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ${branchInfo.branchName}
+          model.addAttribute("designerInfo", dao.selectedDesignerInfo(designerId)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        return "/reservation/reservationConfirm"; // ¼º°ø ½Ã ÀÌµ¿ÇÒ JSP ÆäÀÌÁö
+        return "/reservation/reservationConfirm"; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ JSP ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
        }
 	
 
 
-	// ¿¹¾à - ¿Ï·á
+	// ï¿½ï¿½ï¿½ï¿½ - ï¿½Ï·ï¿½
 	@RequestMapping("/done")
 	public String done(Model model) {
 		System.out.println("done()");
 
-		return "/reservation/done"; // jsp·Î ÀÌµ¿
+		return "/reservation/done"; // jspï¿½ï¿½ ï¿½Ìµï¿½
 	}
 
 }

@@ -93,7 +93,7 @@
 		FROM orders o
 		JOIN orderdetails od ON o.orderid = od.orderid
 		JOIN
-		JunoProduct p ON od.producttype = p.productType AND od.productid =
+		junoProduct p ON od.producttype = p.productType AND od.productid =
 		p.productId
 		GROUP BY o.orderid
 		ORDER BY o.date DESC;
