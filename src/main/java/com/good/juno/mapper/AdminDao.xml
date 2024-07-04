@@ -63,5 +63,30 @@
 		from designer a, branch b
 		where a.branchId = b.branchId
 	</select>
+	
+   <select id="getAllOrders" resultType="com.good.juno.dto.OrderInfoDto">
+        SELECT o.date AS orderDate,
+               o.orderid AS orderId,
+               o.userid AS userId,
+               o.pay AS payStatus,
+               SUM(od.quantity * p.price) AS totalAmount
+        FROM orders o
+        JOIN orderdetails od ON o.orderid = od.orderid
+        JOIN JunoProduct p ON od.producttype = p.productType AND od.productid = p.productId
+        GROUP BY o.orderid
+        ORDER BY o.date DESC;
+    </select>
+	
+	<select id="getOrderDetails" parameterType="int" resultType="com.good.juno.dto.OrderDetailProductDto">
+	    SELECT od.orderid, od.producttype, od.productid, od.quantity,
+	           p.name, p.price, p.productImg1
+	    FROM orderdetails od
+	    JOIN JunoProduct p ON od.producttype = p.productType AND od.productid = p.productId
+	    WHERE od.orderid = #{param}
+	</select>
+	
+	<select id="getAllQna" resultType="com.good.juno.dto.QnaDto">
+		select * from qna
+	</select>
 
 </mapper>

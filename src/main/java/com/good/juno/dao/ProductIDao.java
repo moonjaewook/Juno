@@ -1,7 +1,10 @@
 package com.good.juno.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.good.juno.dto.OrderDetailProductDto;
+import com.good.juno.dto.OrderInfoDto;
 import com.good.juno.dto.ProductDto;
 
 
@@ -28,5 +31,10 @@ public interface ProductIDao {
 	 void insertOrder(int orderId, String id);
 	 //주문상세테이블
 	 void insertOrderDetail(int orderId, String productName, String productId, String quantity);
+	 
+	 //내 주문리스트
+	 List<OrderInfoDto> getAllOrders(String id);
+	 //내 주문 상세
+	 List<OrderDetailProductDto> getOrderDetails(int orderid);
 	 
 }

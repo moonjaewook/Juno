@@ -19,6 +19,9 @@ import com.good.juno.command.admin.BranchRegister;
 import com.good.juno.command.admin.DesignerRegister;
 import com.good.juno.dao.AdminDao;
 import com.good.juno.dto.DesignerDto;
+import com.good.juno.dto.OrderDetailProductDto;
+import com.good.juno.dto.OrderInfoDto;
+import com.good.juno.dto.QnaDto;
 
 @Controller
 public class AdminController {
@@ -54,7 +57,7 @@ public class AdminController {
 		dao.memberInsert(request.getParameter("id"), request.getParameter("pw"), request.getParameter("email"),
 				request.getParameter("name"),
 				request.getParameter("year") + request.getParameter("month") + request.getParameter("day"),
-				request.getParameter("intro"), "일반");
+				request.getParameter("intro"), "�씪諛�");
 		return "Join_Login/Login";
 	}
 
@@ -76,7 +79,7 @@ public class AdminController {
 			return "home";
 		} else {
 			System.out.println(2);
-			model.addAttribute("errorMessage", "ID 혹은 PW가 일치하지 않습니다!");
+			model.addAttribute("errorMessage", "ID �샊�� PW媛� �씪移섑븯吏� �븡�뒿�땲�떎!");
 			return "Join_Login/Login";
 		}
 	}
@@ -96,7 +99,7 @@ public class AdminController {
 	@RequestMapping("/RegisterBranchAction")
 	public String RegisterBranchAction(MultipartHttpServletRequest request,
 			@RequestParam("branch_img") MultipartFile branch_img, Model model) {
-		System.out.println("지점 등록 컨트롤러");
+		System.out.println("吏��젏 �벑濡� 而⑦듃濡ㅻ윭");
 
 		model.addAttribute("request", request);
 		model.addAttribute("branch_img", branch_img);
@@ -118,7 +121,7 @@ public class AdminController {
 	@RequestMapping("/RegisterManagerAction")
 	public String RegisterManagerAction(MultipartHttpServletRequest request,
 			@RequestParam("profile") MultipartFile profile, Model model) {
-		System.out.println("디자이너 등록 컨트롤러");
+		System.out.println("�뵒�옄�씠�꼫 �벑濡� 而⑦듃濡ㅻ윭");
 
 		model.addAttribute("request", request);
 		model.addAttribute("profile", profile);
@@ -140,9 +143,36 @@ public class AdminController {
 	}
 
 	@RequestMapping("/adminqna")
-	public String qna() {
-
-		return "admin/qna";
+	public String qna(Model model) {
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		List<QnaDto> qnaList = dao.getAllQna();
+		
+		model.addAttribute("qnaList", qnaList);
+		
+		return "admin/qnaList";
+	}
+	
+	@RequestMapping("/orderListCheck")
+	public String orderListCheck(Model model) {
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		List<OrderInfoDto> orders = dao.getAllOrders();
+		
+		model.addAttribute("orders", orders);
+		
+		return "admin/orderListCheck";
+	}
+	
+	@RequestMapping("/orderDetails")
+	public String orderDetails(@RequestParam("orderid") int orderid, Model model) {
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		List<OrderDetailProductDto> detail = dao.getOrderDetails(orderid);
+		
+		model.addAttribute("detail", detail);
+		
+		return "admin/orderListDetail";
 	}
 
 	@RequestMapping("/Logout")

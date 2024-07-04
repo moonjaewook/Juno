@@ -149,6 +149,14 @@ wcs_do();
 						</a>
 					</div>
 					
+					<div class="box reser">
+						<a href="./orderListCheck">
+							<p class="tit">결제내역조회</p>
+							<p class="desc">
+								<span>고객의 결제내역</span> <span>확인하기</span>
+							</p>
+						</a>
+					</div>
 					
 				</div>
 				<div class="intro_noti"></div>

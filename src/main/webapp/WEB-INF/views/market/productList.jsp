@@ -123,10 +123,8 @@
 				<div class="mobile_nav_inner">
 					<div class="m_util">
 						<ul>
-	
 							<li><a href="#juno" onclick="location.href='/myjuno/login'">로그인</a></li>
 							<li><a href="#juno" onclick="location.href='/myjuno/join_polish'">회원가입</a></li>
-		
 						</ul>
 					</div>
 					<div class="mn_wrap">
@@ -202,49 +200,6 @@
 					</div>
 				</div>
 			</div>
-			<script>
-			function gotoMyjuno(){
-				if("" != "CUST"){
-					alert("로그인후 이용이 가능합니다.");
-				}
-				location.href = "/myjuno/member_info";
-			}
-			
-			function gotoMyjunoMbr(){
-				if("" != "CUST"){
-					alert("로그인후 이용이 가능합니다.");
-				}
-				location.href = "/myjuno/member_info";
-			}
-			
-			function gotoMyjunoUL(){
-				if("" != "CUST"){
-					alert("로그인후 이용이 가능합니다.");
-				}
-				location.href = "/myjuno/use_list";
-			}
-			
-			function gotoMyjunoOL(){
-				if("" != "CUST"){
-					alert("로그인후 이용이 가능합니다.");
-				}
-				location.href = "/myjuno/order_list";
-			}
-			
-			function gotoMyjunoSS(){
-				if("" != "CUST"){
-					alert("로그인후 이용이 가능합니다.");
-				}
-				location.href = "/myjuno/sdelivery_set";
-			}
-			
-			function gotoMyjunoWD(){
-				if("" != "CUST"){
-					alert("로그인후 이용이 가능합니다.");
-				}
-				location.href = "/myjuno/withdraw";
-			}
-			</script>
 			<div id="container">
 				<div class="sub_visual">
 					<div class="sub_visual_bg" style="background-image:url('https://www.junohair.com/static_resources/images/junohair/sub/jmarket/intro_visual.jpg')"></div>
@@ -259,7 +214,9 @@
 				<div class="clear"></div>
 				<div id="contents" class="prodlistwrap">
 					<div class="inner">
-						<div class="prodcate">
+						<div class="prodcate" style="margin-bottom: 20px;">
+							<a href="./myorderList">나의 구매내역</a>
+							<!-- 
 							<a href="#juno" onclick="location.href='/junohair/jmarket/prodlist'" class="active">ALL</a>		
 							<a href="#juno" onclick="location.href='/junohair/jmarket/prodlist?catagoryMst=1'">SHAMPOO</a>
 							<a href="#juno" onclick="location.href='/junohair/jmarket/prodlist?catagoryMst=2'">TREATMENT</a>
@@ -267,6 +224,7 @@
 							<a href="#juno" onclick="location.href='/junohair/jmarket/prodlist?catagoryMst=4'">ESSENCE</a>
 							<a href="#juno" onclick="location.href='/junohair/jmarket/prodlist?catagoryMst=15'">BODY CARE</a>
 							<a href="#juno" onclick="location.href='/junohair/jmarket/prodlist_selfCheck'">SELF CHECK</a>
+							 -->
 						</div>
 						<div class="prodlistAll">
 							<h2 class="ttl">SHAMPOO</h2>

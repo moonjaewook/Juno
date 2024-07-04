@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.good.juno.dto.DesignerDto;
 import com.good.juno.dto.LoginDto;
+import com.good.juno.dto.OrderDetailProductDto;
+import com.good.juno.dto.OrderInfoDto;
+import com.good.juno.dto.QnaDto;
 
 public interface AdminDao {
 
@@ -30,6 +33,12 @@ public interface AdminDao {
 	public int branchid(String branchName);
 
 	List<DesignerDto> desingerall();
+
+	public List<OrderInfoDto> getAllOrders();
+
+	public List<OrderDetailProductDto> getOrderDetails(int orderid);
+
+	public List<QnaDto> getAllQna();
 
 	
 }

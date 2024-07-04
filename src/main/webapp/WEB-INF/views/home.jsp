@@ -4,10 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	class=" js no-touch csstransforms csstransforms3d csstransitions"
 	style="">
-<script type="text/javascript" async=""
-	src="https://www.google-analytics.com/analytics.js"></script>
-<script type="text/javascript" async=""
-	src="https://www.googletagmanager.com/gtag/js?id=G-DBGPMGH101&amp;l=dataLayer&amp;cx=c"></script>
 <head>
 
 <link rel="shortcut icon"
@@ -37,27 +33,6 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
 <meta http-equiv="imagetoolbar" content="no">
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async=""
-	src="https://www.googletagmanager.com/gtag/js?id=UA-150219424-1"></script>
-<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag() {
-		dataLayer.push(arguments);
-	}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-150219424-1');
-</script>
-<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
-<script type="text/javascript">
-	if (!wcs_add)
-		var wcs_add = {};
-	wcs_add["wa"] = "fce44f52888e1";
-	if (window.wcs) {
-		wcs_do();
-	}
-</script>
 
 <title>준오헤어</title>
 <link rel="stylesheet"
@@ -107,17 +82,15 @@
 	src="https://www.junohair.com/static_resources/lib/js-cookie/3.0.0-rc.0/js.cookie.min.js"></script>
 </head>
 <body>
-	<!-- 메인 롤링 popup -->
+
+
+	<!-- popup -->
 	<div id="popupMainRolling" class="main_rolling_popup"
 		style="display: none;">
 		<div class="rolling_cont">
 			<div class="rolling_img">
-
-
 				<a href="#"><img
 					src="https://www.junohair.com/upload/popup/202405/acdde28110cd430296eaf4bee61dd8df.png"></a>
-
-
 			</div>
 			<div class="foot">
 				<a href="#" class="today_close" onclick="todayCloseNewPop()"><span>오늘하루보지않기</span></a>
@@ -127,263 +100,15 @@
 	</div>
 	<div id="bg_dimm_rolling" class="bg_dimm" style="display: none;"></div>
 
+
+
 	<div id="wrap">
+		<!-- header.jsp 내용 -->
+		<jsp:include page="/WEB-INF/views/common/header2.jsp">
+			<jsp:param name="id" value="${sessionScope.id}" />
+			<jsp:param name="admin" value="${sessionScope.admin}" />
+		</jsp:include>
 
-
-		<div id="header">
-			<div class="header_top">
-				<span class="logo"><a href="#juno"
-					onclick="location.href='/'"><img
-						src="https://www.junohair.com/static_resources/images/home_icon.png"
-						alt="JUNO"></a></span>
-				<div class="inner">
-					<div id="gnb">
-						<ul>
-							<li class="active"><a href="#juno"
-								onclick="location.href='/junohair'">JUNO HAIR</a></li>
-							<li><a href="#juno" onclick="location.href='/junoacademy'">JUNO
-									ACADEMY</a></li>
-							<li><a href="#juno" onclick="location.href='/avenuejuno'">AVENUE
-									JUNO</a></li>
-							<li><a href="#juno" onclick="location.href='/recruit'">RECRUIT</a></li>
-							<li><a href="#juno" onclick="gotoMyjuno()">MY JUNO</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="util">
-					<dl>
-						<c:choose>
-							<c:when test="${sessionScope.admin eq '관리자'}">
-							<dd class="login">
-								<a href="./admin">관리자</a> &nbsp;| &nbsp;
-							</dd>
-    </c:when>
-						</c:choose>
-
-						<c:choose>
-							<c:when test="${empty id}">
-								<dd class="login">
-									<a href="./Login">로그인</a>
-								</dd>
-							</c:when>
-							<c:when test="${not empty id}">
-								<dd class="login">
-									<a href="./Logout">로그아웃</a>
-								</dd>
-							</c:when>
-						</c:choose>
-					</dl>
-				</div>
-				
-				
-				<div class="lang">
-					<a href="#juno" onclick="lang_toggle()" class="cur_lang"><img
-						src="https://www.junohair.com/static_resources/images/kr_n.png"
-						alt="국가 아이콘" class="national">한국어</a> <span
-						class="lang_arr arr_down"><img
-						src="https://www.junohair.com/static_resources/images/lang_arr_down.png"
-						alt=""></span> <span class="lang_arr arr_up"><img
-						src="https://www.junohair.com/static_resources/images/lang_arr_up.png"
-						alt=""></span>
-					<ul class="lang_list">
-						<li><a href="#juno" onclick="location.href='/en/junohair'"><img
-								src="https://www.junohair.com/static_resources/images/en_n.png"
-								alt="국가 아이콘" class="national">ENG</a></li>
-						<li><a href="#juno" onclick="location.href='/cn/junohair'"><img
-								src="https://www.junohair.com/static_resources/images/cn_n.png"
-								alt="국가 아이콘" class="national">中國語</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="header_btm">
-				<div class="inner">
-					<h1>
-						<a href="/junohair"> <img
-							src="https://www.junohair.com/static_resources/images/junohair/junohair_logo_dark.png"
-							alt="JUNO HAIR" class="dark"> <img
-							src="https://www.junohair.com/static_resources/images/junohair/junohair_logo_light.png"
-							alt="JUNO HAIR" class="light">
-						</a>
-					</h1>
-					<div class="lnb">
-						<ul>
-							<li><a href="#juno"
-								onclick="location.href='/junohair/about/story'">ABOUT</a></li>
-							<li><a href="#juno"
-								onclick="location.href='/junohair/salon/shop_list'">SALON</a></li>
-							<li><a href="#juno"
-								onclick="location.href='/junohair/membership/policy'">MEMBERSHIP</a></li>
-							<li><a href="#juno"
-								onclick="location.href='/junohair/communication/news_list'">COMMUNICATION</a></li>
-							<li><a href="#juno"
-								onclick="location.href='/junohair/reservation/intro'">RESERVATION</a></li>
-							<li><a href="#juno"
-								onclick="location.href='/junohair/jmarket/prodlist'">J
-									MARKET</a></li>
-						</ul>
-					</div>
-					<div class="mobile_menu_btn">
-						<a href="#juno" onclick="m_nav();"> <span></span> <span></span>
-							<span></span>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="mobile_nav">
-			<div class="mobile_nav_inner">
-				<div class="m_util">
-					<ul>
-
-						<li><a href="#juno" onclick="location.href='/myjuno/login'">로그인</a></li>
-						<li><a href="#juno"
-							onclick="location.href='/myjuno/join_polish'">회원가입</a></li>
-
-					</ul>
-				</div>
-				<div class="mn_wrap">
-					<div class="lnb">
-						<ul>
-							<li><strong class="depth1">ABOUT
-									<div>
-										<span class="horizon"></span><span class="vertical"></span>
-									</div>
-							</strong>
-								<dl>
-									<dt class="hide">ABOUT</dt>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/about/story'">스토리</a>
-									</dd>
-									<dd>
-										<a href="#juno" onclick="location.href='/junohair/about/ceo'">CEO
-											인사말</a>
-									</dd>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/about/brand'">브랜드</a>
-									</dd>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/about/location'">오시는길</a>
-									</dd>
-								</dl></li>
-							<li><strong class="depth1">SALON
-									<div>
-										<span class="horizon"></span><span class="vertical"></span>
-									</div>
-							</strong>
-								<dl>
-									<dt class="hide">SALON</dt>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/salon/shop_list'">살롱 소개</a>
-									</dd>
-
-								</dl></li>
-							<li><strong class="depth1">MEMBERSHIP
-									<div>
-										<span class="horizon"></span><span class="vertical"></span>
-									</div>
-							</strong>
-								<dl>
-									<dt class="hide">MEMBERSHIP</dt>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/membership/policy'">멤버십
-											제도</a>
-									</dd>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/membership/partnercard'">제휴
-											할인 카드</a>
-									</dd>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/membership/mobilecoupon'">모바일
-											쿠폰</a>
-									</dd>
-								</dl></li>
-							<li><strong class="depth1">COMMUNICATION
-									<div>
-										<span class="horizon"></span><span class="vertical"></span>
-									</div>
-							</strong>
-								<dl>
-									<dt class="hide">COMMUNICATION</dt>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/communication/news_list'">NEWS</a>
-									</dd>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/communication/qna'">Q&amp;A</a>
-									</dd>
-									<dd>
-										<a href="#juno"
-											onclick="location.href='/junohair/communication/partnership'">제휴문의</a>
-									</dd>
-								</dl></li>
-							<li><strong class="depth1"><a href="#juno"
-									onclick="location.href='/junohair/reservation/intro'">RESERVATION</a></strong>
-							</li>
-							<li><strong class="depth1"><a href="#juno"
-									onclick="location.href='/junohair/jmarket/prodlist'">J
-										MARKET</a></strong></li>
-							<li></li>
-							<li><strong class="depth1">MY JUNO
-									<div>
-										<span class="horizon"></span><span class="vertical"></span>
-									</div>
-							</strong>
-								<dl>
-									<dt class="hide">MY JUNO</dt>
-									<dd>
-										<a href="#juno" onclick="gotoMyjunoMbr()">회원정보</a>
-									</dd>
-									<dd>
-										<a href="#juno" onclick="gotoMyjunoUL()">이용내역</a>
-									</dd>
-									<dd>
-										<a href="#juno" onclick="gotoMyjunoOL()">구매내역</a>
-									</dd>
-									<dd>
-										<a href="#juno" onclick="gotoMyjunoSS()">정기배송 설정</a>
-									</dd>
-									<dd>
-										<a href="#juno" onclick="gotoMyjunoWD()">회원 탈퇴</a>
-									</dd>
-								</dl></li>
-						</ul>
-					</div>
-					<div class="gnb">
-						<ul>
-							<li><a href="#juno" onclick="location.href='/junohair'"><img
-									class="hair"
-									src="https://www.junohair.com/static_resources/images/m_gnb_hair.png"
-									alt="JUNO HAIR"></a></li>
-							<li><a href="#juno" onclick="location.href='/junoacademy'"><img
-									class="academy"
-									src="https://www.junohair.com/static_resources/images/m_gnb_academy.png"
-									alt="JUNO ACADEMY"></a></li>
-							<li><a href="#juno" onclick="location.href='/avenuejuno'"><img
-									class="avenue"
-									src="https://www.junohair.com/static_resources/images/m_gnb_avenue.png"
-									alt="AVENUE JUNO"></a></li>
-							<li><a href="#juno"
-								onclick="location.href='https://www.triamilia.com/'"><img
-									class="tria"
-									src="https://www.junohair.com/static_resources/images/m_gnb_tria.png"
-									alt="TRIA MILIA"></a></li>
-							<li><a href="#juno" onclick="location.href='/recruit'">RECRUIT</a></li>
-							<li><a href="#juno" onclick="location.href='/en/junohair/'">ENGLISH</a></li>
-							<li><a href="#juno" onclick="location.href='/cn/junohair/'">中国</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
 		<script>
 			function gotoMyjuno() {
 				if ("" != "CUST") {
@@ -394,155 +119,16 @@
 		</script>
 		<div id="container">
 
-			<div class="visual_section">
-				<div class="visual_slide owl-carousel owl-theme owl-loaded">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					<div class="owl-stage-outer">
-						<div class="owl-stage"
-							style="transform: translate3d(-5709px, 0px, 0px); transition: all 0.7s ease 0s; width: 17127px;">
-							<div class="owl-item cloned"
-								style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=28'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202404/cf0e0c642ef249c7a5bfac28a10ab704.png"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202404/2f8872dc6d7e46dbac37321aa371958a.png)"></div>
-								</div>
-							</div>
-							<div class="owl-item cloned"
-								style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/reservation/intro'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202207/b45501e9d3e94411a6c51f31f1e8bb91.jpg"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202207/ff175943d2b145708d69c69539f9c76e.jpg)"></div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=30'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202405/be63269dda3b4bb0968fed91499e6ae2.png"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202405/782900a938454274a20e76ad76b011e9.png)"></div>
-								</div>
-							</div>
-							<div class="owl-item active"
-								style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=31'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202406/06abf9b4aefa4dd7a7f954feb2597d08.png"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202406/89af406befe342cabac5fda9260e48d1.png)"></div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=32'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202406/aa452d9f8b364dd39ad9808ba5bca908.png"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202406/7aca9034b4b743c78b68bf9af8e6ad7a.png)"></div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=28'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202404/cf0e0c642ef249c7a5bfac28a10ab704.png"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202404/2f8872dc6d7e46dbac37321aa371958a.png)"></div>
-								</div>
-							</div>
-							<div class="owl-item" style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/reservation/intro'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202207/b45501e9d3e94411a6c51f31f1e8bb91.jpg"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202207/ff175943d2b145708d69c69539f9c76e.jpg)"></div>
-								</div>
-							</div>
-							<div class="owl-item cloned"
-								style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=30'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202405/be63269dda3b4bb0968fed91499e6ae2.png"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202405/782900a938454274a20e76ad76b011e9.png)"></div>
-								</div>
-							</div>
-							<div class="owl-item cloned"
-								style="width: 1903px; margin-right: 0px;">
-								<div class="visual_item"
-									onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=31'"
-									style="cursor: pointer;">
-									<img
-										src="https://www.junohair.com/upload/visual/202406/06abf9b4aefa4dd7a7f954feb2597d08.png"
-										alt="">
-									<div class="visual_bg"
-										style="background-image: url(https://www.junohair.com/upload/visual/202406/89af406befe342cabac5fda9260e48d1.png)"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="owl-controls">
-						<div class="owl-nav">
-							<div class="owl-prev" style="display: none;">prev</div>
-							<div class="owl-next" style="display: none;">next</div>
-						</div>
-						<div class="owl-dots" style="">
-							<div class="owl-dot">
-								<span></span>
-							</div>
-							<div class="owl-dot active">
-								<span></span>
-							</div>
-							<div class="owl-dot">
-								<span></span>
-							</div>
-							<div class="owl-dot">
-								<span></span>
-							</div>
-							<div class="owl-dot">
-								<span></span>
-							</div>
-						</div>
-					</div>
+			<div class="owl-item cloned"
+				style="width: 1903px; margin-right: 0px;">
+				<div class="visual_item"
+					onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=31'"
+					style="cursor: pointer;">
+					<img
+						src="https://www.junohair.com/upload/visual/202406/06abf9b4aefa4dd7a7f954feb2597d08.png"
+						alt="">
+					<div class="visual_bg"
+						style="background-image: url(https://www.junohair.com/upload/visual/202406/89af406befe342cabac5fda9260e48d1.png)"></div>
 				</div>
 			</div>
 
@@ -550,9 +136,8 @@
 				<div class="mainbanner">
 					<div class="inner">
 						<ul>
-							<li class="bann01"><a href="#juno"
-								onclick="gotoReservation()">
-									<p class="tit">실시간 예약하기 + ${sessionScope.id}</p>
+							<li class="bann01"><a href="branch">
+									<p class="tit">실시간 예약하기 </p>
 									<p class="desc">쉽고 간편한 매장 예약과 디자이너를 추천해 드립니다.</p>
 									<p class="img">
 										<img
@@ -560,7 +145,7 @@
 											alt="">
 									</p>
 							</a></li>
-							<li class="bann02"><a href="#juno" onclick="gotoJMarket()">
+							<li class="bann02"><a href="jmarket">
 									<p class="tit">J MARKET 이용하기</p>
 									<p class="desc">건강한 모발과 두피를 위한 뷰티 제품을 만나보세요.</p>
 									<p class="img">
