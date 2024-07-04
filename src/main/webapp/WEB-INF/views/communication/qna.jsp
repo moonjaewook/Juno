@@ -119,7 +119,7 @@
 			<div class="sub_menu w33p">
 				<div class="inner">
 					<ul>
-						<li><strong><a href="#juno" onclick="location.href='news_list'">NEWS</a></strong></li>
+						<li><strong><a href="news">NEWS</a></strong></li>
 						<li class="cur"><strong><a href="#juno">Q&amp;A</a></strong></li>
 						<li><strong><a href="#juno" onclick="location.href='partnership'">제휴문의</a></strong></li>
 					</ul>

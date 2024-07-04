@@ -103,7 +103,7 @@
 			<div class="owl-item cloned"
 				style="width: 1903px; margin-right: 0px;">
 				<div class="visual_item"
-					onclick="location='https://www.junohair.com/junohair/communication/news_view?idx=31'"
+					onclick="location='./noticeDetail?id=2'"
 					style="cursor: pointer;">
 					<img
 						src="https://www.junohair.com/upload/visual/202406/06abf9b4aefa4dd7a7f954feb2597d08.png"
