@@ -253,8 +253,8 @@ function selectDay(day) {
 	 	
 	    // 예약 가능한 시간대를 서버에서 가져와서 업데이트
         fetchBookedTimes(year, month, day);
-        
-        
+        console.error('year: ', year);
+        console.error('month: ', month);
         
 }
 
@@ -298,7 +298,7 @@ function updateTimelines(bookedTimes) {
         	console.log("bookedTimes: ", bookedTimes);
             morningHtml += '<li><span class="disabled">' + time + '</span></li>';
         } else {
-            /* morningHtml += `<li><a href="#juno" time24="${time}" ampm="am" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`; */
+            // morningHtml += `<li><a href="#juno" time24="${time}" ampm="am" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`; 
             morningHtml += '<li><a href="#juno" time24="' + time + '" ampm="am" time="' + time + '" onclick="selectTime(\'' + time + '\')">' + time + '</a></li>';
         }
         }
@@ -307,24 +307,6 @@ function updateTimelines(bookedTimes) {
     console.log("morningHtml: ", morningHtml); // 데이터 확인
     document.getElementById("morningTimeList").innerHTML = morningHtml;
     
- 	// 공백 제거 및 소문자 변환
-    /* const normalizedBookedTimes = bookedTimes.map(time => time.trim().toLowerCase());
-
-    console.log("Normalized bookedTimes: ", normalizedBookedTimes); // 정규화된 데이터 확인
-
-    let morningHtml = '';
-    for (let time of morningTimes) {
-        const normalizedTime = time.trim().toLowerCase();
-        console.log(`Checking if ${normalizedTime} is booked`);
-        if (normalizedBookedTimes.includes(normalizedTime)) {
-            morningHtml += `<li><span class="disabled">${time}</span></li>`;
-        } else {
-            morningHtml += `<li><a href="#juno" time24="${time}" ampm="am" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`;
-        }
-    } */
-    
-    
-
     let afternoonHtml = '';
     for (let time of afternoonTimes) {
         if (bookedTimes.includes(time)) {
