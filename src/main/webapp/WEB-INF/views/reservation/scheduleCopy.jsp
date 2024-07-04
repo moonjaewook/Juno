@@ -1,6 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery CDN 링크 추가 -->
+</head>
 
 <!-- header.jsp 내용 -->
 <jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
@@ -23,10 +29,10 @@
 		<div class="reser_process">
 			<ul>
 				<li><span class="num">01</span> <span>매장 선택</span></li>
-				<li style="cursor: pointer;" onclick="gotoPre()">
-					<span class="num">02</span> <span>디자이너 선택</span>
-				</li>
-				<li class="current"><span class="num">03</span> <span>일정 및 시술 선택</span></li>
+				<li style="cursor: pointer;" onclick="gotoPre()"><span
+					class="num">02</span> <span>디자이너 선택</span></li>
+				<li class="current"><span class="num">03</span> <span>일정
+						및 시술 선택</span></li>
 				<li><span class="num">04</span> <span>예약 확인</span></li>
 			</ul>
 		</div>
@@ -37,11 +43,12 @@
 	<!-- 선택한 디자이너 및 지점 Info 출력 -->
 	<div class="designer_namebox">
 		<p class="profileimg">
-			<img src="./resources/productupload/${designerInfo.designerPath}" class="profileimgsrc">
+			<img src="./resources/productupload/${designerInfo.designerPath}"
+				class="profileimgsrc">
 		</p>
 		<div class="infocont">
-			<p class="ttl">${designerInfo.designerName}<em>-</em>
-				<span class="branch">${branchInfo.branchName}</span>
+			<p class="ttl">${designerInfo.designerName}<em>-</em> <span
+					class="branch">${branchInfo.branchName}</span>
 			</p>
 			<p class="desc">${designerInfo.introduce}</p>
 		</div>
@@ -71,32 +78,36 @@
 							<th class="sat">토</th>
 						</tr>
 					</thead>
-					
-					
+
+
 					<tbody id="caltbody">
 						<!-- 현재 월 달력 -->
 						<div id="currentMonthCalendar" style="display: block;">
-							<h1 id="currentMonth" style="text-align: center; margin-top: 100px;">${currentMonth}</h1>
+							<h1 id="currentMonth" style="text-align:">${currentMonth}</h1>
 							<div class="calendarContainer">
 								<table class="uniqueCalendarTable">
-									<c:forEach items="${currentMonthDays}" var="day" varStatus="status">
+									<c:forEach items="${currentMonthDays}" var="day"
+										varStatus="status">
 										<c:if test="${status.index % 7 == 0}">
 											<tr class="CalendarCell">
 										</c:if>
 										<td><c:choose>
-												<c:when test="${fn:contains(designerWorkDay, status.index % 7)}">
+												<c:when
+													test="${fn:contains(designerWorkDay, status.index % 7)}">
 													<%-- <div style="margin-bottom: 5px; color: blue; cursor: pointer;" 
 													onclick="selectDay('${year}', '${month}', '${day}')">${day}</div> --%>
-													<div style="margin-bottom: 5px; color: blue; cursor: pointer;"
+													<div
+														style="margin-bottom: 5px; color: blue; cursor: pointer;"
 														onclick="selectDay('${day}')">${day}</div>
 												</c:when>
-												<c:when test="${not fn:contains(designerWorkDay, status.index % 7)}">
+												<c:when
+													test="${not fn:contains(designerWorkDay, status.index % 7)}">
 													<div style="margin-bottom: 5px; color: gray;">${day}</div>
 												</c:when>
 												<c:otherwise>
 													<!-- 빈 셀을 그대로 두어 요일 맞춤 -->
 												</c:otherwise>
-										</c:choose></td>
+											</c:choose></td>
 										<c:if test="${status.index % 7 == 6}">
 											</tr>
 										</c:if>
@@ -114,85 +125,31 @@
 						</div>
 						<div class="dateTime">
 							<p class="tit">시간</p>
-							<p class="timeselect" id="timeselect">시간을 선택해주세요.</p>
-							<p class="m_timeselect" id="m_timeselect">
-								<a href="">시간을 선택해주세요.</a>
-							</p>
+							<p class="txt" id="timeselect">시간을 선택해주세요.</p>
 						</div>
 
-
-
-						<c:set var="morningTimes">
-							<c:out value="09:00, 09:30, 10:00, 10:30, 11:00, 11:30" escapeXml="false" />
-						</c:set>
-						<c:set var="afternoonTimes">
-							<c:out value="12:00, 12:30, 13:00, 13:30, 14:00, 14:30, 15:00, 15:30, 16:00, 16:30, 17:00, 17:30, 18:00, 18:30, 19:00, 19:30, 20:00, 20:30, 21:00, 21:30" escapeXml="false" />
-						</c:set>
 
 						<div class="timeline" id="timeline">
 							<div class="timesec">
 								<p class="tit">오전</p>
-								<ul>
-									<c:forEach var="time" items="${morningTimes}">
-										<c:choose>
-											<c:when test="${not empty bookedTimes}">
-												<c:set var="isBooked" value="false" />
-												<c:forEach var="bookedTime" items="${bookedTimes}">
-													<c:if
-														test="${fn:substring(bookedTime.reservationTime, 11, 16) == time}">
-														<li><span class="disabled">${time}</span></li>
-														<c:set var="isBooked" value="true" />
-													</c:if>
-												</c:forEach>
-												<c:if test="${not isBooked}">
-													<li><a href="#juno" time24="${time}" ampm="am"
-														time="${time}">${time}</a></li>
-												</c:if>
-											</c:when>
-											<c:otherwise>
-												<li><a href="#juno" time24="${time}" ampm="am"
-													time="${time}">${time}</a></li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
+								<ul id="morningTimeList">
+									<!-- 오전 시간대가 JavaScript로 채워집니다 -->
 								</ul>
 							</div>
-							
 							<div class="timesec">
 								<div class="line">
 									<span></span>
 								</div>
 								<p class="tit">오후</p>
-								<ul>
-									<c:forEach var="time" items="${afternoonTimes}">
-										<c:choose>
-											<c:when test="${not empty bookedTimes}">
-												<c:set var="isBooked" value="false" />
-												<c:forEach var="bookedTime" items="${bookedTimes}">
-													<c:if
-														test="${fn:substring(bookedTime.reservationTime, 11, 16) == time}">
-														<li><span class="disabled">${time}</span></li>
-														<c:set var="isBooked" value="true" />
-													</c:if>
-												</c:forEach>
-												<c:if test="${not isBooked}">
-													<li><a href="#juno" time24="${time}" ampm="pm"
-														time="${time}">${time}</a></li>
-												</c:if>
-											</c:when>
-											<c:otherwise>
-												<li><a href="#juno" time24="${time}" ampm="pm"
-													time="${time}">${time}</a></li>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
+								<ul id="afternoonTimeList">
+									<!-- 오후 시간대가 JavaScript로 채워집니다 -->
 								</ul>
 							</div>
-							
 						</div>
+
+
+
 					</div>
-
-
 				</table>
 			</div>
 		</div>
@@ -200,52 +157,53 @@
 
 
 
+	<!-- 시술 선택 및 예약 확인 화면 -->
 	<div class="sisul_categorybox">
-		<div class="sisul_category cover_scroll">
-			<ul>
-				<li class="active"><a href="#juno" id="shampu"
-					onclick="selectSisulCategory('shampu')">샴푸</a></li>
-				<li><a href="#juno" id="dry"
-					onclick="selectSisulCategory('dry')">드라이</a></li>
-				<li><a href="#juno" id="cut"
-					onclick="selectSisulCategory('cut')">커트</a></li>
-				<li><a href="#juno" id="perm"
-					onclick="selectSisulCategory('perm')">펌</a></li>
-				<li><a href="#juno" id="color"
-					onclick="selectSisulCategory('color')">컬러</a></li>
-				<li><a href="#juno" id="clinic"
-					onclick="selectSisulCategory('clinic')">클리닉</a></li>
-				<li><a href="#juno" id="headspa"
-					onclick="selectSisulCategory('headspa')">헤드스파</a></li>
-			</ul>
-			<span class="cover left"></span> <span class="cover right"></span>
-		</div>
+	    <div class="sisul_category cover_scroll">
+	        <ul>
+	            <li class="active"><a href="#juno" id="shampu" onclick="selectSisulCategory('shampu')">샴푸</a></li>
+	            <li><a href="#juno" id="dry" onclick="selectSisulCategory('dry')">드라이</a></li>
+	            <li><a href="#juno" id="cut" onclick="selectSisulCategory('cut')">커트</a></li>
+	            <li><a href="#juno" id="perm" onclick="selectSisulCategory('perm')">펌</a></li>
+	            <li><a href="#juno" id="color" onclick="selectSisulCategory('color')">컬러</a></li>
+	            <li><a href="#juno" id="clinic" onclick="selectSisulCategory('clinic')">클리닉</a></li>
+	            <li><a href="#juno" id="headspa" onclick="selectSisulCategory('headspa')">헤드스파</a></li>
+	        </ul>
+	        <span class="cover left"></span>
+	        <span class="cover right"></span>
+	    </div>
 	</div>
-
+	
 	<div class="sisul_category_detail sisul_cate_items">
-		<ul id="sisuldetails">
-			<!-- 시술 목록은 JavaScript로 채워집니다 -->
-		</ul>
+	    <ul id="sisuldetails">
+	        <!-- 시술 목록은 JavaScript로 채워집니다 -->
+	    </ul>
 	</div>
-
+	
 	<div class="recomm_sisul" id="recomm_sisul" style="display: none;"></div>
-
+	
 	<div class="forecast_sisul" style="display: none">
-		<div class="box">
-			<p class="ttl">선택 내역</p>
-			<div class="mysisul">
-				<ul id="mysisullist"></ul>
-			</div>
-		</div>
+	    <div class="box">
+	        <p class="ttl">선택 내역</p>
+	        <div class="mysisul">
+	            <ul id="mysisullist"></ul>
+	        </div>
+	    </div>
 	</div>
+	
 
-	<div class="sisul_textbox">
+	<!-- <div class="sisul_textbox">
 		<textarea id="orderMemo" placeholder="요청사항을 입력하세요 (150자 이내)"></textarea>
-	</div>
+	</div> -->
 
 	<div class="ai_foot_btns">
-		<a href="javascript:gotoPre();" class="btnbox_line">이전</a> <a
-			href="#juno" class="btnbox_black">다음</a><br><br><br><br>
+		<a href="javascript:gotoPre();" class="btnbox_line">이전</a> 
+		<a class="btnbox_black" onclick="submitReservation()">다음</a><br>
+		<!-- <a href="javascript:gotoNext();" class="btnbox_black" onclick="submitReservation()">다음</a><br> -->
+		<!-- <a href="javascript:gotoNext();" class="btnbox_black">다음</a><br> -->
+		<br>
+		<br>
+		<br>
 	</div>
 </div>
 
@@ -270,11 +228,11 @@
 
 
 <script>
-
+let dayOutter = ''
 function selectDay(day) {
-	console.log("selectDay 함수 호출됨");
+	console.log("selectDay 함수 호출됨 / day:", day);
 	 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-	 
+	 dayOutter=day;
 	    // 현재 연도와 월을 가져옴
 	    const currentMonth = '<c:out value="${currentMonth}"/>'
 	    const [year, month] = currentMonth.split('-');
@@ -286,59 +244,73 @@ function selectDay(day) {
 	    const date = new Date(year, month - 1, day);
 	    const dayOfWeek = daysOfWeek[date.getDay()];
 
-	    // 날짜 정보를 표시하는 부분 업데이트
 	    document.getElementById("dateTimeTxt").textContent = selectedDate + '(' + dayOfWeek + ')';
+	 	
+	    // 예약 가능한 시간대를 서버에서 가져와서 업데이트
+        fetchBookedTimes(year, month, day);
 }
 
-var holidayData = [ {
-  "sun" : "N",
-  "mon" : "Y",
-  "tue" : "N",
-  "wed" : "N",
-  "thu" : "N",
-  "fri" : "N",
-  "sat" : "N"
-}, {
-  "sun" : "N",
-  "mon" : "Y",
-  "tue" : "N",
-  "wed" : "N",
-  "thu" : "N",
-  "fri" : "N",
-  "sat" : "N"
-}, {
-  "sun" : "N",
-  "mon" : "Y",
-  "tue" : "N",
-  "wed" : "N",
-  "thu" : "N",
-  "fri" : "N",
-  "sat" : "N"
-}, {
-  "sun" : "N",
-  "mon" : "Y",
-  "tue" : "N",
-  "wed" : "N",
-  "thu" : "N",
-  "fri" : "N",
-  "sat" : "N"
-}, {
-  "sun" : "N",
-  "mon" : "Y",
-  "tue" : "N",
-  "wed" : "N",
-  "thu" : "N",
-  "fri" : "N",
-  "sat" : "N"
-}, {
-  "sun" : "N",
-  "mon" : "Y",
-  "tue" : "N",
-  "wed" : "N",
-  "thu" : "N",
-  "fri" : "N",
-  "sat" : "N"
-} ]
+function fetchBookedTimes(year, month, day) {
+    const designerId = '<c:out value="${designerInfo.designerId}"/>';
+    const reservationDate = year + '-' + month + '-' + day;
+
+    $.ajax({
+        url: '${pageContext.request.contextPath}/getBookedTimes',
+        type: 'GET',
+        data: {
+            designerId: designerId,
+            reservationDate: reservationDate
+        },
+        success: function(response) {
+        	console.log('AJAX 요청 성공: ', response);
+            updateTimelines(response);
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX 에러: ', error);
+            console.error('xhr: ', xhr);
+            console.error('status: ', status);
+        }
+    });
+}
+
+function updateTimelines(bookedTimes) {
+    const morningTimes = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30'];
+    const afternoonTimes = ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'];
+
+ 	
+    let morningHtml = '';
+    for (let time of morningTimes) {
+    	console.log("morningTimes: ", morningTimes);
+        if (bookedTimes.includes(time)) {
+        	console.log("bookedTimes: ", bookedTimes);
+            morningHtml += '<li><span class="disabled">' + time + '</span></li>';
+        } else {
+            morningHtml += '<li><a href="#juno" time24="' + time + '" ampm="am" time="' + time + '" onclick="selectTime(\'' + time + '\')">' + time + '</a></li>';
+        }
+    }
+    console.log("morningHtml: ", morningHtml); // 데이터 확인
+    document.getElementById("morningTimeList").innerHTML = morningHtml;
+    
+    
+    let afternoonHtml = '';
+    for (let time of afternoonTimes) {
+        if (bookedTimes.includes(time.trim())) {
+            afternoonHtml += '<li><span class="disabled">' + time + '</span></li>';
+        } else {
+            afternoonHtml += '<li><a href="#juno" time24="' + time + '" ampm="pm" time="' + time + '" onclick="selectTime(\'' + time + '\')">' + time + '</a></li>';
+        }
+    }
+    console.log("afternoonHtml: ", afternoonHtml); // 데이터 확인
+    document.getElementById("afternoonTimeList").innerHTML = afternoonHtml;
+}
+
+
+function selectTime(time) {
+    document.getElementById("timeselect").textContent = time;
+}
+
+
+
 var sisulShampuList = [ {
   "id" : "35c3358b1df396df765f57780b57f710",
   "sisulId" : "24ad48bab64d4e4fabd6912a6369ff02",
@@ -609,406 +581,346 @@ $(document).ready(function(){
 	}
 })
 
+// 여기부터 수정
+function submitReservation() {
+    const selectedSisulList = selectedSisullist; // 선택된 시술 목록을 가져오는 배열
+    const reservationDate = document.getElementById('dateTimeTxt').textContent.split('.')[0]; // 날짜 선택
+    const reservationTime = document.getElementById('timeselect').textContent; // 시간 선택
+    const userId = '<c:out value="${userId}"/>'; // userId 가져오기
+    const branchId = '<c:out value="${branchInfo.branchId}"/>'; // branchId 가져오기
+    const designerId = '<c:out value="${designerInfo.designerId}"/>'; // designerId 가져오기
 
-function selectSisulCategory(sisulCategory){
-	var sisulCategoryList = $("#"+sisulCategory).parent().parent().find("li");
-	for(var i=0; i<sisulCategoryList.length; i++){
-		$(sisulCategoryList[i]).removeClass("active");
-	}
-	$("#"+sisulCategory).parent().addClass("active");
-	
-	var sisulList = [];
-	if(sisulCategory === "shampu"){
-		sisulList = sisulShampuList;
-	} else if(sisulCategory === "dry"){
-		sisulList = sisulDryList;
-	} else if(sisulCategory === "cut"){
-		sisulList = sisulCutList;
-	} else if(sisulCategory === "perm"){
-		sisulList = sisulPermList;
-	} else if(sisulCategory === "color"){
-		sisulList = sisulColorList;
-	} else if(sisulCategory === "clinic"){
-		sisulList = sisulClinicList;
-	} else if(sisulCategory === "headspa"){
-		sisulList = sisulHeadspaList;
-	}
-	
-	$("#sisuldetails").html("");
-	var sisulListHtml = "";
-	if(sisulList.length > 0){
-		for(var i=0; i<sisulList.length; i++){
-			sisulListHtml += '<li>';
-			sisulListHtml += '	<span class="check_type">';
-			sisulListHtml += '		<input type="checkbox" id="' + sisulList[i].id + '" class="checkbox" onclick="sisulCheckboxOnclick(this);"/>';
-			sisulListHtml += '		<label for="' + sisulList[i].id + '">' + sisulList[i].sisulDesc + '</label>';
-			sisulListHtml += '	</span>';
-			sisulListHtml += '	<div class="pricezone">';
-			if(sisulList[i].discountYn){
-				sisulListHtml += '		<p class="saleprice">';
-				sisulListHtml += '			<span class="original">' + sisulList[i].price + '</span>';
-				sisulListHtml += '			<span class="sale">' + (100 - parseInt(Number(sisulList[i].priceDiscount.replaceAll(",","")) /  Number(sisulList[i].price.replaceAll(",","")) * 100)) + '% 할인</span>';
-				sisulListHtml += '		</p>';
-				sisulListHtml += '		<p class="current">' + sisulList[i].priceDiscount + '<span class="won">원</span></p>';
-				sisulListHtml += '	</div>';
-				sisulListHtml += '</li>';
-			} else {
-				sisulListHtml += '		<p class="current">' + sisulList[i].price + '<span class="won">원</span></p>';
-				sisulListHtml += '	</div>';
-				sisulListHtml += '</li>';
-			}
-		}	
-	} else {
-		sisulListHtml += '<li class="full">시술 항목이 없습니다.</li> <!-- 2020-06-14 수정-->';
-	}
+/*     if (!reservationDate || !reservationTime || selectedSisulList.length === 0) {
+        alert('날짜, 시간, 시술을 선택해주세요.');
+        return;
+    } */
 
-	$("#sisuldetails").html(sisulListHtml);
-	
-	// 각 시술상세의 체크박스 체크처리하기
-	for(var i=0; i<sisulAllList.length; i++){
-		if(sisulAllList[i].chk === true){
-			$("input:checkbox[id='"+ sisulAllList[i].id +"']").prop("checked", true)
-		}
-	}
+    const sisulString = selectedSisulList.map(sisul => sisul.sisulDesc).join(',');
 
-	//스크롤 커버
-	var coverScroll = {};
-	$.extend(coverScroll,{
-		init : function(){
-			$('.cover_scroll ul').scroll(function(){
-				var navW = 0,
-				li = $(this).find('li'),
-				conW = $(this).width(),
-				scrollLeft = $(this).scrollLeft();
-				for(var i = 0; i < li.length; i++){
-					navW += li.eq(i).width();
-				}
-				if ( scrollLeft == 0 ){
-					$(this).parent().find('.cover.left').hide();
-					$(this).parent().find('.cover.right').show();
-				} else if ( scrollLeft > ( navW - conW ) ) {
-					$(this).parent().find('.cover.right').hide();
-					$(this).parent().find('.cover.left').show();
-				} else {
-					$(this).parent().find('.cover.right').show();
-					$(this).parent().find('.cover.left').show();
-				}
-			});
-		}
-	}).init();
+    console.log("selectedSisulList : " + JSON.stringify(selectedSisulList));
+    console.log("reservationDate : " + reservationDate);
+    console.log("reservationTime : " + reservationTime);
+    console.log("userId : " + userId);
+    console.log("branchId : " + branchId);
+    console.log("designerId : " + designerId);
+
+    $.ajax({
+        url: '${pageContext.request.contextPath}/reservationConfirm',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            reservationDate: reservationDate,
+            reservationTime: reservationTime,
+            sisul: sisulString,
+            userId: userId,
+            branchId: branchId,
+            designerId: designerId
+        }),
+        success: function(response) {
+            console.log('AJAX 요청 성공: ', response);
+            window.location.href = '${pageContext.request.contextPath}/reservationConfirm'; // 예약 확인 페이지로 이동
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX 에러: ', error);
+            console.error('xhr: ', xhr);
+            console.error('status: ', status);
+        }
+    });
 }
 
-function sisulCheckboxOnclick(obj){
-	var sisulid = $(obj).attr('id');
-	if ( $(obj).prop('checked')){
-		for(var i=0; i<sisulAllList.length; i++){
-			if(sisulid === sisulAllList[i].id){
-				sisulAllList[i].chk = true;
-				// 선택된 시술상세 리스트(selectedSisullist)에 추가를 한다.
-				selectedSisullist.push(sisulAllList[i]);
-				recommendSisul(sisulAllList[i])
-				break;
-			}
-		}
-	} else {
-		for(var i=0; i<sisulAllList.length; i++){
-			if(sisulid === sisulAllList[i].id){
-				sisulAllList[i].chk = false;
-				// 선택된 시술상세 리스트(selectedSisullist)에서 삭제를 한다.
-				for(var j=0; j<selectedSisullist.length; j++){
-					if(sisulid === selectedSisullist[j].id){
-						selectedSisullist.splice(j,1);
-						$("#recomm_sisul").html("");
-						break;
-					}
-				}
-				break;
-			}
-		}
-	}
-	// 선택내역란 영역을 셋팅한다.
-	setMysisulArea();
+
+
+
+
+let selectedSisulList = [];
+
+function selectSisulCategory(sisulCategory) {
+    var sisulCategoryList = $("#" + sisulCategory).parent().parent().find("li");
+    for (var i = 0; i < sisulCategoryList.length; i++) {
+        $(sisulCategoryList[i]).removeClass("active");
+    }
+    $("#" + sisulCategory).parent().addClass("active");
+
+    var sisulList = [];
+    if (sisulCategory === "shampu") {
+        sisulList = sisulShampuList;
+    } else if (sisulCategory === "dry") {
+        sisulList = sisulDryList;
+    } else if (sisulCategory === "cut") {
+        sisulList = sisulCutList;
+    } else if (sisulCategory === "perm") {
+        sisulList = sisulPermList;
+    } else if (sisulCategory === "color") {
+        sisulList = sisulColorList;
+    } else if (sisulCategory === "clinic") {
+        sisulList = sisulClinicList;
+    } else if (sisulCategory === "headspa") {
+        sisulList = sisulHeadspaList;
+    }
+
+    $("#sisuldetails").html("");
+    var sisulListHtml = "";
+    if (sisulList.length > 0) {
+        for (var i = 0; i < sisulList.length; i++) {
+            sisulListHtml += '<li>';
+            sisulListHtml += '    <span class="check_type">';
+            sisulListHtml += '        <input type="checkbox" id="' + sisulList[i].id + '" class="checkbox" onclick="sisulCheckboxOnclick(this);"/>';
+            sisulListHtml += '        <label for="' + sisulList[i].id + '">' + sisulList[i].sisulDesc + '</label>';
+            sisulListHtml += '    </span>';
+            sisulListHtml += '    <div class="pricezone">';
+            if (sisulList[i].discountYn) {
+                sisulListHtml += '        <p class="saleprice">';
+                sisulListHtml += '            <span class="original">' + sisulList[i].price + '</span>';
+                sisulListHtml += '            <span class="sale">' + (100 - parseInt(Number(sisulList[i].priceDiscount.replaceAll(",", "")) / Number(sisulList[i].price.replaceAll(",", "")) * 100)) + '% 할인</span>';
+                sisulListHtml += '        </p>';
+                sisulListHtml += '        <p class="current">' + sisulList[i].priceDiscount + '<span class="won">원</span></p>';
+                sisulListHtml += '    </div>';
+                sisulListHtml += '</li>';
+            } else {
+                sisulListHtml += '        <p class="current">' + sisulList[i].price + '<span class="won">원</span></p>';
+                sisulListHtml += '    </div>';
+                sisulListHtml += '</li>';
+            }
+        }
+    } else {
+        sisulListHtml += '<li class="full">시술 항목이 없습니다.</li>';
+    }
+
+    $("#sisuldetails").html(sisulListHtml);
+
+    // 각 시술상세의 체크박스 체크처리하기
+    for (var i = 0; i < sisulAllList.length; i++) {
+        if (sisulAllList[i].chk === true) {
+            $("input:checkbox[id='" + sisulAllList[i].id + "']").prop("checked", true)
+        }
+    }
 }
 
-function recommendSisul(data){
-	if(data.recommendSisulId == ""){
-		$("#recomm_sisul").html("");
-		$("#recomm_sisul").hide();
-		return;
-	}
-	
-	var recommSisul;
-	for(var i=0; i<sisulAllList.length; i++){
-		if(data.recommendSisulId === sisulAllList[i].id){
-			recommSisul = sisulAllList[i];
-			break;
-		}
-	}
-	if(recommSisul === undefined){
-		$("#recomm_sisul").html("");
-		$("#recomm_sisul").hide();
-		return;
-	}
-	
-	var recomm_sisul_html = '';
-	recomm_sisul_html += '<div class="ttlbox">';
-	recomm_sisul_html += '	<p class="ttl">임경민님의 <span>추천 시술</span></p>';
-	recomm_sisul_html += '</div>';
-	recomm_sisul_html += '<div class="sisul_category_detail">';
-	recomm_sisul_html += '	<ul>';
-	recomm_sisul_html += '		<li>';
-	recomm_sisul_html += '			<span class="check_type">';
-	recomm_sisul_html += '				<input type="checkbox" id="recomm_' + recommSisul.id + '" name="detailsisul" class="checkbox" onclick="recommSisulCheckboxOnclick(this)">';
-	recomm_sisul_html += '				<label for="recomm_' + recommSisul.id + '">' + recommSisul.sisulDesc + '</label>';
-	recomm_sisul_html += '			</span>';
-	recomm_sisul_html += '			<div class="pricezone">';
-	if(recommSisul.discountYn){
-		recomm_sisul_html += '				<p class="saleprice">';
-		recomm_sisul_html += '					<span class="original">' + recommSisul.price + '</span>';
-		recomm_sisul_html += '					<span class="sale">' + (100 - parseInt(Number(recommSisul.priceDiscount.replaceAll(",","")) /  Number(recommSisul.price.replaceAll(",","")) * 100)) + '</span>';
-		recomm_sisul_html += '				</p>';
-		recomm_sisul_html += '				<p class="current">' + recommSisul.priceDiscount + '<span class="won">원</span></p>';
-	} else {
-		recomm_sisul_html += '				<p class="current">' + recommSisul.price + '<span class="won">원</span></p>';
-	}
-	recomm_sisul_html += '			</div>';
-	recomm_sisul_html += '		</li>';
-	recomm_sisul_html += '	</ul>';
-	recomm_sisul_html += '</div>';
-	
-	$("#recomm_sisul").html(recomm_sisul_html);
-	$("#recomm_sisul").show();
-	
-	// 이미 체크되어있는 대상인지 확인하고 체크처리
-	for(var i=0; i<sisulAllList.length; i++){
-		if(sisulAllList[i].chk === true){
-			$("input:checkbox[id='recomm_"+ sisulAllList[i].id +"']").prop("checked", true)
-		}
-	}
+function sisulCheckboxOnclick(obj) {
+    var sisulid = $(obj).attr('id');
+    if ($(obj).prop('checked')) {
+        for (var i = 0; i < sisulAllList.length; i++) {
+            if (sisulid === sisulAllList[i].id) {
+                sisulAllList[i].chk = true;
+                selectedSisulList.push(sisulAllList[i]); // 선택된 시술상세 리스트에 추가
+                recommendSisul(sisulAllList[i]);
+                break;
+            }
+        }
+    } else {
+        for (var i = 0; i < sisulAllList.length; i++) {
+            if (sisulid === sisulAllList[i].id) {
+                sisulAllList[i].chk = false;
+                for (var j = 0; j < selectedSisulList.length; j++) {
+                    if (sisulid === selectedSisulList[j].id) {
+                        selectedSisulList.splice(j, 1); // 선택된 시술상세 리스트에서 삭제
+                        $("#recomm_sisul").html("");
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+    setMysisulArea(); // 선택내역란 영역을 셋팅
 }
 
-function recommSisulCheckboxOnclick(obj){
-	var sisulid = $(obj).attr('id').substr(7)
-	if ( $(obj).prop('checked')){
-		for(var i=0; i<sisulAllList.length; i++){
-			if(sisulid === sisulAllList[i].id){
-				sisulAllList[i].chk = true;
-				// 선택된 시술상세 리스트(selectedSisullist)에 추가를 한다.
-				selectedSisullist.push(sisulAllList[i]);
-				break;
-			}
-		}
-	} else {
-		for(var i=0; i<sisulAllList.length; i++){
-			if(sisulid === sisulAllList[i].id){
-				sisulAllList[i].chk = false;
-				// 선택된 시술상세 리스트(selectedSisullist)에서 삭제를 한다.
-				for(var j=0; j<selectedSisullist.length; j++){
-					if(sisulid === selectedSisullist[j].id){
-						selectedSisullist.splice(j,1);
-						break;
-					}
-				}
-				break;
-			}
-		}
-	}
-	// 선택내역란 영역을 셋팅한다.
-	setMysisulArea();
+function setMysisulArea() {
+    $("#mysisullist").html("");
+    var mysisullisthtml = "";
+    totalamt = 0;
+    for (var i = 0; i < selectedSisulList.length; i++) {
+        mysisullisthtml += '<li>';
+        mysisullisthtml += '    <span class="tit">' + selectedSisulList[i].sisulDesc + '</span>';
+        mysisullisthtml += '    <a href="#juno" class="delete" onclick="removeSelectedSisul(\'' + selectedSisulList[i].id + '\')">삭제</a>';
+        if (selectedSisulList[i].discountYn) {
+            mysisullisthtml += '<p class="price">' + selectedSisulList[i].priceDiscount + '<span class="won">원</span></p>';
+            totalamt += Number(selectedSisulList[i].priceDiscount.replaceAll(",", ""));
+        } else {
+            mysisullisthtml += '<p class="price">' + selectedSisulList[i].price + '<span class="won">원</span></p>';
+            totalamt += Number(selectedSisulList[i].price.replaceAll(",", ""));
+        }
+        mysisullisthtml += '</li>';
+    }
+    mysisullisthtml += '    <li class="total">';
+    mysisullisthtml += '        <span class="tit">예상금액</span>';
+    mysisullisthtml += '        <p class="price">' + totalamt.toLocaleString() + '<span class="won">원</span></p>';
+    mysisullisthtml += '    </li>';
+    $("#mysisullist").html(mysisullisthtml);
+
+    // 만약 총 예상금액이 0원이면
+    if (totalamt == 0) {
+        $('.forecast_sisul').hide();
+    } else {
+        $('.forecast_sisul').show();
+    }
 }
 
-//선택내역란 영역을 셋팅한다.
-function setMysisulArea(){
-	$("#mysisullist").html("");
-	var mysisullisthtml = "";
-	totalamt = 0;
-	for(var i=0; i<selectedSisullist.length; i++){
-		mysisullisthtml += '<li>';
-		mysisullisthtml += '	<span class="tit">' + selectedSisullist[i].sisulDesc + '</span>';
-		mysisullisthtml += '	<a href="#juno" class="delete" onclick="removeSelectedSisul(\'' + selectedSisullist[i].id + '\')">삭제</a>';
-		if(selectedSisullist[i].discountYn){
-			mysisullisthtml += '<p class="price">' + selectedSisullist[i].priceDiscount + '<span class="won">원</span></p>';
-			totalamt += Number(selectedSisullist[i].priceDiscount.replaceAll(",",""));
-		} else {
-			mysisullisthtml += '<p class="price">' + selectedSisullist[i].price + '<span class="won">원</span></p>';
-			totalamt += Number(selectedSisullist[i].price.replaceAll(",",""));
-		}
-		mysisullisthtml += '</li>';
-	}
-	mysisullisthtml += '	<li class="total">';
-	mysisullisthtml += '		<span class="tit">예상금액</span>';
-	mysisullisthtml += '		<p class="price">' + totalamt.numformat() + '<span class="won">원</span></p>';
-	mysisullisthtml += '	</li>';
-	$("#mysisullist").html(mysisullisthtml);
-	
-	// 만약 총 예상금액이 0원이면
-	if(totalamt == 0){
-		$('.forecast_sisul').hide();
-	} else {
-		$('.forecast_sisul').show();
-	}
+function removeSelectedSisul(sisulid) {
+    $("input:checkbox[id='" + sisulid + "']").prop("checked", false);
+    var flag = false;
+    for (var i = 0; i < sisulShampuList.length; i++) {
+        if (sisulShampuList[i].id === sisulid) {
+            sisulShampuList[i].chk = false;
+            flag = true;
+            break;
+        }
+    }
+    if (!flag) {
+        for (var i = 0; i < sisulDryList.length; i++) {
+            if (sisulDryList[i].id === sisulid) {
+                sisulDryList[i].chk = false;
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        for (var i = 0; i < sisulCutList.length; i++) {
+            if (sisulCutList[i].id === sisulid) {
+                sisulCutList[i].chk = false;
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        for (var i = 0; i < sisulPermList.length; i++) {
+            if (sisulPermList[i].id === sisulid) {
+                sisulPermList[i].chk = false;
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        for (var i = 0; i < sisulColorList.length; i++) {
+            if (sisulColorList[i].id === sisulid) {
+                sisulColorList[i].chk = false;
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        for (var i = 0; i < sisulClinicList.length; i++) {
+            if (sisulClinicList[i].id === sisulid) {
+                sisulClinicList[i].chk = false;
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (!flag) {
+        for (var i = 0; i < sisulHeadspaList.length; i++) {
+            if (sisulHeadspaList[i].id === sisulid) {
+                sisulHeadspaList[i].chk = false;
+                flag = true;
+                break;
+            }
+        }
+    }
+    // 선택된 시술상세 리스트(selectedSisulList)에서 삭제를 한다.
+    for (var i = 0; i < selectedSisulList.length; i++) {
+        if (sisulid === selectedSisulList[i].id) {
+            selectedSisulList.splice(i, 1);
+            break;
+        }
+    }
+    // 선택내역란 영역을 셋팅한다.
+    setMysisulArea();
 }
 
-function removeSelectedSisul(sisulid){
-	$("input:checkbox[id='"+ sisulid +"']").prop("checked", false);
-	var flag = false;
-	for(var i=0; i<sisulShampuList.length; i++){
-		if(sisulShampuList[i].id === sisulid){
-			sisulShampuList[i].chk = false;
-			flag = true;
-			break;
-		}
-	}
-	if(!flag){
-		for(var i=0; i<sisulDryList.length; i++){
-			if(sisulDryList[i].id === sisulid){
-				sisulDryList[i].chk = false;
-				flag = true;
-				break;
-			}
-		}
-	}
-	if(!flag){
-		for(var i=0; i<sisulCutList.length; i++){
-			if(sisulCutList[i].id === sisulid){
-				sisulCutList[i].chk = false;
-				flag = true;
-				break;
-			}
-		}
-	}
-	if(!flag){
-		for(var i=0; i<sisulPermList.length; i++){
-			if(sisulPermList[i].id === sisulid){
-				sisulPermList[i].chk = false;
-				flag = true;
-				break;
-			}
-		}
-	}
-	if(!flag){
-		for(var i=0; i<sisulColorList.length; i++){
-			if(sisulColorList[i].id === sisulid){
-				sisulColorList[i].chk = false;
-				flag = true;
-				break;
-			}
-		}
-	}
-	if(!flag){
-		for(var i=0; i<sisulClinicList.length; i++){
-			if(sisulClinicList[i].id === sisulid){
-				sisulClinicList[i].chk = false;
-				flag = true;
-				break;
-			}
-		}
-	}
-	if(!flag){
-		for(var i=0; i<sisulHeadspaList.length; i++){
-			if(sisulHeadspaList[i].id === sisulid){
-				sisulHeadspaList[i].chk = false;
-				flag = true;
-				break;
-			}
-		}
-	}
-	// 선택된 시술상세 리스트(selectedSisullist)에서 삭제를 한다.
-	for(var i=0; i<selectedSisullist.length; i++){
-		if(sisulid === selectedSisullist[i].id){
-			selectedSisullist.splice(i,1);
-			break;
-		}
-	}
-	// 선택내역란 영역을 셋팅한다.
-	setMysisulArea();
-}
 
-var calendarData;
-function setCalendar(){
-	$("#caltbody").html("");
-	calendarData = buildCalendar();
-	$(".title_month").text(calendarData.year + "." + calendarData.month);
-	
-	var valhtml = "";
-	var sun, mon, tue, wed, thu, fri, sat;
-	for(var i=0; i < calendarData.dayinfo.length; i++){
-		sun = calendarData.dayinfo[i].sun === undefined ? "" : calendarData.dayinfo[i].sun;
-		mon = calendarData.dayinfo[i].mon === undefined ? "" : calendarData.dayinfo[i].mon;
-		tue = calendarData.dayinfo[i].tue === undefined ? "" : calendarData.dayinfo[i].tue;
-		wed = calendarData.dayinfo[i].wed === undefined ? "" : calendarData.dayinfo[i].wed;
-		thu = calendarData.dayinfo[i].thu === undefined ? "" : calendarData.dayinfo[i].thu;
-		fri = calendarData.dayinfo[i].fri === undefined ? "" : calendarData.dayinfo[i].fri;
-		sat = calendarData.dayinfo[i].sat === undefined ? "" : calendarData.dayinfo[i].sat;
-		
-		valhtml += '<tr>';
-		valhtml += '	<td class="sun">';
-		if(sun !== "") {
-			if(holidayData[i].sun !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sun_" + sun + '" onclick="selectDay(' + sun + ')" day="' + sun + '">' + sun + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sun_" + sun + '" day="' + sun + '">' + sun + '</span>';
-			}
-		}				
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(mon !== "") {
-			if(holidayData[i].mon !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_mon_" + mon + '" onclick="selectDay(' + mon + ')" day="' + mon + '">' + mon + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_mon_" + mon + '" day="' + mon + '">' + mon + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(tue !== "") {
-			if(holidayData[i].tue !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_tue_" + tue + '" onclick="selectDay(' + tue + ')" day="' + tue + '">' + tue + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_tue_" + tue + '" day="' + tue + '">' + tue + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(wed !== "") {
-			if(holidayData[i].wed !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_wed_" + wed + '" onclick="selectDay(' + wed + ')" day="' + wed + '">' + wed + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_wed_" + wed + '" day="' + wed + '">' + wed + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(thu !== "") {
-			if(holidayData[i].thu !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_thu_" + thu + '" onclick="selectDay(' + thu + ')" day="' + thu + '">' + thu + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_thu_" + thu + '" day="' + thu + '">' + thu + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(fri !== "") {
-			if(holidayData[i].fri !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_fri_" + fri + '" onclick="selectDay(' + fri + ')" day="' + fri + '">' + fri + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_fri_" + fri + '" day="' + fri + '">' + fri + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td class="sat">';
-		if(sat !== "") {
-			if(holidayData[i].sat !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sat_" + sat + '" onclick="selectDay(' + sat + ')" day="' + sat + '">' + sat + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sat_" + sat + '" day="' + sat + '">' + sat + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '</tr>';
-	}
-	$("#caltbody").html(valhtml);
-}
+
+// 여기까지
+
+
+ var calendarData;
+//function setCalendar(){
+//	$("#caltbody").html("");
+//	calendarData = buildCalendar();
+//	$(".title_month").text(calendarData.year + "." + calendarData.month);
+//	
+//	var valhtml = "";
+//	var sun, mon, tue, wed, thu, fri, sat;
+//	for(var i=0; i < calendarData.dayinfo.length; i++){
+//		sun = calendarData.dayinfo[i].sun === undefined ? "" : calendarData.dayinfo[i].sun;
+//		mon = calendarData.dayinfo[i].mon === undefined ? "" : calendarData.dayinfo[i].mon;
+//		tue = calendarData.dayinfo[i].tue === undefined ? "" : calendarData.dayinfo[i].tue;
+//		wed = calendarData.dayinfo[i].wed === undefined ? "" : calendarData.dayinfo[i].wed;
+//		thu = calendarData.dayinfo[i].thu === undefined ? "" : calendarData.dayinfo[i].thu;
+//		fri = calendarData.dayinfo[i].fri === undefined ? "" : calendarData.dayinfo[i].fri;
+//		sat = calendarData.dayinfo[i].sat === undefined ? "" : calendarData.dayinfo[i].sat;
+//		
+//		valhtml += '<tr>';
+//		valhtml += '	<td class="sun">';
+//		if(sun !== "") {
+//			if(holidayData[i].sun !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sun_" + sun + '" onclick="selectDay(' + sun + ')" day="' + sun + '">' + sun + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sun_" + sun + '" day="' + sun + '">' + sun + '</span>';
+//			}
+//		}				
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(mon !== "") {
+//			if(holidayData[i].mon !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_mon_" + mon + '" onclick="selectDay(' + mon + ')" day="' + mon + '">' + mon + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_mon_" + mon + '" day="' + mon + '">' + mon + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(tue !== "") {
+//			if(holidayData[i].tue !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_tue_" + tue + '" onclick="selectDay(' + tue + ')" day="' + tue + '">' + tue + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_tue_" + tue + '" day="' + tue + '">' + tue + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(wed !== "") {
+//			if(holidayData[i].wed !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_wed_" + wed + '" onclick="selectDay(' + wed + ')" day="' + wed + '">' + wed + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_wed_" + wed + '" day="' + wed + '">' + wed + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(thu !== "") {
+//			if(holidayData[i].thu !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_thu_" + thu + '" onclick="selectDay(' + thu + ')" day="' + thu + '">' + thu + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_thu_" + thu + '" day="' + thu + '">' + thu + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(fri !== "") {
+//			if(holidayData[i].fri !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_fri_" + fri + '" onclick="selectDay(' + fri + ')" day="' + fri + '">' + fri + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_fri_" + fri + '" day="' + fri + '">' + fri + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td class="sat">';
+//		if(sat !== "") {
+//			if(holidayData[i].sat !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sat_" + sat + '" onclick="selectDay(' + sat + ')" day="' + sat + '">' + sat + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sat_" + sat + '" day="' + sat + '">' + sat + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '</tr>';
+//	}
+//	$("#caltbody").html(valhtml);
+//}
 
 
 function initRsvTime(reservedTimeList){
@@ -1081,75 +993,61 @@ function initRsvTime(reservedTimeList){
 	loading.close();	
 }
 
-var targetday = targetDateInstance.getDate();
+//var targetday = targetDateInstance.getDate();
 	
 function prevCal(){
-	prevCalendar();
-	setCalendar();
-	var todayInstance = new Date();
-	if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
-		targetday = todayInstance.getDate();
-	} else {
-		targetday = 1;
-	}
-	selectDay(targetday);
+	//prevCalendar();
+	//setCalendar();
+	//var todayInstance = new Date();
+	//if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
+	//	targetday = todayInstance.getDate();
+	//} else {
+	//	targetday = 1;
+	//}
+	//selectDay(targetday);
 }
 
 function nextCal(){
-	nextCalendar();
-	setCalendar();
-	var todayInstance = new Date();
-	if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
-		targetday = todayInstance.getDate();
-	} else {
-		targetday = 1;
-	}
-	selectDay(targetday);
+	//nextCalendar();
+	//setCalendar();
+	//var todayInstance = new Date();
+	//if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
+	//	targetday = todayInstance.getDate();
+	//} else {
+	//	targetday = 1;
+	//}
+	//selectDay(targetday);
 }
 
 function todayCal(){
-	setCalendar();
-	selectDay(targetday);
+	//setCalendar();
+	//selectDay(targetday);
+}
+ 
+function gotoNext() {
+/*     if ($("#timeline").find(".active").length == 0) {
+        alert("시간을 선택해주세요.");
+        return;
+    }
+    if (selectedSisulList.length == 0) {
+        alert("예약하실 시술을 선택해주세요.");
+        return;
+    } */
+
+    // 선택된 시술 목록을 서버로 전송
+    const form = $('<form></form>').attr('action', '/reservationConfirm').attr('method', 'post');
+    selectedSisulList.forEach(sisul => {
+        $('<input>').attr('type', 'hidden').attr('name', 'sisulList').attr('value', JSON.stringify(sisul)).appendTo(form);
+    });
+    form.appendTo('body').submit();
 }
 
-function gotoNext(){
-
-	
-	if($("#timeline").find(".active").length == 0){
-		alert("시간을 선택해주세요.");
-		return;
-	}
-	if(selectedSisullist.length == 0){
-		alert("예약하실 시술을 선택해주세요.");
-		return;
-	}
-	
-	sisulIdAry = []
-	for(var i=0; i<selectedSisullist.length; i++){
-		sisulIdAry.push(selectedSisullist[i].id);
-	}
-
-	var params = "?sisulId=" + sisulIdAry.join() 
-				+ "&orderMemo=" + encodeURIComponent($("#orderMemo").val()) 
-				+ "&scode=" + "1093"
-				+ "&cpcode=" + "80"
-				+ "&rdate=" + rdate
-				+ "&ryoil=" + encodeURIComponent(ryoil) 
-				+ "&rtime24=" + rtime24
-				+ "&refer=" + "norm";
-	
-	location.href = "/junohair/reservation/process04_confirm" + params;
-}
 
 function gotoPre(){
-
-	
-
-	location.href = "/junohair/reservation/process02_designer?cpcode="+"80";
-
-
-	
+	location.href = "designer?branchId=${branchInfo.branchId}";
 }
+
+
 </script>
 
 </body>
