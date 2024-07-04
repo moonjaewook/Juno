@@ -7,8 +7,7 @@ public class ReservationDto {
     private int reservationId;
     private Timestamp reservationDate;
     private Timestamp reservationTime;
-    private String reservationStatus;
-    private Timestamp createdAt;
+    private String sisul;
     private String userId; // 원래는 fk인데 일단은 .. 직접 데이터 넣기
     private int branchId; // FOREIGN KEY (branchId) REFERENCES branch(branchId),
     private int designerId; // FOREIGN KEY (designerId) REFERENCES Designer(designerId)
@@ -32,17 +31,11 @@ public class ReservationDto {
 	public void setReservationTime(Timestamp reservationTime) {
 		this.reservationTime = reservationTime;
 	}
-	public String getReservationStatus() {
-		return reservationStatus;
+	public String getSisul() {
+		return sisul;
 	}
-	public void setReservationStatus(String reservationStatus) {
-		this.reservationStatus = reservationStatus;
-	}
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
+	public void setSisul(String sisul) {
+		this.sisul = sisul;
 	}
 	public String getUserId() {
 		return userId;
@@ -62,6 +55,9 @@ public class ReservationDto {
 	public void setDesignerId(int designerId) {
 		this.designerId = designerId;
 	}
+    
+    // getter setter
+	
     
     
 	

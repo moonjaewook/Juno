@@ -51,11 +51,11 @@
 			<div class="secgroup">
 				<div class="designer_namebox">
 					<p class="profileimg">
-						<img src="https://www.junohair.com/upload/designer/202007/cec23a1f4708444e8cb9e5c78a8dc744.jpg" alt="" class="profileimgsrc">
+						<img src="./resources/productupload/${designerInfo.designerPath}" alt="" class="profileimgsrc">
 					</p>
 					<div class="infocont">
-						<p class="ttl">정원 수석실장</p>
-						<p class="desc">자연스러움속 트랜디함을 만들어드립니다!</p>
+						<p class="ttl">${designerInfo.designerName}</p>
+						<p class="desc">${designerInfo.introduce}</p>
 					</div>
 					<span class="line"></span>
 				</div>
@@ -63,23 +63,24 @@
 					<ul>
 						<li>
 							<p class="tit">예약 매장</p>
-							<p class="branch">가든강남구청역점</p>
+							<p class="branch">${branchInfo.branchName}</p>
 						</li>
 						<li>
 							<p class="tit">날짜</p>
 							<p class="date">
-								<span>2024.07.02(화)</span>
-								<span>오전 10:00</span>
+								<span>${reservation.reservationDate}</span>
 							</p>
 						</li>
 						<li>
 							<p class="tit">예약자</p>
-							<p>임경민</p>
+							<p>${reservation.userId}</p>
 						</li>
+						<!-- 
 						<li>
 							<p class="tit">연락처</p>
 							<p>01076279992</p>
 						</li>
+						 
 						<li>
 							<p class="tit">요청사항</p>
 							<p class="msg">&nbsp;</p>
@@ -101,6 +102,7 @@
 
 							</div>
 						</li>
+						-->
 					</ul>
 				</div>
 			</div>
@@ -113,21 +115,26 @@
 					<span>멤버십 할인 적용이 불가능합니다.</span>
 					<span>위 상품에 대한 할인율은 실제 할인율과 달라질 수 있습니다.</span>
 				</p>
+				<!-- 
 				<div class="total_price">
 					<p class="tit">예상 금액</p>
 					<p class="price">15,000<span class="won">원</span></p>
 				</div>
+				 -->
 			</div>
+			<!-- 
 			<div class="agreebox">
 				<span class="check_type">
 				    <input type="checkbox" id="haircate01" name="haircate" class="checkbox">
 				    <label for="haircate01">준오헤어 이용약관 동의하기</label>
 				</span>
 			</div>	
+			
 			<div class="ai_foot_btns">
 				<a href="javascript:gotoPre();" class="btnbox_line" onclick="gotoPre()">이전</a>
 				<a href="#juno" class="btnbox_black" onclick="gotoNext()">예약하기</a>
 			</div>
+			 -->
 		</div>
 	</div>
 </div>
