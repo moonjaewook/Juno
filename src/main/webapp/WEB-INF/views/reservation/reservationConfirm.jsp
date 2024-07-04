@@ -64,11 +64,15 @@
 						<li>
 							<p class="tit">날짜</p>
 							<p class="date">
+<<<<<<< HEAD
 								<fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy-MM-dd HH:mm" />
+=======
+								${reservation.reservationDate}
+>>>>>>> branch 'MOON' of https://github.com/moonjaewook/Juno
 							</p>
 						</li>
 						<li>
-							<p class="tit">예약자</p>
+							<p class="tit">예약자 ID</p>
 							<p>${reservation.userId}</p>
 						</li>
 						

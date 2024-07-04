@@ -163,9 +163,9 @@ public class ProductController {
 	
 	//구매하기 페이지1
 	@RequestMapping("/purchase")
-	public String purchase(HttpServletRequest request, Model model) {
+	public String purchase(HttpServletRequest request, Model model, HttpSession session) {
 		
-		HttpSession session = request.getSession();
+
 		String id = (String) session.getAttribute("id");
 		System.out.println("로그인된 id : " + id);
 		

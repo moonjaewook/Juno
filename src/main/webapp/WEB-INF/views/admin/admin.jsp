@@ -103,7 +103,7 @@ wcs_do();
 			</div>
 		</div>
 
-		<div id="contents" style="height: 900px;">
+		<div id="contents" style="height: 1200px;">
 			<div class="inner">
 				<div class="reservation_intro" style="height: 200px;">
 
@@ -159,6 +159,15 @@ wcs_do();
 							</p>
 						</a>
 					</div>
+					<div class="box reser">
+						<a href="./reservationListCheck">
+							<p class="tit">예약내역조회</p>
+							<p class="desc">
+								<span>고객님들의 시술예약</span> <span>확인하기</span>
+							</p>
+						</a>
+					</div>
+					
 				</div>
 				<div class="intro_noti"></div>
 			</div>
