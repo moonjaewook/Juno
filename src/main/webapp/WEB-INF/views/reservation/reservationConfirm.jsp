@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!-- header.jsp 내용 -->
 <jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
@@ -19,17 +21,11 @@
 			<ul>
 				<li>
 					<span class="num">01</span>
-
 					<span>매장 선택</span>
-
-
 				</li>
 				<li>
 					<span class="num">02</span>
-
 					<span>디자이너 선택</span>
-
-
 				</li>
 				<li style="cursor: pointer;" onclick="gotoPre()">
 					<span class="num">03</span>
@@ -48,7 +44,7 @@
 			<div class="secgroup">
 				<div class="designer_namebox">
 					<p class="profileimg">
-						<img src="./resources/productupload/${designerInfo.designerPath}" alt="" class="profileimgsrc">
+						<img src="./resources/productupload/${designerInfo.designerPath}" class="profileimgsrc">
 					</p>
 					<div class="infocont">
 						<p class="ttl">${designerInfo.designerName}</p>
@@ -65,19 +61,19 @@
 						<li>
 							<p class="tit">날짜</p>
 							<p class="date">
-								<span>${reservation.reservationDate}</span>
+								<fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy-MM-dd HH:mm" />
 							</p>
 						</li>
 						<li>
 							<p class="tit">예약자</p>
 							<p>${reservation.userId}</p>
 						</li>
-						<!-- 
+						
 						<li>
 							<p class="tit">연락처</p>
-							<p>01076279992</p>
+							<p>${branchInfo.contact}</p>
 						</li>
-						 
+						<!-- 
 						<li>
 							<p class="tit">요청사항</p>
 							<p class="msg">&nbsp;</p>
@@ -88,21 +84,14 @@
 
 								<div>
 									<p class="dtit" name="sisulNm">앞머리 커트</p>
-
-
-
 									<p class="price">15,000<span class="won">원</span></p>
-
-
 								</div>
-
-
 							</div>
 						</li>
 						-->
 					</ul>
 				</div>
-			</div>
+			</div><br><br><br><br><br>
 			<div class="forecastbox">
 				<p class="desc">
 					<span>실제 이용 금액은 세부 시술 내용 및</span>

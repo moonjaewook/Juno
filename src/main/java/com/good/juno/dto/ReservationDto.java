@@ -10,7 +10,7 @@ public class ReservationDto {
     private String sisul;
     private String userId; // 원래는 fk인데 일단은 .. 직접 데이터 넣기
     private int branchId; // FOREIGN KEY (branchId) REFERENCES branch(branchId),
-    private int designerId; // FOREIGN KEY (designerId) REFERENCES Designer(designerId)
+    private String designerId; // FOREIGN KEY (designerId) REFERENCES Designer(designerId)
     
     // getter setter
 	public int getReservationId() {
@@ -49,10 +49,10 @@ public class ReservationDto {
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;
 	}
-	public int getDesignerId() {
+	public String getDesignerId() {
 		return designerId;
 	}
-	public void setDesignerId(int designerId) {
+	public void setDesignerId(String designerId) {
 		this.designerId = designerId;
 	}
     
