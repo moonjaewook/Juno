@@ -16,6 +16,8 @@ public interface AdminDao {
 
 	public LoginDto getInfo(String id);
 
+	public DesignerDto getDesignerInfo(String id);
+	
 	public String admin(String id);
 
 	public List<LoginDto> memberall();
@@ -34,6 +36,8 @@ public interface AdminDao {
 	List<String> branchlist();
 	
 	public int branchid(String branchName);
+	
+	public String branchname(String branchid );
 
 	public int qna_reply(int qnaid);
 	
@@ -44,6 +48,13 @@ public interface AdminDao {
 	public List<OrderDetailProductDto> getOrderDetails(int orderid);
 
 	public List<QnaDto> getAllQna();
+	
+	public List<String> workday(String id);
+	
+	public int designer_modify_member(String id, String pw, String email, String intro);
+	public int designer_modify_designer(String designerId, String introduce);;
+	public int designer_modify_work(String designerId, String workday);
+	public int delete_workday(String designerId);
 	
 	public QnaDto Qnainfo(String qnaId);
 

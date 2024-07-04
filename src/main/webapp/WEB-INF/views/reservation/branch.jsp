@@ -3,39 +3,42 @@
 
 <style>
 .si_img {
-    position: relative;
-    width: 100%; /* 필요한 경우 조정 */
-    height: 300px; /* 필요한 경우 조정 */
-    overflow: hidden;
+	position: relative;
+	width: 100%; /* 필요한 경우 조정 */
+	height: 300px; /* 필요한 경우 조정 */
+	overflow: hidden;
 }
 
 .si_img a {
-    display: block;
-    width: 100%;
-    height: 100%;
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 .si_img_bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 이 속성을 사용하면 이미지가 컨테이너에 맞게 조정됩니다 */
-    display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* 이 속성을 사용하면 이미지가 컨테이너에 맞게 조정됩니다 */
+	display: block;
 }
 
 .si_img_border {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 2px solid; /* 원하는 대로 조정 */
-    box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 2px solid; /* 원하는 대로 조정 */
+	box-sizing: border-box;
 }
 </style>
 
 
 <!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
+<jsp:include page="/WEB-INF/views/common/headerReservation.jsp">
+	<jsp:param name="id" value="${sessionScope.id}" />
+	<jsp:param name="admin" value="${sessionScope.admin}" />
+</jsp:include>
 
 <body>
 	<div id="container" class="reservation_wrap">

@@ -1,7 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
 <!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
+<jsp:include page="/WEB-INF/views/common/headerReservation.jsp">
+	<jsp:param name="id" value="${sessionScope.id}" />
+	<jsp:param name="admin" value="${sessionScope.admin}" />
+</jsp:include>
 
 <div id="container" class="reservation_wrap">
 	<div class="sub_visual">

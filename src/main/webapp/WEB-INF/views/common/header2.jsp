@@ -35,7 +35,7 @@
 							</c:when>
 							<c:when test="${admin eq '디자이너'}">
 								<dd class="login">
-									<a href="./admin">디자이너</a> &nbsp;| &nbsp;
+									<a href="./admin_designer">디자이너</a> &nbsp;| &nbsp;
 								</dd>
 							</c:when>
 						</c:choose>

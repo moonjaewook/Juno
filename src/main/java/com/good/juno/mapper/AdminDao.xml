@@ -22,6 +22,14 @@
 		#{param1}
 	</select>
 
+	<select id="getDesignerInfo"
+		resultType="com.good.juno.dto.DesignerDto">
+		select * from designer where designerid =
+		#{param1}
+	</select>
+
+
+
 	<select id="memberall" resultType="com.good.juno.dto.LoginDto">
 		SELECT * FROM member
 	</select>
@@ -59,6 +67,11 @@
 	<select id="branchid" resultType="int">
 		SELECT branchId FROM branch
 		where branchName = #{param1}
+	</select>
+
+	<select id="branchname" resultType="String">
+		SELECT branchName FROM branch
+		where branchId = #{param1}
 	</select>
 
 	<select id="desingerall"
@@ -108,7 +121,34 @@
 		#{param1}
 	</select>
 
+
+	<select id="workday" resultType="String">
+		select workDay from designerWork
+		where designerId = #{param1}
+	</select>
+
 	<update id="qna_reply">
 		update qna set answer = 1 where qnaid = #{param1}
 	</update>
+
+	<update id="designer_modify_member">
+		UPDATE member
+		SET pw = #{param2}, email = #{param3}, intro = #{param4}
+		WHERE id = #{param1}
+	</update>
+	<update id="designer_modify_designer">
+		update designer set introduce = #{param2} where
+		designerId = #{param1}
+	</update>
+
+	<delete id="delete_workday">
+		DELETE FROM designerwork WHERE designerId = #{designerId}
+	</delete>
+
+	<update id="designer_modify_work">
+		INSERT INTO designerwork (designerId, workDay) VALUES (#{param1}, #{param2})
+	</update>
+
+
+
 </mapper>

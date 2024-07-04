@@ -96,69 +96,35 @@ wcs_do();
 			<div class="sub_visual_bg"
 				style="background-image: url('https://www.junohair.com/static_resources/images/junohair/sub/reservation/reser_visual.jpg')"></div>
 			<div class="sub_visual_text">
-				<strong>관리자 화면</strong>
+				<strong>디자이너 화면</strong>
 				<p class="sub_visual_sub_text">
 					<span>JUNO HAIR, 체계적인 관리의 시작</span>
 				</p>
 			</div>
 		</div>
 
-		<div id="contents" style="height: 900px;">
+		<div id="contents" style="height: 400px;">
 			<div class="inner">
 				<div class="reservation_intro" style="height: 200px;">
 
-					<div class="box recomm">
-						<a href="./register2">
-							<p class="tit">지점 등록</p>
+					<div class="box reser">
+						<a href="./admin_designerinfo">
+							<p class="tit">내 정보 조회·수정</p>
 							<p class="desc">
-								<span>JUNO HAIR 점포를</span> <span>등록합니다. </span>
-							</p>
-						</a>
-					</div>
-					<div class="box recomm">
-						<a href="./adminqna">
-							<p class="tit">문의답변</p>
-							<p class="desc">
-								<span>고객의 목소리를</span> <span>경청합니다. </span>
+								<span>최고의 미용 전문가를</span> <span>목표로 성장합니다.</span>
 							</p>
 						</a>
 					</div>
 
 					<div class="box reser">
-						<a href="./register1">
-							<p class="tit">디자이너 등록</p>
+						<a href="./admin_reservation">
+							<p class="tit">예약 내역 조회</p>
 							<p class="desc">
-								<span>최고의 미용 전문가를</span> <span>선별합니다</span>
+								<span>내 고객 예약 내역</span> <span>확인하기</span>
 							</p>
 						</a>
 					</div>
 
-					<div class="box reser">
-						<a href="./designerall">
-							<p class="tit">디자이너 조회·삭제</p>
-							<p class="desc">
-								<span>최고의 미용 전문가를</span> <span>확인해보세요</span>
-							</p>
-						</a>
-					</div>
-
-					<div class="box recomm">
-						<a href="./ProductAddTest">
-							<p class="tit">판매 물품 등록</p>
-							<p class="desc">
-								<span>고객님의 헤어를 책임지는</span> <span>제품을 등록합니다. </span>
-							</p>
-						</a>
-					</div>
-
-					<div class="box reser">
-						<a href="./orderListCheck">
-							<p class="tit">결제내역조회</p>
-							<p class="desc">
-								<span>고객의 결제내역</span> <span>확인하기</span>
-							</p>
-						</a>
-					</div>
 				</div>
 				<div class="intro_noti"></div>
 			</div>

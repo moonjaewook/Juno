@@ -91,6 +91,11 @@ public class AdminController {
 
 		return "admin/admin";
 	}
+	
+	@RequestMapping("/admin_designer")
+	public String admin_designer() {
+		return "admin/admin_designer";
+	}
 
 	@RequestMapping("/register2")
 	public String register2() {
@@ -143,6 +148,55 @@ public class AdminController {
 		model.addAttribute("designer_all", designer_all);
 		return "admin/designer_all";
 	}
+	
+	@RequestMapping("admin_designerinfo")
+	public String admin_designerinfo(HttpSession session, HttpServletRequest request, Model model) {
+		System.out.println("admin_designerinfo");
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		
+		String id = (String) session.getAttribute("id");
+		System.out.println(dao.workday(id));
+		
+		model.addAttribute("member", dao.getInfo(id));
+		model.addAttribute("designer", dao.getDesignerInfo(id));
+		model.addAttribute("branch", dao.branchname(dao.getDesignerInfo(id).getBranchId()));
+		model.addAttribute("workday", dao.workday(id));
+		
+		
+		return "admin/designer_modify";
+	}
+	
+	@RequestMapping("admin_designer_modifyAction")
+	public String admin_designer_modifyAction(HttpSession session, HttpServletRequest request, Model model) {
+		System.out.println("admin_designer_modifyAction");
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		
+		String id = (String) session.getAttribute("id");
+		
+		System.out.println(request.getParameter("pw"));
+		System.out.println(request.getParameter("email"));
+		
+
+		dao.designer_modify_member(id, request.getParameter("pw"), request.getParameter("email"), request.getParameter("intro"));
+		dao.designer_modify_designer(id, request.getParameter("intro"));
+	
+		dao.delete_workday(id);
+		
+		String[] workdays =  request.getParameterValues("workdays");
+		System.out.println(workdays);
+		
+		for (String workday : workdays) {
+			dao.designer_modify_work(id, workday);
+			}
+			
+		return "redirect:admin_designer";
+	}
+	
+	
+	
+	
 
 	@RequestMapping("designer_del")
 	public String designer_del(HttpServletRequest request, Model model, HttpSession session) {

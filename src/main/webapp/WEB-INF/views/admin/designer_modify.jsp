@@ -4,10 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	class=" js no-touch csstransforms csstransforms3d csstransitions"
 	style="">
-<script type="text/javascript" async=""
-	src="https://www.google-analytics.com/analytics.js"></script>
-<script type="text/javascript" async=""
-	src="https://www.googletagmanager.com/gtag/js?id=G-DBGPMGH101&amp;l=dataLayer&amp;cx=c"></script>
 <head>
 
 <link rel="shortcut icon"
@@ -36,15 +32,14 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
 <meta http-equiv="imagetoolbar" content="no">
-
-
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
-if(!wcs_add) var wcs_add = {};
-wcs_add["wa"] = "fce44f52888e1";
-if(window.wcs) {
-wcs_do();
-}
+	if (!wcs_add)
+		var wcs_add = {};
+	wcs_add["wa"] = "fce44f52888e1";
+	if (window.wcs) {
+		wcs_do();
+	}
 </script>
 <title>준오헤어</title>
 <link rel="stylesheet"
@@ -56,17 +51,19 @@ wcs_do();
 <link rel="stylesheet"
 	href="https://www.junohair.com/static_resources/css/junohair/sub_common.css?rscVer=0333">
 <link rel="stylesheet"
-	href="https://www.junohair.com/static_resources/css/junohair/sub_style2.css?rscVer=0333">
-<link rel="stylesheet"
-	href="https://www.junohair.com/static_resources/css/junohair/reservation.css?rscVer=0333">
+	href="https://www.junohair.com/static_resources/css/myjuno/join.css?rscVer=0333">
 <script
 	src="https://www.junohair.com/static_resources/lib/jquery/1.12.4/jquery.min.js?rscVer=0333"></script>
 <script
-	src="https://www.junohair.com/static_resources/js/viewportchecker.js?rscVer=0333"></script>
+	src="https://www.junohair.com/static_resources/js/imagesloaded.3.2.x.pkgd.min.js?rscVer=0333"></script>
+<script
+	src="https://www.junohair.com/static_resources/js/isotope.min.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/modernizr.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/smoothscroll.js?rscVer=0333"></script>
+<script
+	src="https://www.junohair.com/static_resources/js/viewportchecker.js?rscVer=0333"></script>
 
 <link rel="stylesheet"
 	href="https://www.junohair.com/static_resources/css/contents.display.none.css?rscVer=0333">
@@ -80,6 +77,15 @@ wcs_do();
 	src="https://www.junohair.com/static_resources/lib/axios/0.19.0/axios.min.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
+
+<script
+	src="https://www.junohair.com/static_resources/js/myjuno/juno_sub_ui.js?rscVer=0333"></script>
+
+<link rel="stylesheet" type="text/css" href="./resources/join_css.css">
+<script type="text/javascript" src="./resources/verify.js"
+	charset="utf-8"></script>
+
+
 </head>
 
 
@@ -88,84 +94,226 @@ wcs_do();
 	<jsp:param name="admin" value="${sessionScope.admin}" />
 </jsp:include>
 
+<body class="join">
+	<div id="wrap">
 
-<body>
+		<script>
+			function gotoMyjuno() {
+				if ("" != "CUST") {
+					alert("로그인후 이용이 가능합니다.");
+				}
+				location.href = "/myjuno/member_info";
+			}
+		</script>
 
-	<div id="container" class="reservation_wrap">
-		<div class="sub_visual">
-			<div class="sub_visual_bg"
-				style="background-image: url('https://www.junohair.com/static_resources/images/junohair/sub/reservation/reser_visual.jpg')"></div>
-			<div class="sub_visual_text">
-				<strong>관리자 화면</strong>
-				<p class="sub_visual_sub_text">
-					<span>JUNO HAIR, 체계적인 관리의 시작</span>
-				</p>
+		<div id="container">
+			<div class="sub_visual">
+				<div class="sub_visual_bg"
+					style="background-image: url('https://www.junohair.com/static_resources/images/myjuno/intro_visual.jpg')"></div>
+				<div class="sub_visual_text">디자이너 정보 조회·수정</div>
 			</div>
+			<div class="sub_menu"></div>
+
+			<!-- 	<div id="contents">
+				
+					<div class="inner"> -->
+			<div class="section1">
+				<div class="section_tit">
+					<span class="bar"></span> <strong class="tit">정보 조회·수정</strong>
+				</div>
+			</div>
+
+			<!-- 		<div class="section_content">
+							<div class="sec1_top">
+								<div class="join_form_wrap"> -->
+
+			<form id="join" action="admin_designer_modifyAction"
+				method=post>
+
+				<table>
+
+					<tr>
+						<!-- 기본정보-->
+						<td colspan="2" class="subtitle td">기본 정보</td>
+					</tr>
+					<tr>
+						<!-- 아이디 -->
+						<td class="division">아이디:</td>
+						<td class="valuefield" id = "id" name ="id">${member.id }</td>
+					</tr>
+
+					<tr>
+						<!-- 비밀번호 -->
+						<td class="division">비밀번호:</td>
+						<td class="valuefield">
+						<input type="password" id="pw"
+							name="pw" size="12" maxlength="12" value="${member.pw}">
+							&nbsp; 4~12자의 영문 대소문자와 숫자로만 입력</td>
+					</tr>
+
+					<tr>
+						<!-- 비밀번호 확인 -->
+						<td class="division">비밀번호 확인:</td>
+						<td class="valuefield"><input type="password" id="PWconfirm"
+							name="pwconfirm" size="12" maxlength="12" value="${member.pw}"></td>
+					</tr>
+
+					<tr>
+						<!-- 메일주소 -->
+						<td class="division">메일주소:</td>
+						<td class="valuefield"><input type="text" id="email"
+							name="email" size="30" value="${member.email }"></input> &nbsp;
+							예) id@domain.com</td>
+					</tr>
+
+					<tr>
+						<!-- 이름 -->
+						<td class="division">이름:</td>
+						<td class="valuefield">${member.name }</td>
+					</tr>
+
+					<tr>
+						<!-- 기본정보-->
+						<td colspan="7" class="subtitle">업무 관련 정보</td>
+					</tr>
+					<tr>
+						<td class="division">지점명:</td>
+						<td class="valuefield">${branch}</td>
+					</tr>
+
+					<tr>
+		            <td class="division">근무시간:</td>
+		            <td class="valuefield" id = "workdays" name ="workdays">
+		                <label><input type="checkbox" name="workdays" value="월" ${workday.contains('월') ? 'checked' : ''}> 월</label>
+		                <label><input type="checkbox" name="workdays" value="화" ${workday.contains('화') ? 'checked' : ''}> 화</label>
+		                <label><input type="checkbox" name="workdays" value="수" ${workday.contains('수') ? 'checked' : ''}> 수</label>
+		                <label><input type="checkbox" name="workdays" value="목" ${workday.contains('목') ? 'checked' : ''}> 목</label>
+		                <label><input type="checkbox" name="workdays" value="금" ${workday.contains('금') ? 'checked' : ''}> 금</label>
+		            </td>
+		       		</tr>
+
+					<tr>
+						<!-- 자기소개  -->
+						<td class="division">자기소개:</td>
+						<td class="valuefield"><textarea id="intro" name="intro"
+								cols="72" rows="10">${designer.introduce}</textarea></td>
+					</tr>
+
+				</table>
+
+
+
+				<div class="form_right">
+					<input type="submit" class="button" value="정보 변경" />
+				</div>
+			</form>
+
+			<style>
+body {
+	font-family: Arial, sans-serif !important;
+	margin: 20px !important;
+	background-color: #f0f2f5 !important;
+}
+
+#join {
+	width: 80% !important;
+	max-width: 800px !important;
+	margin: 20px auto !important;
+	background-color: #fff !important;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+	border-radius: 8px !important;
+	padding: 20px !important;
+}
+
+table {
+	width: 100% !important;
+	border-collapse: collapse !important;
+	margin: 20px 0 !important;
+}
+
+.subtitle {
+	background-color: #343a40 !important;
+	color: white !important;
+	text-align: left !important;
+	font-weight: bold !important;
+	padding: 10px !important;
+}
+
+.division {
+	background-color: #f8f8f8 !important;
+	width: 30% !important;
+	font-weight: bold !important;
+	padding: 12px 15px !important;
+}
+
+.valuefield {
+	background-color: #fff !important;
+	padding: 12px 15px !important;
+}
+
+input[type="text"], input[type="password"], input[type="file"], select,
+	textarea {
+	width: calc(100% - 20px) !important;
+	padding: 8px 10px !important;
+	border: 1px solid #ccc !important;
+	border-radius: 4px !important;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus,
+	textarea:focus {
+	border-color: #343a40 !important;
+	outline: none !important;
+	box-shadow: 0 0 5px rgba(52, 58, 64, 0.5) !important;
+}
+
+textarea {
+	resize: vertical !important;
+}
+
+.valuefield.datefield {
+	display: flex !important;
+	align-items: center !important;
+}
+
+.valuefield.datefield input[type="text"], .valuefield.datefield select {
+	width: auto !important;
+	margin-right: 10px !important;
+}
+
+.valuefield.datefield select:last-child {
+	margin-right: 0 !important;
+}
+
+.form_right {
+	text-align: center !important;
+	padding: 20px !important;
+}
+
+.button {
+	background-color: #343a40 !important;
+	color: #fff !important;
+	padding: 10px 20px !important;
+	border: none !important;
+	border-radius: 4px !important;
+	font-size: 16px !important;
+	cursor: pointer !important;
+	transition: background-color 0.3s !important;
+}
+
+.button:hover {
+	background-color: #23272b !important;
+}
+</style>
+
+
+			</br> </br> </br>
 		</div>
-
-		<div id="contents" style="height: 900px;">
-			<div class="inner">
-				<div class="reservation_intro" style="height: 200px;">
-
-					<div class="box recomm">
-						<a href="./register2">
-							<p class="tit">지점 등록</p>
-							<p class="desc">
-								<span>JUNO HAIR 점포를</span> <span>등록합니다. </span>
-							</p>
-						</a>
-					</div>
-					<div class="box recomm">
-						<a href="./adminqna">
-							<p class="tit">문의답변</p>
-							<p class="desc">
-								<span>고객의 목소리를</span> <span>경청합니다. </span>
-							</p>
-						</a>
-					</div>
-
-					<div class="box reser">
-						<a href="./register1">
-							<p class="tit">디자이너 등록</p>
-							<p class="desc">
-								<span>최고의 미용 전문가를</span> <span>선별합니다</span>
-							</p>
-						</a>
-					</div>
-
-					<div class="box reser">
-						<a href="./designerall">
-							<p class="tit">디자이너 조회·삭제</p>
-							<p class="desc">
-								<span>최고의 미용 전문가를</span> <span>확인해보세요</span>
-							</p>
-						</a>
-					</div>
-
-					<div class="box recomm">
-						<a href="./ProductAddTest">
-							<p class="tit">판매 물품 등록</p>
-							<p class="desc">
-								<span>고객님의 헤어를 책임지는</span> <span>제품을 등록합니다. </span>
-							</p>
-						</a>
-					</div>
-
-					<div class="box reser">
-						<a href="./orderListCheck">
-							<p class="tit">결제내역조회</p>
-							<p class="desc">
-								<span>고객의 결제내역</span> <span>확인하기</span>
-							</p>
-						</a>
+	</div>
+	<!-- 						</div>
 					</div>
 				</div>
-				<div class="intro_noti"></div>
 			</div>
-
-		</div>
-
-	</div>
+		</div> -->
 
 	<div id="footer">
 		<div class="footgotop" id="goTop">
@@ -265,28 +413,29 @@ wcs_do();
 			</div>
 		</div>
 	</div>
+	<div class="idCheckLayer">
+		<p class="ttl">아이디 중복 체크</p>
+		<div class="layer_content">
+			<div class="search_wrap">
+				<input type="text" name="id_val" maxlength="14"> <a
+					href="#juno" onclick="idDplChkLayerPop.goCheck()">중복확인</a>
+			</div>
+			<div class="search_error">
+				<span></span>은(는) 사용이 불가한 아이디 입니다.
+			</div>
+			<div class="search_success">
+				<p>
+					입력하신 아이디 <span></span>은(는)<br> 사용하실 수 있습니다.
+				</p>
+				<a href="#juno" onclick="idDplChkLayerPop.use()">사용하기</a>
+			</div>
+		</div>
+		<a href="#juno" class="btn_close" onclick="idDplChkLayerPop.close()"><span
+			class="blind">팝업닫기</span></a>
 	</div>
-	<script>
-	function startReservation(){
-		
-		
- 		if("CUST" != "CUST"){
-			alert("로그인 후 이용이 가능합니다.");
-			return
-		}
-		location.href="/junohair/reservation/process01_branch";
-	}
-	
-	function startRsvRecmnd(){
-		
-
-		if("CUST" != "CUST"){
-			alert("로그인 후 이용이 가능합니다.");
-			return
-		}
-		location.href="/junohair/reservation/ai_process01_info";
-	}
-</script>
+	<div class="overlay1" onclick="idDplChkLayerPop.close()"></div>
+	<div class="overlaycomm"></div>
+	</div>
 
 </body>
 </html>
