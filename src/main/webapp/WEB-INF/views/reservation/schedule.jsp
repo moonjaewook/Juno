@@ -236,7 +236,6 @@
 let dayOutter = ''
 function selectDay(day) {
 	console.log("selectDay 함수 호출됨 / day:", day);
-	console.log("day'typeof:", typeof(day));
 	 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 	 dayOutter=day;
 	    // 현재 연도와 월을 가져옴
@@ -250,16 +249,21 @@ function selectDay(day) {
 	    const date = new Date(year, month - 1, day);
 	    const dayOfWeek = daysOfWeek[date.getDay()];
 
-	 	// 예약 가능한 시간대를 서버에서 가져와서 업데이트
-        //fetchBookedTimes(year, month, day);
-        console.log("year : " + year);
-        console.log("month : " + month);
-        console.log("day : " + day);
+	    document.getElementById("dateTimeTxt").textContent = selectedDate + '(' + dayOfWeek + ')';
+	 	
+	    // 예약 가능한 시간대를 서버에서 가져와서 업데이트
+        fetchBookedTimes(year, month, day);
+        
+        
+        
 }
 
 function fetchBookedTimes(year, month, day) {
     const designerId = '<c:out value="${designerInfo.designerId}"/>';
-    const reservationDate = `${year}-${month}-${day}`;
+    const reservationDate = year + '-' + month + '-' + day;
+    console.log("fetchBookedTimes: ")
+    console.log(year, month, day)
+    console.log(designerId, reservationDate)
 
     $.ajax({
         url: '${pageContext.request.contextPath}/getBookedTimes',
@@ -269,28 +273,57 @@ function fetchBookedTimes(year, month, day) {
             reservationDate: reservationDate
         },
         success: function(response) {
-        	 console.log('AJAX 요청 성공: ', response);
-            updateTimelines(response.bookedTime);
+        	console.log('AJAX 요청 성공: ', response);
+            updateTimelines(response);
         },
         error: function(xhr, status, error) {
             console.error('AJAX 에러: ', error);
+            console.error('xhr: ', xhr);
+            console.error('status: ', status);
         }
     });
 }
 
 function updateTimelines(bookedTimes) {
+	console.log("bookedTimes: ", bookedTimes); // 데이터 확인
     const morningTimes = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30'];
     const afternoonTimes = ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'];
 
+ 	
     let morningHtml = '';
     for (let time of morningTimes) {
+    	console.log("morningTimes: ", morningTimes);
         if (bookedTimes.includes(time)) {
+        	console.log("Current time: ", time); // 현재 처리 중인 time 값 로그
+        	console.log("bookedTimes: ", bookedTimes);
+            morningHtml += '<li><span class="disabled">' + time + '</span></li>';
+        } else {
+            /* morningHtml += `<li><a href="#juno" time24="${time}" ampm="am" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`; */
+            morningHtml += '<li><a href="#juno" time24="' + time + '" ampm="am" time="' + time + '" onclick="selectTime(\'' + time + '\')">' + time + '</a></li>';
+        }
+        }
+    } 
+    
+    console.log("morningHtml: ", morningHtml); // 데이터 확인
+    document.getElementById("morningTimeList").innerHTML = morningHtml;
+    
+ 	// 공백 제거 및 소문자 변환
+    /* const normalizedBookedTimes = bookedTimes.map(time => time.trim().toLowerCase());
+
+    console.log("Normalized bookedTimes: ", normalizedBookedTimes); // 정규화된 데이터 확인
+
+    let morningHtml = '';
+    for (let time of morningTimes) {
+        const normalizedTime = time.trim().toLowerCase();
+        console.log(`Checking if ${normalizedTime} is booked`);
+        if (normalizedBookedTimes.includes(normalizedTime)) {
             morningHtml += `<li><span class="disabled">${time}</span></li>`;
         } else {
             morningHtml += `<li><a href="#juno" time24="${time}" ampm="am" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`;
         }
-    }
-    document.getElementById("morningTimeList").innerHTML = morningHtml;
+    } */
+    
+    
 
     let afternoonHtml = '';
     for (let time of afternoonTimes) {
@@ -300,6 +333,7 @@ function updateTimelines(bookedTimes) {
             afternoonHtml += `<li><a href="#juno" time24="${time}" ampm="pm" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`;
         }
     }
+    console.log("afternoonHtml: ", afternoonHtml); // 데이터 확인
     document.getElementById("afternoonTimeList").innerHTML = afternoonHtml;
 }
 
@@ -1100,35 +1134,35 @@ function initRsvTime(reservedTimeList){
 	loading.close();	
 }
 
-var targetday = targetDateInstance.getDate();
+//var targetday = targetDateInstance.getDate();
 	
 function prevCal(){
-	prevCalendar();
+	//prevCalendar();
 	//setCalendar();
-	var todayInstance = new Date();
-	if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
-		targetday = todayInstance.getDate();
-	} else {
-		targetday = 1;
-	}
-	selectDay(targetday);
+	//var todayInstance = new Date();
+	//if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
+	//	targetday = todayInstance.getDate();
+	//} else {
+	//	targetday = 1;
+	//}
+	//selectDay(targetday);
 }
 
 function nextCal(){
-	nextCalendar();
+	//nextCalendar();
 	//setCalendar();
-	var todayInstance = new Date();
-	if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
-		targetday = todayInstance.getDate();
-	} else {
-		targetday = 1;
-	}
-	selectDay(targetday);
+	//var todayInstance = new Date();
+	//if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
+	//	targetday = todayInstance.getDate();
+	//} else {
+	//	targetday = 1;
+	//}
+	//selectDay(targetday);
 }
 
 function todayCal(){
 	//setCalendar();
-	selectDay(targetday);
+	//selectDay(targetday);
 }
  
 function gotoNext(){
