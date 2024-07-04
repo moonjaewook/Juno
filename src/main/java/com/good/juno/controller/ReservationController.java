@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -38,8 +39,16 @@ public class ReservationController {
 
 	// 예약 - 지점선택
 	@RequestMapping("/branch")
-	public String branch(Model model) {
+	public String branch(HttpServletRequest request, Model model) {
 		System.out.println("branch()");
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		
+		if (id == null) {
+			session.setAttribute("loginCheck", "로그인해주세요.");
+			return "Join_Login/Login";
+		}
 
 		ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
 		model.addAttribute("branch", dao.branchList()); // 데이터베이스에서 branch 목록을 가져와서 넘겨주기
@@ -115,6 +124,7 @@ public class ReservationController {
     public List<String> getBookedTimes(@RequestParam("designerId") String designerId,
                                        @RequestParam("reservationDate") String reservationDate) {
     	
+    	
     	log.info("designerId: {}", designerId);
     	log.info("reservationDate: {}", reservationDate);
     	ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
@@ -136,7 +146,8 @@ public class ReservationController {
  
 //	@RequestMapping("/reservationConfirm")
 //	public String reservationConfirm(HttpServletRequest request, Model model) {
-//		System.out.println("reservationConfirm()");
+//		
+//		System.out.println("컨트롤러들어왔찌롱");
 //		
 //		int branchId = Integer.parseInt(request.getParameter("branchId")); // branchId를 int로 변환
 //		String designerId = request.getParameter("designerId"); // 선택한 디자이너 Id
@@ -149,37 +160,45 @@ public class ReservationController {
 //		return "/reservation/reservationConfirm"; // jsp로 이동
 //	}
 	
-	@RequestMapping(value = "/reservationConfirm", method = RequestMethod.POST)
-    @ResponseBody
-    public String insertReservation(HttpServletRequest request)  {
+	@RequestMapping("/reservationConfirm")
+    public String insertReservation(HttpServletRequest request, Model model)  {
+		
+		System.out.println("컨트롤러들어왔찌롱");
+		
+		
+		System.out.println(request.getParameter("reservationDate"));
+		System.out.println(request.getParameter("reservationTime"));
+		System.out.println(request.getParameter("userId"));
+		System.out.println(request.getParameter("branchId"));
+		System.out.println(request.getParameter("designerId"));
 		
 		String reservationDate = request.getParameter("reservationDate");
-        String reservationTime = request.getParameter("reservationTime");
-        String sisul = request.getParameter("sisul");
-        String userId = request.getParameter("userId");
-        int branchId = Integer.parseInt(request.getParameter("branchId"));
-        String designerId = request.getParameter("designerId");
-        
+		String reservationTime = request.getParameter("reservationTime");
+		String userId = request.getParameter("userId");
+		String branchId = request.getParameter("branchId");
+		String designerId = request.getParameter("designerId");
+		
+		  ReservationDto reservation = new ReservationDto();
+		  reservation.setUserId(userId);
+		  reservation.setBranchId(Integer.parseInt(branchId));
+		  reservation.setDesignerId(Integer.parseInt(designerId));
+		  reservation.setReservationDate(Timestamp.valueOf(reservationDate + " " + reservationTime + ":00"));
+		  
+		  System.out.println(reservation.getReservationDate());
 
-        ReservationDto reservation = new ReservationDto();
-        
-        reservation.setReservationDate(Timestamp.valueOf(reservationDate + " " + reservationTime + ":00"));
-        reservation.setReservationTime(Timestamp.valueOf(reservationDate + " " + reservationTime + ":00"));
-        reservation.setSisul(sisul);
-        reservation.setUserId(userId);
-        reservation.setBranchId(branchId);
-        reservation.setDesignerId(Integer.parseInt(designerId));
-       
+          ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
+          dao.insertReservation2(reservation.getReservationDate(), reservation.getUserId(), reservation.getBranchId(), reservation.getDesignerId());
+          
+          model.addAttribute("reservation", reservation);
+          
 
-        ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
-        dao.insertReservation(reservation);
-
+          model.addAttribute("branchInfo", dao.selectedBranchInfo(Integer.parseInt(branchId))); // 선택한 지점정보 -> 지점명 출력 ${branchInfo.branchName}
+          model.addAttribute("designerInfo", dao.selectedDesignerInfo(designerId)); // 선택한 디자이너의 인적 정보
 
         return "/reservation/reservationConfirm"; // 성공 시 이동할 JSP 페이지
        }
 	
-	
-	
+
 
 	// 예약 - 완료
 	@RequestMapping("/done")

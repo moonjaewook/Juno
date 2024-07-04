@@ -40,6 +40,8 @@ public interface ReservationIDao {
 
 	// 예약 데이터베이스에 넣기
 	public void insertReservation(ReservationDto reservation);
+
+	public void insertReservation2(Timestamp reservationDate, String userId, int branchId, int designerId);
    
 	
 

@@ -7,7 +7,7 @@
   
   <!-- 테스트 상품 넣기 -->
   <insert id="insertProduct" parameterType="com.good.juno.dto.ProductDto">
-    INSERT INTO JunoProduct (
+    INSERT INTO junoProduct (
       productType, productId, name, price, productDes, productKeyword, productToWho, 
       productSmell, productIngr, productImg1, productImg2, productDetailImg
     ) VALUES (
@@ -69,7 +69,7 @@
               SUM(od.quantity * p.price) AS totalAmount
        FROM orders o
        JOIN orderdetails od ON o.orderid = od.orderid
-       JOIN JunoProduct p ON od.producttype = p.productType AND od.productid = p.productId
+       JOIN junoProduct p ON od.producttype = p.productType AND od.productid = p.productId
        WHERE o.userid = #{param}
        GROUP BY o.orderid
        ORDER BY o.date DESC;
@@ -79,7 +79,7 @@
 	    SELECT od.orderid, od.producttype, od.productid, od.quantity,
 	           p.name, p.price, p.productImg1
 	    FROM orderdetails od
-	    JOIN JunoProduct p ON od.producttype = p.productType AND od.productid = p.productId
+	    JOIN junoProduct p ON od.producttype = p.productType AND od.productid = p.productId
 	    WHERE od.orderid = #{param}
 	</select>
 
