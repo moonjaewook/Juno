@@ -51,7 +51,12 @@ public class ProductDao {
     }
     
 	public void sendEmail(String recipientEmail, String contents) throws MessagingException {
-
+		
+		
+		System.out.println("sendemail");
+		System.out.println("받는사람" + recipientEmail);
+		System.out.println("내용" + contents);
+		
 		String host = "smtp.naver.com";
 		String user = "sjung8009@naver.com";
 		String password = "FPSJH5ZWGLLS";

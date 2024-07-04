@@ -89,8 +89,10 @@
 </head>
 
 
-<!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header2.jsp" />
+<jsp:include page="/WEB-INF/views/common/header2.jsp">
+	<jsp:param name="id" value="${sessionScope.id}" />
+	<jsp:param name="admin" value="${sessionScope.admin}" />
+</jsp:include>
 
 <body class="join">
 	<div id="wrap">
@@ -203,8 +205,6 @@ img {
 	height: auto !important;
 	border-radius: 8px !important;
 }
-
-
 
 a:hover {
 	text-decoration: underline !important;

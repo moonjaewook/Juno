@@ -35,7 +35,7 @@ public interface AdminDao {
 	
 	public int branchid(String branchName);
 
-	public int qna_reply(String qnaid, String contents);
+	public int qna_reply(int qnaid);
 	
 	List<DesignerDto> desingerall();
 
@@ -44,6 +44,8 @@ public interface AdminDao {
 	public List<OrderDetailProductDto> getOrderDetails(int orderid);
 
 	public List<QnaDto> getAllQna();
+	
+	public QnaDto Qnainfo(String qnaId);
 
 	
 }

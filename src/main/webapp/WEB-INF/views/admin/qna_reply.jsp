@@ -195,26 +195,26 @@ textarea {
 			</head>
 			<body>
 
-				<form id="qaForm" action="#" method="post">
+				<form id="adminqna_replyaction" action="adminqna_replyaction" method="post">
 
 					<table>
 						<tr>
 							<td colspan="2" class="subtitle">Q&A Email Form</td>
 						</tr>
+						<input type="hidden" id="qnaId" name="qnaId" value="${qnaId.qnaId}" />
+						<input type="hidden" id="userEmail" name="userEmail" value="${qnaId.userEmail}" />
+						
 						<tr>
 							<td class="division">발송자명:</td>
-							<td class="valuefield"><input type="text" id="senderName"
-								name="senderName" required></td>
+							<td class="valuefield">${qnaId.userId }</td>
 						</tr>
 						<tr>
 							<td class="division">발송이메일:</td>
-							<td class="valuefield"><input type="email" id="senderEmail"
-								name="senderEmail" required></td>
+							<td class="valuefield">${qnaId.userEmail}</td>
 						</tr>
 						<tr>
 							<td class="division">문의내용:</td>
-							<td class="valuefield"><textarea id="questionContent"
-									name="questionContent" rows="5" required></textarea></td>
+							<td class="valuefield">${qnaId.content}</td>
 						</tr>
 						<tr>
 							<td class="division">답변:</td>

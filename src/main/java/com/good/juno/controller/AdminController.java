@@ -143,7 +143,7 @@ public class AdminController {
 		model.addAttribute("designer_all", designer_all);
 		return "admin/designer_all";
 	}
-	
+
 	@RequestMapping("designer_del")
 	public String designer_del(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("desinger_del");
@@ -154,70 +154,66 @@ public class AdminController {
 		return "redirect:designerall";
 
 	}
-	
 
 	@RequestMapping("/adminqna")
 	public String qna(Model model) {
-		
+
 		AdminDao dao = sqlSession.getMapper(AdminDao.class);
 		List<QnaDto> qnaList = dao.getAllQna();
-		
+
 		model.addAttribute("qnaList", qnaList);
-		
+
 		return "admin/qnaList";
 	}
-	
+
 	@RequestMapping("/orderListCheck")
 	public String orderListCheck(Model model) {
-		
+
 		AdminDao dao = sqlSession.getMapper(AdminDao.class);
 		List<OrderInfoDto> orders = dao.getAllOrders();
-		
+
 		model.addAttribute("orders", orders);
-		
+
 		return "admin/orderListCheck";
 	}
-	
+
 	@RequestMapping("/orderDetails")
 	public String orderDetails(@RequestParam("orderid") int orderid, Model model) {
-		
+
 		AdminDao dao = sqlSession.getMapper(AdminDao.class);
 		List<OrderDetailProductDto> detail = dao.getOrderDetails(orderid);
-		
+
 		model.addAttribute("detail", detail);
-		
+
 		return "admin/orderListDetail";
 	}
 
-
-
 	@RequestMapping("/adminqna_reply")
-	public String qna_reply(HttpServletRequest request,Model model) {
+	public String qna_reply(HttpServletRequest request, Model model) {
 		System.out.println("qna_reply");
 
-		model.addAttribute("request", request);
-		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		model.addAttribute("qnaId", dao.Qnainfo(request.getParameter("qnaId")));
 		return "admin/qna_reply";
 	}
 
 	@RequestMapping("/adminqna_replyaction")
-	public String qna_replyaction(HttpServletRequest request,Model model) {
+	public String qna_replyaction(HttpServletRequest request, Model model) {
 		System.out.println("qna_replyaction");
 
 		AdminDao dao = sqlSession.getMapper(AdminDao.class);
-		dao.qna_reply(request.getParameter("qnaid"), request.getParameter("contents"));
-		
-		
+		dao.qna_reply(Integer.parseInt(request.getParameter("qnaId")));
+
 		ProductDao pdao = new ProductDao(null);
 		try {
-			pdao.sendEmail(request.getParameter("email"),request.getParameter("contents"));
+			pdao.sendEmail(request.getParameter("userEmail"), request.getParameter("answerContent"));
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
-				
-		return "redirect:designerall";
+
+		return "redirect:adminqna";
 	}
-	
+
 	@RequestMapping("/Logout")
 	public String logoutAction(HttpServletRequest request, Model model, HttpSession session) {
 
