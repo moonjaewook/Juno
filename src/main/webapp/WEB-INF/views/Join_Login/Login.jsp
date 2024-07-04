@@ -56,14 +56,14 @@
 </script>
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
-    window.onload = function() {
-        // 서버에서 전달된 loginCheck 변수를 가져옵니다.
-        var loginCheck = "<c:out value='${loginCheck}'/>";
-        // loginCheck 변수가 null이 아닌 경우 알럿을 띄웁니다.
-        if (loginCheck) {
-            alert(loginCheck);
-        }
-    };
+	window.onload = function() {
+		// 서버에서 전달된 loginCheck 변수를 가져옵니다.
+		var loginCheck = "<c:out value='${loginCheck}'/>";
+		// loginCheck 변수가 null이 아닌 경우 알럿을 띄웁니다.
+		if (loginCheck) {
+			alert(loginCheck);
+		}
+	};
 </script>
 <title>준오헤어</title>
 
@@ -88,8 +88,6 @@
 	src="https://www.junohair.com/static_resources/lib/jquery/1.12.4/jquery.min.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/viewportchecker.js?rscVer=0333"></script>
-<script
-	src="https://www.junohair.com/static_resources/js/js_common.js?rscVer=0333"></script>
 <style type="text/css">
 .submenu {
 	display: none;
@@ -135,8 +133,11 @@
 	src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 </head>
 
-<!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header2.jsp" />
+<jsp:include page="/WEB-INF/views/common/header2.jsp">
+	<jsp:param name="id" value="${sessionScope.id}" />
+	<jsp:param name="admin" value="${sessionScope.admin}" />
+</jsp:include>
+
 
 <body class="login">
 	<div id="wrap">

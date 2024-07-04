@@ -79,14 +79,15 @@ wcs_do();
 <script
 	src="https://www.junohair.com/static_resources/lib/axios/0.19.0/axios.min.js?rscVer=0333"></script>
 <script
-	src="https://www.junohair.com/static_resources/js/common.js?rscVer=0333"></script>
-<script
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
 </head>
 
 
-<!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header2.jsp" />
+<jsp:include page="/WEB-INF/views/common/header2.jsp">
+	<jsp:param name="id" value="${sessionScope.id}" />
+	<jsp:param name="admin" value="${sessionScope.admin}" />
+</jsp:include>
+
 
 <body>
 
@@ -121,7 +122,7 @@ wcs_do();
 							</p>
 						</a>
 					</div>
-					
+
 					<div class="box reser">
 						<a href="./register1">
 							<p class="tit">디자이너 등록</p>
@@ -130,7 +131,7 @@ wcs_do();
 							</p>
 						</a>
 					</div>
-					
+
 					<div class="box reser">
 						<a href="./designerall">
 							<p class="tit">디자이너 조회·삭제</p>
@@ -139,7 +140,7 @@ wcs_do();
 							</p>
 						</a>
 					</div>
-					
+
 					<div class="box recomm">
 						<a href="./ProductAddTest">
 							<p class="tit">판매 물품 등록</p>
@@ -148,8 +149,8 @@ wcs_do();
 							</p>
 						</a>
 					</div>
-					
-					
+
+
 				</div>
 				<div class="intro_noti"></div>
 			</div>

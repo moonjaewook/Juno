@@ -76,8 +76,6 @@
 	href="https://www.junohair.com/static_resources/css/myjuno/join.css?rscVer=0333">
 <script
 	src="https://www.junohair.com/static_resources/lib/jquery/1.12.4/jquery.min.js?rscVer=0333"></script>
-<script
-	src="https://www.junohair.com/static_resources/js/js_common.js?rscVer=0333"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 .submenu {
@@ -112,9 +110,11 @@
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
 </head>
 
+<jsp:include page="/WEB-INF/views/common/header2.jsp">
+	<jsp:param name="id" value="${sessionScope.id}" />
+	<jsp:param name="admin" value="${sessionScope.admin}" />
+</jsp:include>
 
-<!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header2.jsp" />
 
 <body class="join">
 	<div id="wrap">

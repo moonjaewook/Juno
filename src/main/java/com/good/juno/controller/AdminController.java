@@ -2,6 +2,7 @@ package com.good.juno.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import com.good.juno.command.admin.BCommand;
 import com.good.juno.command.admin.BranchRegister;
 import com.good.juno.command.admin.DesignerRegister;
 import com.good.juno.dao.AdminDao;
+import com.good.juno.dao.ProductDao;
 import com.good.juno.dto.DesignerDto;
 
 @Controller
@@ -138,13 +140,46 @@ public class AdminController {
 		model.addAttribute("designer_all", designer_all);
 		return "admin/designer_all";
 	}
+	
+	@RequestMapping("designer_del")
+	public String designer_del(HttpServletRequest request, Model model, HttpSession session) {
+		System.out.println("desinger_del");
 
-	@RequestMapping("/adminqna")
-	public String qna() {
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		dao.designer_del(request.getParameter("id"));
+		dao.member_del(request.getParameter("id"));
 
-		return "admin/qna";
+		return "redirect:designerall";
 	}
 
+
+	@RequestMapping("/adminqna_reply")
+	public String qna_reply(HttpServletRequest request,Model model) {
+		System.out.println("qna_reply");
+
+		model.addAttribute("request", request);
+		
+		return "admin/qna_reply";
+	}
+
+	@RequestMapping("/adminqna_replyaction")
+	public String qna_replyaction(HttpServletRequest request,Model model) {
+		System.out.println("qna_replyaction");
+
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		dao.qna_reply(request.getParameter("qnaid"), request.getParameter("contents"));
+		
+		
+		ProductDao pdao = new ProductDao(null);
+		try {
+			pdao.sendEmail(request.getParameter("email"),request.getParameter("contents"));
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+				
+		return "redirect:designerall";
+	}
+	
 	@RequestMapping("/Logout")
 	public String logoutAction(HttpServletRequest request, Model model, HttpSession session) {
 
