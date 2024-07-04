@@ -55,8 +55,10 @@
 	<!-- 선택한 디자이너 및 지점 Info 출력 -->
 	<div class="designer_namebox">
 		<p class="profileimg">
-			<img src="./resources/productupload/${designerInfo.designerPath}"
-				class="profileimgsrc">
+			<%-- <img src="./resources/productupload/${designerInfo.designerPath}" --%>
+			<img src="./resources/productupload/11.jpg"
+             class="profileimgsrc"
+             style="width: 150px; height: 125px; object-fit: cover;">
 		</p>
 		<div class="infocont">
 			<p class="ttl">${designerInfo.designerName}<em>-</em> <span

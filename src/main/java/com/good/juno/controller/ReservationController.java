@@ -1,10 +1,11 @@
 package com.good.juno.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,10 +14,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +26,6 @@ import com.good.juno.command.reservation.ScheduleCommand;
 import com.good.juno.dao.ReservationIDao;
 import com.good.juno.dto.DesignerWorkDto;
 import com.good.juno.dto.ReservationDto;
-import java.sql.Timestamp;
 @Controller
 // @RequestMapping("/reservation")
 public class ReservationController {
@@ -181,11 +179,12 @@ public class ReservationController {
 		  ReservationDto reservation = new ReservationDto();
 		  reservation.setUserId(userId);
 		  reservation.setBranchId(Integer.parseInt(branchId));
-		  reservation.setDesignerId(Integer.parseInt(designerId));
+		  reservation.setDesignerId(designerId);
 		  reservation.setReservationDate(Timestamp.valueOf(reservationDate + " " + reservationTime + ":00"));
 		  
 		  System.out.println(reservation.getReservationDate());
 
+	        
           ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
           dao.insertReservation2(reservation.getReservationDate(), reservation.getUserId(), reservation.getBranchId(), reservation.getDesignerId());
           
