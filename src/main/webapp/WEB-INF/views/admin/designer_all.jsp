@@ -76,8 +76,6 @@
 <script
 	src="https://www.junohair.com/static_resources/lib/axios/0.19.0/axios.min.js?rscVer=0333"></script>
 <script
-	src="https://www.junohair.com/static_resources/js/common.js?rscVer=0333"></script>
-<script
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
 
 <script
@@ -124,7 +122,113 @@
 			</div>
 			</br> </br>
 
+			<style>
+body {
+	font-family: Arial, sans-serif !important;
+	margin: 20px !important;
+	background-color: #f0f2f5 !important;
+}
 
+#contents {
+	margin-bottom: 200px !important;
+}
+
+.board_list {
+	width: 90% !important;
+	margin: 0 auto !important;
+	background-color: #fff !important;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+	border-radius: 8px !important;
+	overflow: hidden !important;
+}
+
+.table {
+	width: 100% !important;
+	border-collapse: collapse !important;
+	display: table !important;
+	margin: 20px 0 !important;
+}
+
+.thead {
+	background-color: #343a40 !important;
+	color: white !important;
+	text-align: left !important;
+	font-weight: bold !important;
+	display: table-row !important;
+}
+
+.th, .td {
+	padding: 12px 15px !important;
+	border-bottom: 1px solid #dee2e6 !important;
+	display: table-cell !important;
+	text-align: center !important; /* 가운데 정렬 */
+	vertical-align: middle !important; /* 세로 가운데 정렬 */
+}
+
+.th {
+	text-align: center !important;
+	background-color: #6c757d !important;
+	color: #fff !important;
+}
+
+.td {
+	text-align: left !important;
+}
+
+.tr {
+	display: table-row !important;
+}
+
+.tr:nth-child(even) {
+	background-color: #f8f9fa !important;
+}
+
+.tr:hover {
+	background-color: #e9ecef !important;
+}
+
+.noPost {
+	text-align: center !important;
+	font-size: 16px !important;
+	color: #999 !important;
+}
+
+.consult-title {
+	font-weight: bold !important;
+	color: #333 !important;
+}
+
+img {
+	max-width: 100px !important;
+	height: auto !important;
+	border-radius: 8px !important;
+}
+
+
+
+a:hover {
+	text-decoration: underline !important;
+}
+
+.btn-delete {
+	color: #dc3545 !important;
+	font-weight: bold !important;
+	cursor: pointer !important;
+}
+
+/* 관리자 화면 스타일 추가 */
+.table .th {
+	border-right: 1px solid #ced4da !important;
+}
+
+.table .td {
+	border-right: 1px solid #ced4da !important;
+}
+
+.table .td:last-child, .table .th:last-child {
+	border-right: none !important;
+}
+</style>
 
 			<div id="contents">
 				<div class="board_list">
@@ -159,7 +263,7 @@
 								</div>
 								<div class="td">${member.branchName}</div>
 								<div class="td">
-									<a href="./memberdelete.ad?userid=${member.designerId}"
+									<a href="./designer_del?id=${member.designerId}"
 										class="btn-delete">디자이너 삭제</a>
 								</div>
 							</div>

@@ -66,7 +66,6 @@
     <script
         src="https://www.junohair.com/static_resources/lib/babel-polyfill/7.4.4/polyfill.min.js?rscVer=0333"></script>
     <script src="https://www.junohair.com/static_resources/lib/axios/0.19.0/axios.min.js?rscVer=0333"></script>
-    <script src="https://www.junohair.com/static_resources/js/common.js?rscVer=0333"></script>
     <script src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
 
     <script src="https://www.junohair.com/static_resources/js/junohair/juno_sub_ui.js?rscVer=0333"></script>

@@ -45,7 +45,6 @@
 	<link rel="stylesheet" href="https://www.junohair.com/static_resources/css/junohair/sub_common.css?rscVer=0333">
 	<link rel="stylesheet" href="https://www.junohair.com/static_resources/css/junohair/sub_style4.css?rscVer=0333">
 	<script src="https://www.junohair.com/static_resources/lib/jquery/1.12.4/jquery.min.js?rscVer=0333"></script>
-	<script src="https://www.junohair.com/static_resources/js/js_common.js?rscVer=0333"></script>
 	<style type="text/css">
 		.submenu {
 			display: none;

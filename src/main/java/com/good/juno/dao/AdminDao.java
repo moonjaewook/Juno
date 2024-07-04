@@ -28,10 +28,15 @@ public interface AdminDao {
 	public int designer_register(String designerId, String designerName, String introduce, String designerPath,
 			int branchId);
 
+	public int designer_del(String designerId);
+	public int member_del(String designerId);
+	
 	List<String> branchlist();
 	
 	public int branchid(String branchName);
 
+	public int qna_reply(String qnaid, String contents);
+	
 	List<DesignerDto> desingerall();
 
 	public List<OrderInfoDto> getAllOrders();

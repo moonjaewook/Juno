@@ -6,8 +6,7 @@
 	<div id="wrap">
 		<div id="header">
 			<div class="header_top">
-				<span class="logo"><a href="#juno"
-					onclick="location.href='/'"><img
+				<span class="logo"><a href="./"><img
 						src="https://www.junohair.com/static_resources/images/home_icon.png"
 						alt="JUNO"></a></span>
 				<div class="inner">
@@ -57,7 +56,7 @@
 	
 				<!-- 언어 변경 -->
 				<div class="lang">
-					<a href="#juno" onclick="lang_toggle()" class="cur_lang"><img
+					<a href="./"  class="cur_lang"><img
 						src="https://www.junohair.com/static_resources/images/kr_n.png"
 						alt="국가 아이콘" class="national">한국어</a> <span
 						class="lang_arr arr_down"><img
@@ -78,7 +77,7 @@
 			<div class="header_btm">
 				<div class="inner">
 					<h1>
-						<a href="/junohair"> <img
+						<a href="./"> <img
 							src="https://www.junohair.com/static_resources/images/junohair/junohair_logo_dark.png"
 							alt="JUNO HAIR" class="dark"> <img
 							src="https://www.junohair.com/static_resources/images/junohair/junohair_logo_light.png"

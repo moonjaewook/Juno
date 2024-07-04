@@ -47,9 +47,11 @@
 	href="https://www.junohair.com/static_resources/css/junohair/common.css?rscVer=0333">
 <link rel="stylesheet"
 	href="https://www.junohair.com/static_resources/css/junohair/main_style.css?rscVer=0333">
-<script type="text/javascript" async=""
-	src="https://www.google-analytics.com/analytics.js"></script>
-<script
+
+<link rel="stylesheet"
+	href="https://www.junohair.com/static_resources/css/contents.display.none.css?rscVer=0333">
+
+ <script
 	src="https://www.junohair.com/static_resources/lib/jquery/1.12.4/jquery.min.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/owl.carousel.min.js?rscVer=0333"></script>
@@ -62,8 +64,6 @@
 <script
 	src="https://www.junohair.com/static_resources/js/smoothscroll.js?rscVer=0333"></script>
 
-<link rel="stylesheet"
-	href="https://www.junohair.com/static_resources/css/contents.display.none.css?rscVer=0333">
 <script
 	src="https://www.junohair.com/static_resources/lib/vue/2.6.10/vue.min.js?rscVer=0333"></script>
 <script
@@ -73,37 +73,18 @@
 <script
 	src="https://www.junohair.com/static_resources/lib/axios/0.19.0/axios.min.js?rscVer=0333"></script>
 <script
-	src="https://www.junohair.com/static_resources/js/common.js?rscVer=0333"></script>
-<script
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/js/junohair/juno_main_ui.js?rscVer=0333"></script>
 <script
 	src="https://www.junohair.com/static_resources/lib/js-cookie/3.0.0-rc.0/js.cookie.min.js"></script>
+
 </head>
 <body>
 
-
-	<!-- popup -->
-	<div id="popupMainRolling" class="main_rolling_popup"
-		style="display: none;">
-		<div class="rolling_cont">
-			<div class="rolling_img">
-				<a href="#"><img
-					src="https://www.junohair.com/upload/popup/202405/acdde28110cd430296eaf4bee61dd8df.png"></a>
-			</div>
-			<div class="foot">
-				<a href="#" class="today_close" onclick="todayCloseNewPop()"><span>오늘하루보지않기</span></a>
-				<a href="#" class="close" onclick="closeNewPop()">닫기</a>
-			</div>
-		</div>
-	</div>
-	<div id="bg_dimm_rolling" class="bg_dimm" style="display: none;"></div>
-
-
-
 	<div id="wrap">
 		<!-- header.jsp 내용 -->
+
 		<jsp:include page="/WEB-INF/views/common/header2.jsp">
 			<jsp:param name="id" value="${sessionScope.id}" />
 			<jsp:param name="admin" value="${sessionScope.admin}" />
@@ -137,7 +118,7 @@
 					<div class="inner">
 						<ul>
 							<li class="bann01"><a href="branch">
-									<p class="tit">실시간 예약하기 </p>
+									<p class="tit">실시간 예약하기</p>
 									<p class="desc">쉽고 간편한 매장 예약과 디자이너를 추천해 드립니다.</p>
 									<p class="img">
 										<img
@@ -290,16 +271,13 @@
 								src="https://www.junohair.com/static_resources/images/junohair/footer_media_img.png"
 								alt="JUNO SOCIAL MEDIA"><span class="bar"></span></strong>
 							<ul>
-								<li><a href="#juno"
-									onclick="window.open('https://www.facebook.com/junohair.official/', '_blank');"><img
+								<li><a href=""><img
 										src="https://www.junohair.com/static_resources/images/junohair/footer_social1.jpg"
 										alt="facebook"></a></li>
-								<li><a href="#juno"
-									onclick="window.open('https://www.instagram.com/junohair_official/', '_blank');"><img
+								<li><a href=""><img
 										src="https://www.junohair.com/static_resources/images/junohair/footer_social2.jpg"
 										alt="instagram"></a></li>
-								<li><a href="#juno"
-									onclick="window.open('https://www.youtube.com/channel/UCwmPMC_aCMskDKR6P30pn6Q/', '_blank');"><img
+								<li><a href="#"><img
 										src="https://www.junohair.com/static_resources/images/junohair/footer_social_youtube.jpg"
 										alt="youtube"></a></li>
 							</ul>

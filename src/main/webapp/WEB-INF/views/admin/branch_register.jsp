@@ -76,8 +76,6 @@
 <script
 	src="https://www.junohair.com/static_resources/lib/axios/0.19.0/axios.min.js?rscVer=0333"></script>
 <script
-	src="https://www.junohair.com/static_resources/js/common.js?rscVer=0333"></script>
-<script
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
 
 <script
@@ -90,9 +88,10 @@
 
 </head>
 
-
-<!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header2.jsp" />
+<jsp:include page="/WEB-INF/views/common/header2.jsp">
+	<jsp:param name="id" value="${sessionScope.id}" />
+	<jsp:param name="admin" value="${sessionScope.admin}" />
+</jsp:include>
 
 <body class="join">
 	<div id="wrap">
@@ -127,7 +126,8 @@
 							<div class="sec1_top">
 								<div class="join_form_wrap"> -->
 
-			<form id="join" action="./RegisterBranchAction" enctype="multipart/form-data" method="post">
+			<form id="join" action="./RegisterBranchAction"
+				enctype="multipart/form-data" method="post">
 
 				<table>
 
@@ -170,7 +170,7 @@
 						<td class="valuefield"><input type="text" id="contact"
 							name="contact" size="30"></td>
 					</tr>
-					
+
 					<tr>
 						<!-- 이름 -->
 						<td class="division">지점 이미지:</td>
@@ -181,66 +181,119 @@
 
 				</table>
 
-				&nbsp; &nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<div class="form_right">
 					<input type="submit" class="button" value="지점 등록" />
 				</div>
-		
+
 			</form>
 
 			<style>
-.form_right {
-	display: flex;
-	justify-content: center; /* 가로 가운데 정렬 */
-	align-items: center; /* 세로 가운데 정렬 */
+			
+			
+body {
+	font-family: Arial, sans-serif !important;
+	margin: 20px !important;
+	background-color: #f0f2f5 !important;
 }
 
-.form_right input {
-	display: block;
-	color: #fff;
-	text-align: center;
-	background: #ed1c24;
-	font-size: 15px;
-	font-weight: 600;
-	height: 40px;
-	width: 130px;
-	border-radius: 5px;
-	border: none; /* 테두리 제거 */
-	cursor: pointer; /* 커서 모양 변경 */
-	margin: 0; /* 여백 제거 */
-	padding: 0; /* 내부 여백 제거 */
+#join {
+	width: 80% !important;
+	max-width: 800px !important;
+	margin: 20px auto !important;
+	background-color: #fff !important;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+	border-radius: 8px !important;
+	padding: 20px !important;
+}
+
+table {
+	width: 100% !important;
+	border-collapse: collapse !important;
+	margin: 20px 0 !important;
+}
+
+.subtitle {
+	background-color: #343a40 !important;
+	color: white !important;
+	text-align: left !important;
+	font-weight: bold !important;
+	padding: 10px !important;
+}
+
+.division {
+	background-color: #f8f8f8 !important;
+	width: 30% !important;
+	font-weight: bold !important;
+	padding: 12px 15px !important;
+}
+
+.valuefield {
+	background-color: #fff !important;
+	padding: 12px 15px !important;
+}
+
+input[type="text"], input[type="password"], input[type="file"], select,
+	textarea {
+	width: calc(100% - 20px) !important;
+	padding: 8px 10px !important;
+	border: 1px solid #ccc !important;
+	border-radius: 4px !important;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus,
+	textarea:focus {
+	border-color: #343a40 !important;
+	outline: none !important;
+	box-shadow: 0 0 5px rgba(52, 58, 64, 0.5) !important;
+}
+
+textarea {
+	resize: vertical !important;
+}
+
+.valuefield.datefield {
+	display: flex !important;
+	align-items: center !important;
+}
+
+.valuefield.datefield input[type="text"], .valuefield.datefield select {
+	width: auto !important;
+	margin-right: 10px !important;
+}
+
+.valuefield.datefield select:last-child {
+	margin-right: 0 !important;
+}
+
+.form_right {
+	text-align: center !important;
+	padding: 20px !important;
+}
+
+.button {
+	background-color: #343a40 !important;
+	color: #fff !important;
+	padding: 10px 20px !important;
+	border: none !important;
+	border-radius: 4px !important;
+	font-size: 16px !important;
+	cursor: pointer !important;
+	transition: background-color 0.3s !important;
+}
+
+.button:hover {
+	background-color: #23272b !important;
 }
 </style>
 
-			<!-- 	<p style="text-align: center;">
-				<button type="button" class="button-common" onclick="verification()">디자이너
-					등록</button>
-				&nbsp;&nbsp; <input type="reset" value="다시 입력">
-			</p> -->
 
-
-			<!-- <div class="sec1_btm">
-				<div class="join_form_wrap">
-
-					<div class="btn_group">
-						<ul>
-							<li class="member_submit"><a onclick="verification()">회원가입</a></li>
-							<li class="cancel"><a href="Login">취소</a></li>
-						</ul>
-					</div>
-				</div>
-			</div> -->
 
 			</br> </br> </br>
 		</div>
 	</div>
-	<!-- 						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
+
 
 	<div id="footer">
 		<div class="footgotop" id="goTop">

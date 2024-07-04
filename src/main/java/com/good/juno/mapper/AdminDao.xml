@@ -31,8 +31,12 @@
 		= #{param1}
 	</select>
 
-	<delete id="memberDel">
-		delete from shop_member where id= #{param1}
+	<delete id="member_del">
+		delete from member where id= #{param1} ;
+	</delete>
+
+	<delete id="designer_del">
+		delete from designer where designerId= #{param1} ;
 	</delete>
 
 	<insert id="branch_register">
@@ -89,4 +93,9 @@
 		select * from qna
 	</select>
 
+
+	<update id="qna_reply">
+		update qna set answer = 1 and content = #{param2} where qnaid =
+		#{param1}
+	</update>
 </mapper>
