@@ -52,7 +52,14 @@
                     <c:forEach var="designer" items="${designers}">
 					    <li> 
 					        <a href="schedule?designerId=${designer.designerId}&branchId=${branchInfo.branchId}">
-					            <div class="profileimg" style="background-image: url('${designer.designerPath}')"></div>
+					        
+					            <div class="profileimg" style="background-image: url('./resources/productupload/${designer.designerPath}')"></div> 
+					            <%-- <div class="profileimg">
+										<a href="#juno"> <img class="si_img_bg"
+											src="./resources/productupload/${designer.designerPath}">
+											<div class="si_img_border"></div>
+										</a>
+									</div> --%>
 					            <div class="infocont">
 					                <p class="ttl">${designer.designerName}</p>
 					                <p class="desc">${designer.introduce}</p>

@@ -1,6 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jQuery CDN 링크 추가 -->
+</head>
 
 <!-- header.jsp 내용 -->
 <jsp:include page="/WEB-INF/views/common/headerReservation.jsp" />
@@ -30,300 +36,208 @@
 				<li><span class="num">04</span> <span>예약 확인</span></li>
 			</ul>
 		</div>
-
-		<div class="clear"></div>
-
+	</div>
 
 
-		<div class="designer_namebox">
-			<p class="profileimg">
-				<img src="${designerInfo.designerPath}" alt="" class="profileimgsrc">
+	<div class="clear"></div>
+	<!-- 선택한 디자이너 및 지점 Info 출력 -->
+	<div class="designer_namebox">
+		<p class="profileimg">
+			<img src="./resources/productupload/${designerInfo.designerPath}"
+				class="profileimgsrc">
+		</p>
+		<div class="infocont">
+			<p class="ttl">${designerInfo.designerName}<em>-</em> <span
+					class="branch">${branchInfo.branchName}</span>
 			</p>
-			<div class="infocont">
-				<p class="ttl">${designerInfo.designerName}<em>-</em><span
-						class="branch">${branchInfo.branchName}</span>
-				</p>
-				<p class="desc">${designerInfo.introduce}</p>
-			</div>
-			<span class="line"></span>
+			<p class="desc">${designerInfo.introduce}</p>
 		</div>
+		<span class="line"></span>
+	</div>
 
-		<div class="schedule_box">
-			<div class="calendar_wrap">
-				<div class="head">
-					<a class="btn_prev" href="designer?branchId=${branch.branchId}"
-						onclick="prevCal()"><span class="blind">이전</span></a> <span
-						class="title_month">${currentMonth}</span> <a class="btn_next"
-						href="reservationConfirm" onclick="nextCal()"><span
-						class="blind">다음</span></a>
-				</div>
-				<div class="calendarTable">
-					<table border="0" cellpadding="0" cellspacing="0">
-						<thead>
-							<tr>
-								<th class="sun">일</th>
-								<th>월</th>
-								<th>화</th>
-								<th>수</th>
-								<th>목</th>
-								<th>금</th>
-								<th class="sat">토</th>
-							</tr>
-						</thead>
-						<tbody id="caltbody">
-
-							<%-- 		                             <c:forEach var="day" items="${currentMonthDays}">
-		                                 <tr>
-		                                     <td>${day}</td>
-		                                     <td>
-		                                         <c:if test="${not empty bookedTimes}">
-		                                             <c:forEach var="bookedTime" items="${bookedTimes}">
-		                                                 <c:if test="${bookedTime.reservationDate == day}">
-		                                                     <span class="booked">${day}</span>
-		                                                 </c:if>
-		                                             </c:forEach>
-		                                         </c:if>
-		                                         <c:if test="${empty bookedTimes}">
-		                                             <a href="#" onclick="selectDay('${day}')">${day}</a>
-		                                         </c:if>
-		                                     </td>
-		                                 </tr>
-		                             </c:forEach> --%>
+	<!-- 달력 form -->
+	<div class="schedule_box">
+		<div class="calendar_wrap">
+			<div class="head">
+				<a class="btn_prev" href="designer?branchId=${branch.branchId}"
+					onclick="prevCal()"><span class="blind">이전</span></a> <span
+					class="title_month">${currentMonth}</span> <a class="btn_next"
+					href="reservationConfirm" onclick="nextCal()"><span
+					class="blind">다음</span></a>
+			</div>
+			<div class="calendarTable">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th class="sun">일</th>
+							<th>월</th>
+							<th>화</th>
+							<th>수</th>
+							<th>목</th>
+							<th>금</th>
+							<th class="sat">토</th>
+						</tr>
+					</thead>
 
 
-							<!-- 현재 달 달력 -->
-							<div id="currentMonthCalendar" style="display: block;">
-								<h1 id="currentMonth" style="text-align: center; margin-top: 100px;">${currentMonth}</h1>
-								<div class="calendarContainer">
-									<table class="uniqueCalendarTable">
-										<c:forEach items="${currentMonthDays}" var="day"
-											varStatus="status">
-											<c:if test="${status.index % 7 == 0}">
-												<tr class="CalendarCell">
-											</c:if>
-											<td><c:choose>
-													<c:when test="${fn:contains(designerWorkDay, status.index % 7)}">
-													    <div style="margin-bottom: 5px; color: tomato; cursor: pointer;"
-													         onclick="selectDay('${day}')">${day}</div>
-													</c:when>
-													<%-- <c:when
-														test="${fn:contains(designerWorkDay, status.index % 7)}">
-														<div style="margin-bottom: 5px; color: tomato;">${day}</div>
-														<c:forEach items="${rooms}" var="room">
-												                        ${room.roomName}:
-												                        <c:choose>
-												                            <c:when test="${day lt currentDate}">
-												                                <span class="old_day">예약불가</span>
-												                            </c:when>
-												                            <c:when test="${availabilityByDate[day][room.roomId] != null and availabilityByDate[day][room.roomId]}">
-												                                <a href="./makeReserve.re?date=${formattedCurrentMonth}-${day.length() == 1 ? '0' + day : day}&roomId=${room.roomId}" class="available">예약하기</a>
-												                            </c:when>
-												                            <c:otherwise>
-												                                <span class="unavailable">예약완료</span>
-												                            </c:otherwise>
-												                        </c:choose>
-												                        <br>
-												                    </c:forEach>
-													</c:when> --%>
-													<c:when
-														test="${not fn:contains(designerWorkDay, status.index % 7)}">
-														<div style="margin-bottom: 5px; color: blue;"
-															>${day}</div>
-													</c:when>
-													<c:otherwise>
-														<!-- 빈 셀을 그대로 두어 요일 맞춤 -->
-													</c:otherwise>
-												</c:choose></td>
-											<c:if test="${status.index % 7 == 6}">
-												</tr>
-											</c:if>
-										</c:forEach>
-									</table>
+					<tbody id="caltbody">
+						<!-- 현재 월 달력 -->
+						<div id="currentMonthCalendar" style="display: block;">
+							<h1 id="currentMonth" style="text-align:">${currentMonth}</h1>
+							<div class="calendarContainer">
+								<table class="uniqueCalendarTable">
+									<c:forEach items="${currentMonthDays}" var="day"
+										varStatus="status">
+										<c:if test="${status.index % 7 == 0}">
+											<tr class="CalendarCell">
+										</c:if>
+										<td><c:choose>
+												<c:when
+													test="${fn:contains(designerWorkDay, status.index % 7)}">
+													<%-- <div style="margin-bottom: 5px; color: blue; cursor: pointer;" 
+													onclick="selectDay('${year}', '${month}', '${day}')">${day}</div> --%>
+													<div
+														style="margin-bottom: 5px; color: blue; cursor: pointer;"
+														onclick="selectDay('${day}')">${day}</div>
+												</c:when>
+												<c:when
+													test="${not fn:contains(designerWorkDay, status.index % 7)}">
+													<div style="margin-bottom: 5px; color: gray;">${day}</div>
+												</c:when>
+												<c:otherwise>
+													<!-- 빈 셀을 그대로 두어 요일 맞춤 -->
+												</c:otherwise>
+											</c:choose></td>
+										<c:if test="${status.index % 7 == 6}">
+											</tr>
+										</c:if>
+									</c:forEach>
+								</table>
+							</div>
+						</div>
+					</tbody>
+
+
+					<div class="timeselectbox">
+						<div class="dateTime">
+							<p class="tit">날짜</p>
+							<p class="txt" id="dateTimeTxt">날짜를 선택해주세요.</p>
+						</div>
+						<div class="dateTime">
+							<p class="tit">시간</p>
+							<p class="timeselect" id="timeselect">시간을 선택해주세요.</p>
+							<p class="m_timeselect" id="m_timeselect">
+								<a href="">시간을 선택해주세요.</a>
+							</p>
+						</div>
+
+
+						<div class="timeline" id="timeline">
+							<div class="timesec">
+								<p class="tit">오전</p>
+								<ul id="morningTimeList">
+									<!-- 오전 시간대가 JavaScript로 채워집니다 -->
+								</ul>
+							</div>
+							<div class="timesec">
+								<div class="line">
+									<span></span>
 								</div>
+								<p class="tit">오후</p>
+								<ul id="afternoonTimeList">
+									<!-- 오후 시간대가 JavaScript로 채워집니다 -->
+								</ul>
 							</div>
-						</tbody>
-
-						<div class="timeselectbox">
-							<div class="dateTime">
-								<p class="tit">날짜</p>
-								<p class="txt" id="dateTimeTxt">날짜를 선택해주세요.</p>
-							</div>
-							<div class="dateTime">
-								<p class="tit">시간</p>
-								<p class="timeselect" id="timeselect">시간을 선택해주세요.</p>
-								<p class="m_timeselect" id="m_timeselect">
-									<a href="">시간을 선택해주세요.</a>
-								</p>
-							</div>
-							
-<%-- 							<c:choose>
-	                            <c:when test="${day lt currentDate}">
-	                                <span class="old_day">예약불가</span>
-	                            </c:when>
-	                            <c:when test="${availabilityByDate[day][room.roomId] != null and availabilityByDate[day][room.roomId]}">
-	                                <a href="./makeReserve.re?date=${formattedCurrentMonth}-${day.length() == 1 ? '0' + day : day}&roomId=${room.roomId}" class="available">예약하기</a>
-	                            </c:when>
-	                            <c:otherwise>
-	                                <span class="unavailable">예약완료</span>
-	                            </c:otherwise>
-	                        </c:choose> --%>
-	                        
-	                        
-	                        
-	                        
-	                        <c:set var="morningTimes">
-							    <c:out value="09:00, 09:30, 10:00, 10:30, 11:00, 11:30" escapeXml="false"/>
-							</c:set>
-							<c:set var="afternoonTimes">
-							    <c:out value="12:00, 12:30, 13:00, 13:30, 14:00, 14:30, 15:00, 15:30, 16:00, 16:30, 17:00, 17:30, 18:00, 18:30, 19:00, 19:30, 20:00, 20:30, 21:00, 21:30" escapeXml="false"/>
-							</c:set>
-	                        
-							<div class="timeline" id="timeline">
-							    <div class="timesec">
-							        <p class="tit">오전</p>
-							        <ul>
-							            <c:forEach var="time" items="${morningTimes}">
-							                <c:choose>
-							                    <c:when test="${not empty bookedTimes}">
-							                        <c:set var="isBooked" value="false" />
-							                        <c:forEach var="bookedTime" items="${bookedTimes}">
-							                            <c:if test="${fn:substring(bookedTime.reservationTime, 11, 16) == time}">
-							                                <li><span class="disabled">${time}</span></li>
-							                                <c:set var="isBooked" value="true" />
-							                            </c:if>
-							                        </c:forEach>
-							                        <c:if test="${not isBooked}">
-							                            <li><a href="#juno" time24="${time}" ampm="am" time="${time}">${time}</a></li>
-							                        </c:if>
-							                    </c:when>
-							                    <c:otherwise>
-							                        <li><a href="#juno" time24="${time}" ampm="am" time="${time}">${time}</a></li>
-							                    </c:otherwise>
-							                </c:choose>
-							            </c:forEach>
-							        </ul>
-							    </div>
-							    <div class="timesec">
-							        <div class="line">
-							            <span></span>
-							        </div>
-							        <p class="tit">오후</p>
-							        <ul>
-							            <c:forEach var="time" items="${afternoonTimes}">
-							                <c:choose>
-							                    <c:when test="${not empty bookedTimes}">
-							                        <c:set var="isBooked" value="false" />
-							                        <c:forEach var="bookedTime" items="${bookedTimes}">
-							                            <c:if test="${fn:substring(bookedTime.reservationTime, 11, 16) == time}">
-							                                <li><span class="disabled">${time}</span></li>
-							                                <c:set var="isBooked" value="true" />
-							                            </c:if>
-							                        </c:forEach>
-							                        <c:if test="${not isBooked}">
-							                            <li><a href="#juno" time24="${time}" ampm="pm" time="${time}">${time}</a></li>
-							                        </c:if>
-							                    </c:when>
-							                    <c:otherwise>
-							                        <li><a href="#juno" time24="${time}" ampm="pm" time="${time}">${time}</a></li>
-							                    </c:otherwise>
-							                </c:choose>
-							            </c:forEach>
-							        </ul>
-							    </div>
-							</div>
-
-
 						</div>
 
 
 
-
-
-
-
-					</table>
-				</div>
-			</div>
-			</div>
-
-
-
-			<div class="sisul_categorybox">
-				<div class="sisul_category cover_scroll">
-					<ul>
-						<li class="active"><a href="#juno" id="shampu"
-							onclick="selectSisulCategory('shampu')">샴푸</a></li>
-						<li><a href="#juno" id="dry"
-							onclick="selectSisulCategory('dry')">드라이</a></li>
-						<li><a href="#juno" id="cut"
-							onclick="selectSisulCategory('cut')">커트</a></li>
-						<li><a href="#juno" id="perm"
-							onclick="selectSisulCategory('perm')">펌</a></li>
-						<li><a href="#juno" id="color"
-							onclick="selectSisulCategory('color')">컬러</a></li>
-						<li><a href="#juno" id="clinic"
-							onclick="selectSisulCategory('clinic')">클리닉</a></li>
-						<li><a href="#juno" id="headspa"
-							onclick="selectSisulCategory('headspa')">헤드스파</a></li>
-					</ul>
-					<span class="cover left"></span> <span class="cover right"></span>
-				</div>
-			</div>
-
-			<div class="sisul_category_detail sisul_cate_items">
-				<ul id="sisuldetails">
-					<!-- 시술 목록은 JavaScript로 채워집니다 -->
-				</ul>
-			</div>
-
-			<div class="recomm_sisul" id="recomm_sisul" style="display: none;"></div>
-
-			<div class="forecast_sisul" style="display: none">
-				<div class="box">
-					<p class="ttl">선택 내역</p>
-					<div class="mysisul">
-						<ul id="mysisullist"></ul>
 					</div>
-				</div>
-			</div>
-
-			<div class="sisul_textbox">
-				<textarea id="orderMemo" placeholder="요청사항을 입력하세요 (150자 이내)"></textarea>
-			</div>
-
-			<div class="ai_foot_btns">
-				<a href="javascript:gotoPre();" class="btnbox_line">이전</a> <a
-					href="#juno" class="btnbox_black">다음</a>
-			</div>
-		</div>
-
-
-		<!-- footer.jsp 내용 -->
-		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-
-	</div>
-
-	<div class="loading" style="display: none;">
-		<div class="loading_inner">
-			<img
-				src="https://www.junohair.com/static_resources/images/gate_img1.png"
-				alt="JUNO HAIR">
-			<p>시간스케줄을 로딩중 입니다..</p>
-			<div class="loading_dots">
-				<span class="loading_dot"></span> <span class="loading_dot"></span>
-				<span class="loading_dot"></span> <span class="loading_dot"></span>
-				<span class="loading_dot"></span>
+				</table>
 			</div>
 		</div>
 	</div>
 
-		
+
+
+	<div class="sisul_categorybox">
+		<div class="sisul_category cover_scroll">
+			<ul>
+				<li class="active"><a href="#juno" id="shampu"
+					onclick="selectSisulCategory('shampu')">샴푸</a></li>
+				<li><a href="#juno" id="dry"
+					onclick="selectSisulCategory('dry')">드라이</a></li>
+				<li><a href="#juno" id="cut"
+					onclick="selectSisulCategory('cut')">커트</a></li>
+				<li><a href="#juno" id="perm"
+					onclick="selectSisulCategory('perm')">펌</a></li>
+				<li><a href="#juno" id="color"
+					onclick="selectSisulCategory('color')">컬러</a></li>
+				<li><a href="#juno" id="clinic"
+					onclick="selectSisulCategory('clinic')">클리닉</a></li>
+				<li><a href="#juno" id="headspa"
+					onclick="selectSisulCategory('headspa')">헤드스파</a></li>
+			</ul>
+			<span class="cover left"></span> <span class="cover right"></span>
+		</div>
+	</div>
+
+	<div class="sisul_category_detail sisul_cate_items">
+		<ul id="sisuldetails">
+			<!-- 시술 목록은 JavaScript로 채워집니다 -->
+		</ul>
+	</div>
+
+	<div class="recomm_sisul" id="recomm_sisul" style="display: none;"></div>
+
+	<div class="forecast_sisul" style="display: none">
+		<div class="box">
+			<p class="ttl">선택 내역</p>
+			<div class="mysisul">
+				<ul id="mysisullist"></ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="sisul_textbox">
+		<textarea id="orderMemo" placeholder="요청사항을 입력하세요 (150자 이내)"></textarea>
+	</div>
+
+	<div class="ai_foot_btns">
+		<a href="javascript:gotoPre();" class="btnbox_line">이전</a> <a
+			href="#juno" class="btnbox_black">다음</a><br>
+		<br>
+		<br>
+		<br>
+	</div>
+</div>
+
+
+<!-- footer.jsp 내용 -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+</div>
+
+<div class="loading" style="display: none;">
+	<div class="loading_inner">
+		<img src="/static_resources/images/gate_img1.png" alt="JUNO HAIR">
+		<p>시간스케줄을 로딩중 입니다..</p>
+		<div class="loading_dots">
+			<span class="loading_dot active"></span> <span
+				class="loading_dot active"></span> <span class="loading_dot active"></span>
+			<span class="loading_dot active"></span> <span
+				class="loading_dot active"></span>
+		</div>
+	</div>
+</div>
+
+
 <script>
-
+let dayOutter = ''
 function selectDay(day) {
-	console.log("selectDay 함수 호출됨");
+	console.log("selectDay 함수 호출됨 / day:", day);
 	 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-	 
+	 dayOutter=day;
 	    // 현재 연도와 월을 가져옴
 	    const currentMonth = '<c:out value="${currentMonth}"/>'
 	    const [year, month] = currentMonth.split('-');
@@ -335,9 +249,99 @@ function selectDay(day) {
 	    const date = new Date(year, month - 1, day);
 	    const dayOfWeek = daysOfWeek[date.getDay()];
 
-	    // 날짜 정보를 표시하는 부분 업데이트
 	    document.getElementById("dateTimeTxt").textContent = selectedDate + '(' + dayOfWeek + ')';
+	 	
+	    // 예약 가능한 시간대를 서버에서 가져와서 업데이트
+        fetchBookedTimes(year, month, day);
+        
+        
+        
 }
+
+function fetchBookedTimes(year, month, day) {
+    const designerId = '<c:out value="${designerInfo.designerId}"/>';
+    const reservationDate = year + '-' + month + '-' + day;
+    console.log("fetchBookedTimes: ")
+    console.log(year, month, day)
+    console.log(designerId, reservationDate)
+
+    $.ajax({
+        url: '${pageContext.request.contextPath}/getBookedTimes',
+        type: 'GET',
+        data: {
+            designerId: designerId,
+            reservationDate: reservationDate
+        },
+        success: function(response) {
+        	console.log('AJAX 요청 성공: ', response);
+            updateTimelines(response);
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX 에러: ', error);
+            console.error('xhr: ', xhr);
+            console.error('status: ', status);
+        }
+    });
+}
+
+function updateTimelines(bookedTimes) {
+	console.log("bookedTimes: ", bookedTimes); // 데이터 확인
+    const morningTimes = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30'];
+    const afternoonTimes = ['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'];
+
+ 	
+    let morningHtml = '';
+    for (let time of morningTimes) {
+    	console.log("morningTimes: ", morningTimes);
+        if (bookedTimes.includes(time)) {
+        	console.log("Current time: ", time); // 현재 처리 중인 time 값 로그
+        	console.log("bookedTimes: ", bookedTimes);
+            morningHtml += '<li><span class="disabled">' + time + '</span></li>';
+        } else {
+            /* morningHtml += `<li><a href="#juno" time24="${time}" ampm="am" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`; */
+            morningHtml += '<li><a href="#juno" time24="' + time + '" ampm="am" time="' + time + '" onclick="selectTime(\'' + time + '\')">' + time + '</a></li>';
+        }
+        }
+    } 
+    
+    console.log("morningHtml: ", morningHtml); // 데이터 확인
+    document.getElementById("morningTimeList").innerHTML = morningHtml;
+    
+ 	// 공백 제거 및 소문자 변환
+    /* const normalizedBookedTimes = bookedTimes.map(time => time.trim().toLowerCase());
+
+    console.log("Normalized bookedTimes: ", normalizedBookedTimes); // 정규화된 데이터 확인
+
+    let morningHtml = '';
+    for (let time of morningTimes) {
+        const normalizedTime = time.trim().toLowerCase();
+        console.log(`Checking if ${normalizedTime} is booked`);
+        if (normalizedBookedTimes.includes(normalizedTime)) {
+            morningHtml += `<li><span class="disabled">${time}</span></li>`;
+        } else {
+            morningHtml += `<li><a href="#juno" time24="${time}" ampm="am" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`;
+        }
+    } */
+    
+    
+
+    let afternoonHtml = '';
+    for (let time of afternoonTimes) {
+        if (bookedTimes.includes(time)) {
+            afternoonHtml += `<li><span class="disabled">${time}</span></li>`;
+        } else {
+            afternoonHtml += `<li><a href="#juno" time24="${time}" ampm="pm" time="${time}" onclick="selectTime('${time}')">${time}</a></li>`;
+        }
+    }
+    console.log("afternoonHtml: ", afternoonHtml); // 데이터 확인
+    document.getElementById("afternoonTimeList").innerHTML = afternoonHtml;
+}
+
+function selectTime(time) {
+    document.getElementById("timeselect").textContent = time;
+}
+
+
 
 var holidayData = [ {
   "sun" : "N",
@@ -973,91 +977,91 @@ function removeSelectedSisul(sisulid){
 	setMysisulArea();
 }
 
-var calendarData;
-function setCalendar(){
-	$("#caltbody").html("");
-	calendarData = buildCalendar();
-	$(".title_month").text(calendarData.year + "." + calendarData.month);
-	
-	var valhtml = "";
-	var sun, mon, tue, wed, thu, fri, sat;
-	for(var i=0; i < calendarData.dayinfo.length; i++){
-		sun = calendarData.dayinfo[i].sun === undefined ? "" : calendarData.dayinfo[i].sun;
-		mon = calendarData.dayinfo[i].mon === undefined ? "" : calendarData.dayinfo[i].mon;
-		tue = calendarData.dayinfo[i].tue === undefined ? "" : calendarData.dayinfo[i].tue;
-		wed = calendarData.dayinfo[i].wed === undefined ? "" : calendarData.dayinfo[i].wed;
-		thu = calendarData.dayinfo[i].thu === undefined ? "" : calendarData.dayinfo[i].thu;
-		fri = calendarData.dayinfo[i].fri === undefined ? "" : calendarData.dayinfo[i].fri;
-		sat = calendarData.dayinfo[i].sat === undefined ? "" : calendarData.dayinfo[i].sat;
-		
-		valhtml += '<tr>';
-		valhtml += '	<td class="sun">';
-		if(sun !== "") {
-			if(holidayData[i].sun !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sun_" + sun + '" onclick="selectDay(' + sun + ')" day="' + sun + '">' + sun + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sun_" + sun + '" day="' + sun + '">' + sun + '</span>';
-			}
-		}				
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(mon !== "") {
-			if(holidayData[i].mon !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_mon_" + mon + '" onclick="selectDay(' + mon + ')" day="' + mon + '">' + mon + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_mon_" + mon + '" day="' + mon + '">' + mon + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(tue !== "") {
-			if(holidayData[i].tue !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_tue_" + tue + '" onclick="selectDay(' + tue + ')" day="' + tue + '">' + tue + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_tue_" + tue + '" day="' + tue + '">' + tue + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(wed !== "") {
-			if(holidayData[i].wed !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_wed_" + wed + '" onclick="selectDay(' + wed + ')" day="' + wed + '">' + wed + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_wed_" + wed + '" day="' + wed + '">' + wed + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(thu !== "") {
-			if(holidayData[i].thu !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_thu_" + thu + '" onclick="selectDay(' + thu + ')" day="' + thu + '">' + thu + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_thu_" + thu + '" day="' + thu + '">' + thu + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td>';
-		if(fri !== "") {
-			if(holidayData[i].fri !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_fri_" + fri + '" onclick="selectDay(' + fri + ')" day="' + fri + '">' + fri + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_fri_" + fri + '" day="' + fri + '">' + fri + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '	<td class="sat">';
-		if(sat !== "") {
-			if(holidayData[i].sat !== "Y"){
-				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sat_" + sat + '" onclick="selectDay(' + sat + ')" day="' + sat + '">' + sat + '</a>';
-			} else {
-				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sat_" + sat + '" day="' + sat + '">' + sat + '</span>';
-			}
-		}
-		valhtml += '	</td>';
-		valhtml += '</tr>';
-	}
-	$("#caltbody").html(valhtml);
-}
+ var calendarData;
+//function setCalendar(){
+//	$("#caltbody").html("");
+//	calendarData = buildCalendar();
+//	$(".title_month").text(calendarData.year + "." + calendarData.month);
+//	
+//	var valhtml = "";
+//	var sun, mon, tue, wed, thu, fri, sat;
+//	for(var i=0; i < calendarData.dayinfo.length; i++){
+//		sun = calendarData.dayinfo[i].sun === undefined ? "" : calendarData.dayinfo[i].sun;
+//		mon = calendarData.dayinfo[i].mon === undefined ? "" : calendarData.dayinfo[i].mon;
+//		tue = calendarData.dayinfo[i].tue === undefined ? "" : calendarData.dayinfo[i].tue;
+//		wed = calendarData.dayinfo[i].wed === undefined ? "" : calendarData.dayinfo[i].wed;
+//		thu = calendarData.dayinfo[i].thu === undefined ? "" : calendarData.dayinfo[i].thu;
+//		fri = calendarData.dayinfo[i].fri === undefined ? "" : calendarData.dayinfo[i].fri;
+//		sat = calendarData.dayinfo[i].sat === undefined ? "" : calendarData.dayinfo[i].sat;
+//		
+//		valhtml += '<tr>';
+//		valhtml += '	<td class="sun">';
+//		if(sun !== "") {
+//			if(holidayData[i].sun !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sun_" + sun + '" onclick="selectDay(' + sun + ')" day="' + sun + '">' + sun + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sun_" + sun + '" day="' + sun + '">' + sun + '</span>';
+//			}
+//		}				
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(mon !== "") {
+//			if(holidayData[i].mon !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_mon_" + mon + '" onclick="selectDay(' + mon + ')" day="' + mon + '">' + mon + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_mon_" + mon + '" day="' + mon + '">' + mon + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(tue !== "") {
+//			if(holidayData[i].tue !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_tue_" + tue + '" onclick="selectDay(' + tue + ')" day="' + tue + '">' + tue + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_tue_" + tue + '" day="' + tue + '">' + tue + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(wed !== "") {
+//			if(holidayData[i].wed !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_wed_" + wed + '" onclick="selectDay(' + wed + ')" day="' + wed + '">' + wed + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_wed_" + wed + '" day="' + wed + '">' + wed + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(thu !== "") {
+//			if(holidayData[i].thu !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_thu_" + thu + '" onclick="selectDay(' + thu + ')" day="' + thu + '">' + thu + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_thu_" + thu + '" day="' + thu + '">' + thu + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td>';
+//		if(fri !== "") {
+//			if(holidayData[i].fri !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_fri_" + fri + '" onclick="selectDay(' + fri + ')" day="' + fri + '">' + fri + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_fri_" + fri + '" day="' + fri + '">' + fri + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '	<td class="sat">';
+//		if(sat !== "") {
+//			if(holidayData[i].sat !== "Y"){
+//				valhtml += '	<a href="#juno" id="'+ String(i+1) + "_sat_" + sat + '" onclick="selectDay(' + sat + ')" day="' + sat + '">' + sat + '</a>';
+//			} else {
+//				valhtml += '	<span class="closeday" id="'+ String(i+1) + "_sat_" + sat + '" day="' + sat + '">' + sat + '</span>';
+//			}
+//		}
+//		valhtml += '	</td>';
+//		valhtml += '</tr>';
+//	}
+//	$("#caltbody").html(valhtml);
+//}
 
 
 function initRsvTime(reservedTimeList){
@@ -1130,37 +1134,37 @@ function initRsvTime(reservedTimeList){
 	loading.close();	
 }
 
-var targetday = targetDateInstance.getDate();
+//var targetday = targetDateInstance.getDate();
 	
 function prevCal(){
-	prevCalendar();
-	setCalendar();
-	var todayInstance = new Date();
-	if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
-		targetday = todayInstance.getDate();
-	} else {
-		targetday = 1;
-	}
-	selectDay(targetday);
+	//prevCalendar();
+	//setCalendar();
+	//var todayInstance = new Date();
+	//if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
+	//	targetday = todayInstance.getDate();
+	//} else {
+	//	targetday = 1;
+	//}
+	//selectDay(targetday);
 }
 
 function nextCal(){
-	nextCalendar();
-	setCalendar();
-	var todayInstance = new Date();
-	if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
-		targetday = todayInstance.getDate();
-	} else {
-		targetday = 1;
-	}
-	selectDay(targetday);
+	//nextCalendar();
+	//setCalendar();
+	//var todayInstance = new Date();
+	//if(targetDateInstance.getFullYear() == todayInstance.getFullYear() && targetDateInstance.getMonth() == todayInstance.getMonth()){
+	//	targetday = todayInstance.getDate();
+	//} else {
+	//	targetday = 1;
+	//}
+	//selectDay(targetday);
 }
 
 function todayCal(){
-	setCalendar();
-	selectDay(targetday);
+	//setCalendar();
+	//selectDay(targetday);
 }
-
+ 
 function gotoNext(){
 
 	

@@ -1,3 +1,248 @@
+<html xmlns="http://www.w3.org/1999/xhtml" class=" js no-touch csstransforms csstransforms3d csstransitions" style=""><head>
+
+
+		<div id="container" class="reservation_wrap">
+			<div class="sub_visual">
+				<div class="sub_visual_bg" style="background-image:url('/static_resources/images/junohair/sub/reservation/reser_visual.jpg')"></div>
+				<div class="sub_visual_text">
+					<strong>RESERVATION</strong>
+					<p class="sub_visual_sub_text">
+						<span>실시간 매장 예약을 통해 <br class="m">편리한 매장 이용을 도와드리며,</span><br>
+						<span>AI기반의 디자이너 추천 기능을 제공합니다.</span>
+					</p>
+				</div>
+			</div>
+			
+			<div id="contents" class="shop_list">
+				<div class="reser_process">
+					<ul>
+						<li>
+							<span class="num">01</span>
+
+							<span>매장 선택</span>
+
+
+						</li>
+						<li style="cursor: pointer;" onclick="gotoPre()">
+							<span class="num">02</span>
+
+							<span>디자이너 선택</span>
+
+
+						</li>
+						<li class="current">
+							<span class="num">03</span>
+							<span>일정 및 시술 선택</span>
+						</li>
+						<li>
+							<span class="num">04</span>
+							<span>예약 확인</span>
+						</li>
+					</ul>
+				</div>
+
+				<div class="clear"></div>
+
+				<div class="designer_namebox">
+					<p class="profileimg">
+
+	
+	
+						<img src="/upload/designer/202007/cec23a1f4708444e8cb9e5c78a8dc744.jpg" alt="" class="profileimgsrc">	
+	
+
+					</p>
+					<div class="infocont">
+						<p class="ttl">정원 수석실장<em>-</em><span class="branch">가든강남구청역점</span></p>
+						<p class="desc">자연스러움속 트랜디함을 만들어드립니다!</p>
+					</div>
+					<span class="line"></span>
+				</div>
+				<div class="schedule_box">
+					<div class="calendar_wrap">
+						<div class="head">
+						    <a class="btn_prev" href="#juno" onclick="prevCal()"><span class="blind">이전</span></a>
+						    <span class="title_month">2024.7</span>
+						    <a class="btn_next" href="#juno" onclick="nextCal()"><span class="blind">다음</span></a>
+						</div>
+						<div class="calendarTable">
+							<table border="0" cellpadding="0" cellspacing="0">
+								<thead>
+				                    <tr>
+				                        <th class="sun">일</th>
+				                        <th>월</th>
+				                        <th>화</th>
+				                        <th>수</th>
+				                        <th>목</th>
+				                        <th>금</th>
+				                        <th class="sat">토</th>
+				                    </tr>
+				                </thead>
+				                <tbody id="caltbody"><tr>	<td class="sun">	</td>	<td>	<span class="closeday" id="1_mon_1" day="1">1</span>	</td>	<td>	<a href="#juno" id="1_tue_2" onclick="selectDay(2)" day="2">2</a>	</td>	<td>	<a href="#juno" id="1_wed_3" onclick="selectDay(3)" day="3" class="">3</a>	</td>	<td>	<a href="#juno" id="1_thu_4" onclick="selectDay(4)" day="4" class="">4</a>	</td>	<td>	<a href="#juno" id="1_fri_5" onclick="selectDay(5)" day="5">5</a>	</td>	<td class="sat">	<a href="#juno" id="1_sat_6" onclick="selectDay(6)" day="6">6</a>	</td></tr><tr>	<td class="sun">	<a href="#juno" id="2_sun_7" onclick="selectDay(7)" day="7">7</a>	</td>	<td>	<span class="closeday" id="2_mon_8" day="8">8</span>	</td>	<td>	<a href="#juno" id="2_tue_9" onclick="selectDay(9)" day="9">9</a>	</td>	<td>	<a href="#juno" id="2_wed_10" onclick="selectDay(10)" day="10">10</a>	</td>	<td>	<a href="#juno" id="2_thu_11" onclick="selectDay(11)" day="11">11</a>	</td>	<td>	<a href="#juno" id="2_fri_12" onclick="selectDay(12)" day="12">12</a>	</td>	<td class="sat">	<a href="#juno" id="2_sat_13" onclick="selectDay(13)" day="13">13</a>	</td></tr><tr>	<td class="sun">	<a href="#juno" id="3_sun_14" onclick="selectDay(14)" day="14">14</a>	</td>	<td>	<span class="closeday" id="3_mon_15" day="15">15</span>	</td>	<td>	<a href="#juno" id="3_tue_16" onclick="selectDay(16)" day="16">16</a>	</td>	<td>	<a href="#juno" id="3_wed_17" onclick="selectDay(17)" day="17">17</a>	</td>	<td>	<a href="#juno" id="3_thu_18" onclick="selectDay(18)" day="18">18</a>	</td>	<td>	<a href="#juno" id="3_fri_19" onclick="selectDay(19)" day="19" class="dday">19</a>	</td>	<td class="sat">	<a href="#juno" id="3_sat_20" onclick="selectDay(20)" day="20" class="">20</a>	</td></tr><tr>	<td class="sun">	<a href="#juno" id="4_sun_21" onclick="selectDay(21)" day="21" class="">21</a>	</td>	<td>	<span class="closeday" id="4_mon_22" day="22">22</span>	</td>	<td>	<a href="#juno" id="4_tue_23" onclick="selectDay(23)" day="23" class="">23</a>	</td>	<td>	<a href="#juno" id="4_wed_24" onclick="selectDay(24)" day="24" class="">24</a>	</td>	<td>	<a href="#juno" id="4_thu_25" onclick="selectDay(25)" day="25">25</a>	</td>	<td>	<a href="#juno" id="4_fri_26" onclick="selectDay(26)" day="26" class="">26</a>	</td>	<td class="sat">	<a href="#juno" id="4_sat_27" onclick="selectDay(27)" day="27">27</a>	</td></tr><tr>	<td class="sun">	<a href="#juno" id="5_sun_28" onclick="selectDay(28)" day="28">28</a>	</td>	<td>	<span class="closeday" id="5_mon_29" day="29">29</span>	</td>	<td>	<a href="#juno" id="5_tue_30" onclick="selectDay(30)" day="30">30</a>	</td>	<td>	<a href="#juno" id="5_wed_31" onclick="selectDay(31)" day="31">31</a>	</td>	<td>	</td>	<td>	</td>	<td class="sat">	</td></tr></tbody>
+							</table>
+							<div class="noti">
+								<p><span>선택</span></p>
+								<p><span>불가</span></p>
+							</div>
+						</div>
+					</div>
+					<div class="timeselectbox">
+						<div class="dateTime">
+							<p class="tit">날짜</p>
+							<p class="txt" id="dateTimeTxt">2024.7.19(금)</p>
+						</div>
+						<div class="dateTime">
+							<p class="tit">시간</p>
+							<p class="timeselect" id="timeselect">시간을 선택해주세요.</p>
+							<p class="m_timeselect" id="m_timeselect"><a href="">시간을 선택해주세요.</a></p>
+						</div>
+						<div class="timeline" id="timeline"><div class="timesec">	<p class="tit">오전</p>	<ul><li><span class="disabled">9:00</span></li><li><span class="disabled">9:30</span></li><li><a href="#juno" time24="10:00" ampm="am" time="10:00">10:00</a></li><li><a href="#juno" time24="10:30" ampm="am" time="10:30">10:30</a></li><li><a href="#juno" time24="11:00" ampm="am" time="11:00">11:00</a></li><li><a href="#juno" time24="11:30" ampm="am" time="11:30">11:30</a></li>	</ul></div><div class="timesec">	<div class="line"><span></span></div>	<p class="tit">오후</p>	<ul><li><a href="#juno" time24="12:00" ampm="pm" time="12:00">12:00</a></li><li><a href="#juno" time24="12:30" ampm="pm" time="12:30">12:30</a></li><li><a href="#juno" time24="13:00" ampm="pm" time="1:00">1:00</a></li><li><a href="#juno" time24="13:30" ampm="pm" time="1:30">1:30</a></li><li><a href="#juno" time24="14:00" ampm="pm" time="2:00">2:00</a></li><li><a href="#juno" time24="14:30" ampm="pm" time="2:30">2:30</a></li><li><a href="#juno" time24="15:00" ampm="pm" time="3:00">3:00</a></li><li><a href="#juno" time24="15:30" ampm="pm" time="3:30">3:30</a></li><li><a href="#juno" time24="16:00" ampm="pm" time="4:00">4:00</a></li><li><a href="#juno" time24="16:30" ampm="pm" time="4:30">4:30</a></li><li><a href="#juno" time24="17:00" ampm="pm" time="5:00">5:00</a></li><li><a href="#juno" time24="17:30" ampm="pm" time="5:30">5:30</a></li><li><a href="#juno" time24="18:00" ampm="pm" time="6:00">6:00</a></li><li><a href="#juno" time24="18:30" ampm="pm" time="6:30">6:30</a></li><li><a href="#juno" time24="19:00" ampm="pm" time="7:00">7:00</a></li><li><a href="#juno" time24="19:30" ampm="pm" time="7:30">7:30</a></li><li><a href="#juno" time24="20:00" ampm="pm" time="8:00">8:00</a></li><li><a href="#juno" time24="20:30" ampm="pm" time="8:30">8:30</a></li><li><span class="disabled">9:00</span></li><li><span class="disabled">9:30</span></li>	</ul></div></div>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				<div class="sisul_categorybox">
+					<div class="sisul_category cover_scroll">
+						<ul>
+							<li class="active"><a href="#juno" id="shampu"
+								onclick="selectSisulCategory('shampu')">샴푸</a></li>
+							<li><a href="#juno" id="dry"
+								onclick="selectSisulCategory('dry')">드라이</a></li>
+							<li><a href="#juno" id="cut"
+								onclick="selectSisulCategory('cut')">커트</a></li>
+							<li><a href="#juno" id="perm"
+								onclick="selectSisulCategory('perm')">펌</a></li>
+							<li><a href="#juno" id="color"
+								onclick="selectSisulCategory('color')">컬러</a></li>
+							<li><a href="#juno" id="clinic"
+								onclick="selectSisulCategory('clinic')">클리닉</a></li>
+							<li><a href="#juno" id="headspa"
+								onclick="selectSisulCategory('headspa')">헤드스파</a></li>
+						</ul>
+						<span class="cover left"></span> <span class="cover right"></span>
+					</div>
+				</div>
+
+			<div class="sisul_category_detail sisul_cate_items">
+				<ul id="sisuldetails">
+					<!-- 시술 목록은 JavaScript로 채워집니다 -->
+				</ul>
+			</div>
+				
+			<div class="recomm_sisul" id="recomm_sisul" style="display: none;"></div>
+
+			<div class="forecast_sisul" style="display: none">
+				<div class="box">
+					<p class="ttl">선택 내역</p>
+					<div class="mysisul">
+						<ul id="mysisullist"></ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="sisul_textbox">
+				<textarea id="orderMemo" placeholder="요청사항을 입력하세요 (150자 이내)"></textarea>
+			</div>
+
+			<div class="ai_foot_btns">
+				<a href="javascript:gotoPre();" class="btnbox_line">이전</a> <a
+					href="#juno" class="btnbox_black">다음</a>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		<div id="footer">
+			<div class="footgotop" id="goTop"><a href="#juno" onclick="goTopbtn()"><span class="blind">상단으로 가기</span></a></div>
+			<div class="footer_top">
+				<div class="inner">
+					<div class="ft_left">
+						<div class="family_site">
+							<img src="/static_resources/images/family_site.png" alt="family site">
+							<span class="bar"></span>
+							<ul class="fs_list">
+								<li><a href="#juno" onclick="location.href='/junohair'"><img src="/static_resources/images/family_junoHair.png" alt="JUNO HAIR"></a></li>
+								<li><a href="#juno" onclick="location.href='/junoacademy'"><img src="/static_resources/images/family_junoAcademy.png" alt="JUNO ACADEMY"></a></li>
+								<li><a href="#juno" onclick="location.href='/avenuejuno'"><img src="/static_resources/images/family_junoAvenue.png" alt="JUNO AVENUE"></a></li>
+								<li><a href="#juno" onclick="location.href='https://www.triamilia.com/'"><img src="/static_resources/images/family_triamilia.png" alt="triamilia"></a></li> 
+							</ul>
+						</div>
+						<div class="terms">
+							<ul class="term_list">
+								<li><a href="#juno" onclick="window.open('/myjuno/privacypolicy?section=1', '_blank');">이용약관</a></li>
+								<li><span class="bar"></span></li>
+								<li><a href="#juno" onclick="window.open('/myjuno/privacypolicy?section=2', '_blank');">개인정보처리방침</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="ft_right">
+						<div class="ft_rightTop">
+							<ul>
+								<li><a href="#juno" onclick="location.href='/junohair/communication/partnership'">제휴문의</a></li>
+								<li><a href="#juno" onclick="location.href='/recruit'">인재채용</a></li>
+								<li><a href="#juno" onclick="location.href='/junohair/communication/qna'">Q&amp;A</a></li>
+							</ul>
+						</div>
+						<div class="fr_rightBottom">
+							<strong><img src="/static_resources/images/junohair/footer_media_img.png" alt="JUNO SOCIAL MEDIA"><span class="bar"></span></strong>
+							<ul>
+								<li><a href="#juno" onclick="window.open('https://www.facebook.com/junohair.official/', '_blank');"><img src="/static_resources/images/junohair/footer_social1.jpg" alt="facebook"></a></li>
+								<li><a href="#juno" onclick="window.open('https://www.instagram.com/junohair_official/', '_blank');"><img src="/static_resources/images/junohair/footer_social2.jpg" alt="instagram"></a></li>
+								<li><a href="#juno" onclick="window.open('https://www.youtube.com/channel/UCwmPMC_aCMskDKR6P30pn6Q/', '_blank');"><img src="/static_resources/images/junohair/footer_social_youtube.jpg" alt="youtube"></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer_btm">
+				<div class="inner">
+					<strong><img src="/static_resources/images/junohair/footer_junohair_logo.png" alt="JUNO HAIR"></strong>
+					<div class="address">
+						<p>
+							<span>(주)준오뷰티</span>
+							<span>대표자 강윤선</span>	
+							<span>서울특별시 강남구 청담동 63-14 JUNO &amp; BEAUTY 5층</span>	
+						</p>
+						<p>
+							<span>사업자등록번호 : 110-81-60003</span>
+							<span>통신판매번호 : 2020-서울강남-02683호</span>
+							<span>대표전화 +82-2-548-0605</span>
+						</p>
+						<p>Copyright ⓒ 2017 JUNOHAIR.COM. All rights Reserved.</p>
+					</div>
+		            <div class="emblem">
+		            	<img src="/static_resources/images/K_BPI_2020.png" alt="2020 K-BPI 파워엠블렘" style="height:44px">  <!-- 2020-04-02 이미지경로 수정-->
+						<img src="/static_resources/images/naward.png" alt="2017 &amp;Award">
+		            </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	<div class="loading" style="display: none;">
+		<div class="loading_inner">
+			<img src="/static_resources/images/gate_img1.png" alt="JUNO HAIR">
+			<p>시간스케줄을 로딩중 입니다..</p>
+			<div class="loading_dots">
+				<span class="loading_dot active"></span>
+				<span class="loading_dot active"></span>
+				<span class="loading_dot active"></span>
+				<span class="loading_dot active"></span>
+				<span class="loading_dot active"></span>
+			</div>
+		</div>
+	</div>
 <script>
 		
 var holidayData = [ {
@@ -893,3 +1138,5 @@ function gotoPre(){
 	
 }
 </script>
+
+</body></html>
