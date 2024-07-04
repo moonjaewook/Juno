@@ -24,6 +24,7 @@ import com.good.juno.dto.DesignerDto;
 import com.good.juno.dto.OrderDetailProductDto;
 import com.good.juno.dto.OrderInfoDto;
 import com.good.juno.dto.QnaDto;
+import com.good.juno.dto.ReservationDetailDto;
 
 @Controller
 public class AdminController {
@@ -194,7 +195,19 @@ public class AdminController {
 		return "redirect:admin_designer";
 	}
 	
-	
+	@RequestMapping("admin_reservation")
+	public String designerReservationCheck(HttpServletRequest request, Model model, HttpSession session) {
+		
+		String id = (String) session.getAttribute("id");
+		System.out.println(id);
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		List<ReservationDetailDto> dto = dao.getAllReservationsForDesigner(id);
+		
+		model.addAttribute("reservations", dto);
+		
+		return "admin/reservationList";
+	}
 
 	@RequestMapping("designer_del")
 	public String designer_del(HttpServletRequest request, Model model, HttpSession session) {
@@ -265,6 +278,46 @@ public class AdminController {
 
 		return "redirect:adminqna";
 	}
+	
+	@RequestMapping("/reservationListCheck")
+	public String reservationList(Model model) {
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		List<ReservationDetailDto> dto = dao.getAllReservations();
+		
+		model.addAttribute("reservations", dto);
+		
+		return "admin/reservationList";
+	}
+	
+	@RequestMapping("/myJuno")
+	public String myJuno(HttpServletRequest request, HttpSession session) {
+		
+		String id = (String) session.getAttribute("id");
+		System.out.println("로그인된 id : " + id);
+		
+		if (id == null) {
+			session.setAttribute("loginCheck", "로그인이 필요합니다.");
+			return "Join_Login/Login";
+		}
+		
+		return "admin/myJuno";
+	}
+	
+	@RequestMapping("/MyreservationListCheck")
+	public String myReservationListCheck(HttpServletRequest request, Model model, HttpSession session) {
+		
+		String id = (String) session.getAttribute("id");
+		System.out.println(id);
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		List<ReservationDetailDto> dto = dao.getAllReservationsForUser(id);
+		
+		model.addAttribute("reservations", dto);
+		
+		return "admin/reservationList";
+	}
+
 
 	@RequestMapping("/Logout")
 	public String logoutAction(HttpServletRequest request, Model model, HttpSession session) {

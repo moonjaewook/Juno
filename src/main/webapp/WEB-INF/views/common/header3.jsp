@@ -91,7 +91,7 @@
 						<ul>
 							<li><a>ABOUT</a></li>
 							<li><a>SALON</a></li>
-							<li><a>MEMBERSHIP</a></li>
+							<li><a href="myJuno">MY JUNO</a></li>
 							<li><a href="news">COMMUNICATION</a></li>
 							<li><a href="branch">RESERVATION</a></li>
 							<li><a href="jmarket">J MARKET</a></li>

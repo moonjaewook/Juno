@@ -3,6 +3,7 @@ package com.good.juno.dto;
 import java.sql.Date;
 
 public class OrderInfoDto {
+	
     private Date orderDate;
     private int orderId;
     private String userId;

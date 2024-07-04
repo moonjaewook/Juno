@@ -68,11 +68,11 @@
 						<li>
 							<p class="tit">날짜</p>
 							<p class="date">
-								<span>${reservation.reservationDate}</span>
+								${reservation.reservationDate}
 							</p>
 						</li>
 						<li>
-							<p class="tit">예약자</p>
+							<p class="tit">예약자 ID</p>
 							<p>${reservation.userId}</p>
 						</li>
 						<!-- 

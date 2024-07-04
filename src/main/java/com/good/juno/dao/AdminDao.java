@@ -7,6 +7,7 @@ import com.good.juno.dto.LoginDto;
 import com.good.juno.dto.OrderDetailProductDto;
 import com.good.juno.dto.OrderInfoDto;
 import com.good.juno.dto.QnaDto;
+import com.good.juno.dto.ReservationDetailDto;
 
 public interface AdminDao {
 
@@ -57,6 +58,12 @@ public interface AdminDao {
 	public int delete_workday(String designerId);
 	
 	public QnaDto Qnainfo(String qnaId);
+
+	public List<ReservationDetailDto> getAllReservations();
+
+	public List<ReservationDetailDto> getAllReservationsForDesigner(String id);
+
+	public List<ReservationDetailDto> getAllReservationsForUser(String id);
 
 	
 }
