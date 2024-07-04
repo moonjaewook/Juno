@@ -10,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.good.juno.command.reservation.Command;
 import com.good.juno.command.reservation.ScheduleCommand;
 import com.good.juno.dao.ReservationIDao;
 import com.good.juno.dto.DesignerWorkDto;
+import com.good.juno.dto.ReservationDto;
 
 @Controller
 // @RequestMapping("/reservation")
@@ -60,6 +64,61 @@ public class ReservationController {
 
 		return "/reservation/designer"; // jsp로 이동
 	}
+	
+	// 예약 - 스케줄
+	@RequestMapping(value = "/schedule", method = {RequestMethod.GET, RequestMethod.POST})
+    public String schedule(HttpServletRequest request, Model model,
+                           @RequestParam(value = "designerId", required = false) String designerId,
+                           @RequestParam(value = "reservationDate", required = false) String reservationDate) {
+        System.out.println("schedule()");
+
+        // Check if the request is for fetching booked times
+        if (designerId != null && reservationDate != null) {
+            ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
+            List<ReservationDto> bookedTimes = dao.getBookedTimes(designerId, reservationDate + "%");
+
+            // 예약된 시간을 String 리스트로 변환
+            List<String> bookedTime = new ArrayList<String>();
+            for (ReservationDto dto : bookedTimes) {
+                bookedTime.add(dto.getReservationTime().toLocalDateTime().toLocalTime().toString());
+            }
+
+            // AJAX 요청인 경우 JSON 형태로 반환
+            model.addAttribute("bookedTime", bookedTime);
+            return "jsonView"; // JSON 형식으로 응답을 반환하기 위한 View 설정
+        }
+        
+
+        // Normal schedule page
+        int branchId = Integer.parseInt(request.getParameter("branchId")); // branchId를 int로 변환
+
+        ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
+
+        model.addAttribute("branchInfo", dao.selectedBranchInfo(branchId)); // 선택한 지점정보 -> 지점명 출력 ${branchInfo.branchName}
+        model.addAttribute("designerInfo", dao.selectedDesignerInfo(designerId)); // 선택한 디자이너의 인적 정보
+        model.addAttribute("designerWorkInfo", dao.selectedDesignerWorkInfo(designerId)); // 선택한 디자이너의 근무 정보
+
+        List<DesignerWorkDto> list = dao.selectedDesignerWorkInfo(designerId);
+
+        String[] days = {"0", "1", "2", "3", "4", "5", "6"};
+        String[] strDays = {"일", "월", "화", "수", "목", "금", "토"};
+        List<String> dayList = new ArrayList<String>();
+        for (DesignerWorkDto dto : list) {
+            for (int i = 0; i < strDays.length; i++) {
+                if (dto.getWorkDay().equals(strDays[i])) {
+                    dayList.add(days[i]);
+                }
+            }
+        }
+        model.addAttribute("designerWorkDay", dayList); // 선택한 디자이너의 근무 정보
+
+        ScheduleCommand command = new ScheduleCommand();
+        command.execute(model, branchId, designerId, dao);
+
+        return "/reservation/schedule"; // jsp로 이동
+    }
+	
+	
 
 	// 예약 - 스케줄
 	@RequestMapping("/schedule")
@@ -91,13 +150,38 @@ public class ReservationController {
         model.addAttribute("designerWorkDay", dayList); // 선택한 디자이너의 근무 정보
         
         
-        
-        
         ScheduleCommand command = new ScheduleCommand();
         command.execute(model, branchId, designerId, dao);
         
 		return "/reservation/schedule"; // jsp로 이동
 	}
+	
+	// AJAX 요청을 처리하는 메서드 추가
+    @RequestMapping(value = "/getBookedTimes", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> getBookedTimes(@RequestParam("designerId") String designerId,
+                                       @RequestParam("reservationDate") String reservationDate, Model model) {
+    	
+    	ReservationIDao dao = sqlSession.getMapper(ReservationIDao.class);
+    	
+        List<ReservationDto> bookedTimes = dao.getBookedTimes(designerId, reservationDate + "%"); // 예약된 시간목록
+
+        // 예약된 시간을 String 리스트로 변환
+        List<String> bookedTime = new ArrayList<String>(); 
+        for (ReservationDto dto : bookedTimes) {
+        	bookedTime.add(dto.getReservationTime().toLocalDateTime().toLocalTime().toString());
+        }
+
+        return bookedTime;
+    }
+    
+    
+	
+	
+	
+	
+	
+	
 
 	// 예약 - 확인
 	@RequestMapping("/reservationConfirm")

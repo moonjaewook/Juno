@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.good.juno.dto.DesignerDto;
 import com.good.juno.dto.DesignerWorkDto;
 import com.good.juno.dto.ReservationDto;
@@ -28,14 +30,15 @@ public interface ReservationIDao {
     // 선택한 디자이너의 (인적)정보
     public DesignerDto selectedDesignerInfo(String designerId);
     
+    
     // 선택한 디자이너의 (근무)정보
     public List<DesignerWorkDto> selectedDesignerWorkInfo(String designerId);
 
     // 특정 디자이너의 특정 날짜에 대한 예약된 시간 조회
-	public List<ReservationDto> getBookedTimes(String designerId, String reservationDate);
+	// public List<ReservationDto> getBookedTimes(String designerId, String reservationDate);
+	public List<ReservationDto> getBookedTimes(@Param("designerId") String designerId, @Param("reservationDate") String reservationDate);
     
  
-    
     
 	
 //	// 목록 BListCommand
