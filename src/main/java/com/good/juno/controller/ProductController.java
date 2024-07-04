@@ -22,6 +22,8 @@ import com.good.juno.dao.AdminDao;
 import com.good.juno.dao.ProductDao;
 import com.good.juno.dao.ProductIDao;
 import com.good.juno.dto.LoginDto;
+import com.good.juno.dto.OrderDetailProductDto;
+import com.good.juno.dto.OrderInfoDto;
 import com.good.juno.dto.ProductCartDto;
 import com.good.juno.dto.ProductDto;
 
@@ -81,7 +83,7 @@ public class ProductController {
 		return "market/productDetail";
 	}
 	
-	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½
+	//å ì™ì˜™è¢‚å ì™ì˜™å ï¿½
 	@RequestMapping("/addCart")
 	public String addCart(HttpServletRequest request, Model model) {
 		
@@ -103,15 +105,15 @@ public class ProductController {
 	    boolean existProduct = false;
 	    
 	    for (ProductCartDto item : cart) {
-	        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+	        // å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì‹±ë±„ì˜™ å ìŒëŒì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸
 	        if (item.getProduct().getProductId() == dto.getProductId() &&
 	            item.getProduct().getProductType() == dto.getProductType()) {
-	            item.setQuantity(item.getQuantity() + quantity); // ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+	            item.setQuantity(item.getQuantity() + quantity); // å ì™ì˜™å ì™ì˜™ å ìŒ©ê³¤ì˜™
 	            existProduct = true;
 	            break;
 	        }
 	    }
-	    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½Ì¶ï¿½ï¿½
+	    //å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™í’ˆå ì‹±ë°ì˜™å ï¿½
 	    if (!existProduct) {
 	        cart.add(new ProductCartDto(dto, quantity));
 	    }
@@ -119,7 +121,7 @@ public class ProductController {
 	    session.setAttribute("cart", cart);
 	    List<ProductCartDto> cart2 = (List<ProductCartDto>) session.getAttribute("cart");
 	    
-	    //ï¿½×½ï¿½Æ®
+	    //å ìŒ“ì™ì˜™íŠ¸
 	    for (ProductCartDto item : cart2) {
 	    	
 	    	System.out.println(item.getProduct().getName());
@@ -131,7 +133,7 @@ public class ProductController {
 		return "redirect:jmarket";
 	}
 	
-	//Àå¹Ù±¸´Ï¿¡¼­ Æ¯Á¤ ¸ñ·Ï »èÁ¦
+	//ì¥ë°”êµ¬ë‹ˆì—ì„œ íŠ¹ì • ëª©ë¡ ì‚­ì œ
 	@RequestMapping("/deleteCart")
 	public String deleteCart(@RequestParam("ptype") int ptype, @RequestParam("pid") int pid, HttpServletRequest request) {
 		
@@ -159,16 +161,16 @@ public class ProductController {
 		return "redirect:jmarket";
 	}
 	
-	//±¸¸ÅÇÏ±â ÆäÀÌÁö1
+	//êµ¬ë§¤í•˜ê¸° í˜ì´ì§€1
 	@RequestMapping("/purchase")
 	public String purchase(HttpServletRequest request, Model model) {
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
-		System.out.println("·Î±×ÀÎµÈ id : " + id);
+		System.out.println("ë¡œê·¸ì¸ëœ id : " + id);
 		
 		if (id == null) {
-			session.setAttribute("loginCheck", "·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.");
+			session.setAttribute("loginCheck", "ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.");
 			return "Join_Login/Login";
 		}
 		
@@ -181,7 +183,7 @@ public class ProductController {
 		return "market/orderStep1";
 	}
 	
-	//ÁÖ¹®Ã³¸®
+	//ì£¼ë¬¸ì²˜ë¦¬
 	@RequestMapping("/order")
 	public String order(HttpServletRequest request, Model model) {
 		
@@ -189,22 +191,22 @@ public class ProductController {
 		String id = (String) session.getAttribute("id");
 		
 		ProductIDao dao = sqlSession.getMapper(ProductIDao.class);
-		//°áÁ¦Å×ÀÌºí¿¡¼­ ¸¶Áö¸· ÁÖ¹®¹øÈ£ °¡Á®¿À±â
+		//ê²°ì œí…Œì´ë¸”ì—ì„œ ë§ˆì§€ë§‰ ì£¼ë¬¸ë²ˆí˜¸ ê°€ì ¸ì˜¤ê¸°
 		int orderId = dao.getOrderNum();
 		orderId++;
-		//°áÁ¦Å×ÀÌºí¿¡ insert
+		//ê²°ì œí…Œì´ë¸”ì— insert
 		dao.insertOrder(orderId, id);
 		
-	    int totalItems = Integer.parseInt(request.getParameter("totalItems")); // ÃÑ »óÇ° °³¼ö
+	    int totalItems = Integer.parseInt(request.getParameter("totalItems")); // ì´ ìƒí’ˆ ê°œìˆ˜
 	    
-	    System.out.println("»óÇ° ÃÑ °³¼ö" + totalItems);
+	    System.out.println("ìƒí’ˆ ì´ ê°œìˆ˜" + totalItems);
 	    for (int i = 0; i < totalItems; i++) {
 	    	//String productName = request.getParameter("productName_" + i);
 	        String productType = request.getParameter("productType_" + i);
 	        String productId = request.getParameter("productId_" + i);
 	        String quantity = request.getParameter("productQuantity_" + i);
 	        
-	        System.out.println(i + "¹øÂ° Ç×¸ñ");
+	        System.out.println(i + "ë²ˆì§¸ í•­ëª©");
 	        System.out.println(orderId);
 	        System.out.println(productType);
 	        System.out.println(productId);
@@ -214,8 +216,48 @@ public class ProductController {
 
 	    }
 		
-		return "market/orderStep2";
+	    session.removeAttribute("cart");
+	    
+		return "redirect:jmarket";
 	}
 	
+	@RequestMapping("/myorderList")
+	public String orderListCheck(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		System.out.println("ë¡œê·¸ì¸ëœ id : " + id);
+		
+		if (id == null) {
+			session.setAttribute("loginCheck", "ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.");
+			return "Join_Login/Login";
+		}
+		
+		ProductIDao dao = sqlSession.getMapper(ProductIDao.class);
+		List<OrderInfoDto> orders = dao.getAllOrders(id);
+		
+		model.addAttribute("orders", orders);
+		
+		return "market/myOrderList";
+	}
+	
+	@RequestMapping("/myOrderDetails")
+	public String orderDetails(@RequestParam("orderid") int orderid, HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		
+		if (id == null) {
+			session.setAttribute("loginCheck", "ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.");
+			return "Join_Login/Login";
+		}
+		
+		ProductIDao dao = sqlSession.getMapper(ProductIDao.class);
+		List<OrderDetailProductDto> detail = dao.getOrderDetails(orderid);
+		
+		model.addAttribute("detail", detail);
+		
+		return "market/myOrderDetail";
+	}
 
 }

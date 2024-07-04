@@ -76,8 +76,6 @@
 <script
 	src="https://www.junohair.com/static_resources/lib/axios/0.19.0/axios.min.js?rscVer=0333"></script>
 <script
-	src="https://www.junohair.com/static_resources/js/common.js?rscVer=0333"></script>
-<script
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
 
 <script
@@ -90,27 +88,20 @@
 
 </head>
 
-
-<!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header2.jsp" />
+<jsp:include page="/WEB-INF/views/common/header2.jsp">
+	<jsp:param name="id" value="${sessionScope.id}" />
+	<jsp:param name="admin" value="${sessionScope.admin}" />
+</jsp:include>
 
 <body class="join">
 	<div id="wrap">
 
-		<script>
-			function gotoMyjuno() {
-				if ("" != "CUST") {
-					alert("로그인후 이용이 가능합니다.");
-				}
-				location.href = "/myjuno/member_info";
-			}
-		</script>
 
 		<div id="container">
 			<div class="sub_visual">
 				<div class="sub_visual_bg"
 					style="background-image: url('https://www.junohair.com/static_resources/images/myjuno/intro_visual.jpg')"></div>
-				<div class="sub_visual_text">디자이너 등록</div>
+				<div class="sub_visual_text">문의 내용 답변</div>
 			</div>
 			<div class="sub_menu"></div>
 
@@ -119,147 +110,129 @@
 					<div class="inner"> -->
 			<div class="section1">
 				<div class="section_tit">
-					<span class="bar"></span> <strong class="tit">디자이너 등록</strong>
+					<span class="bar"></span> <strong class="tit">문의 내용 답변</strong>
 				</div>
 			</div>
 
-			<!-- 		<div class="section_content">
-							<div class="sec1_top">
-								<div class="join_form_wrap"> -->
+			<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 20px;
+	background-color: #f0f2f5;
+}
 
-			<form id="join" action="./RegisterAction" method=post>
+#qaForm {
+	width: 80%;
+	max-width: 800px;
+	margin: 20px auto;
+	background-color: #fff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	padding: 20px;
+}
 
-				<table>
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 10px 0; /* reduced top margin */
+}
 
-					<tr>
-						<!-- 기본정보-->
-						<td colspan="2" class="subtitle td">기본 정보</td>
-					</tr>
-					<tr>
-						<!-- 아이디 -->
-						<td class="division">아이디:</td>
-						<td class="valuefield"><input type="text" id="ID" name="id"
-							size="12" maxlength="12"> &nbsp; 4~12자의 영문 대소문자와 숫자로만 입력</td>
-					</tr>
+.subtitle {
+	background-color: #343a40;
+	color: white;
+	text-align: left;
+	font-weight: bold;
+	padding: 10px;
+}
 
-					<tr>
-						<!-- 비밀번호 -->
-						<td class="division">비밀번호:</td>
-						<td class="valuefield"><input type="password" id="PW"
-							name="pw" size="12" maxlength="12"> &nbsp; 4~12자의 영문
-							대소문자와 숫자로만 입력</td>
-					</tr>
+.division {
+	background-color: #f8f8f8;
+	width: 30%;
+	font-weight: bold;
+	padding: 12px 15px;
+	vertical-align: top; /* align text with input fields */
+}
 
-					<tr>
-						<!-- 비밀번호 확인 -->
-						<td class="division">비밀번호 확인:</td>
-						<td class="valuefield"><input type="password" id="PWconfirm"
-							name="pwconfirm" size="12" maxlength="12"></td>
-					</tr>
+.valuefield {
+	background-color: #fff;
+	padding: 12px 15px;
+}
 
-					<tr>
-						<!-- 메일주소 -->
-						<td class="division">메일주소:</td>
-						<td class="valuefield"><input type="text" id="Email"
-							name="email" size="30"></input> &nbsp; 예) id@domain.com</td>
-					</tr>
+input[type="text"], input[type="email"], textarea {
+	width: calc(100% - 20px);
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 5px; /* adjusted margin */
+}
 
-					<tr>
-						<!-- 이름 -->
-						<td class="division">이름:</td>
-						<td class="valuefield"><input type="text" id="Name"
-							name="name" size="30"></td>
-					</tr>
+textarea {
+	resize: vertical;
+	height: 120px; /* fixed height for textarea */
+}
 
-					<tr>
-						<!-- 기본정보-->
-						<td colspan="7" class="subtitle">개인 신상 정보</td>
-					</tr>
-					<tr>
-						<!-- 생일 -->
-						<td class="division">생일:</td>
-						<td class="valuefield"><input type="text" id="Year"
-							name="year" size="4" maxlength="4"> 년 <select id="Month"
-							name="month">
-								<option value="01">1</option>
-								<option value="02">2</option>
-								<option value="03">3</option>
-								<option value="04">4</option>
-								<option value="05">5</option>
-								<option value="06">6</option>
-								<option value="07">7</option>
-								<option value="08">8</option>
-								<option value="09">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-						</select> 월 <select id="Day" name="day">
-								<option value="01">1</option>
-								<option value="02">2</option>
-								<option value="03">3</option>
-								<option value="04">4</option>
-								<option value="05">5</option>
-								<option value="06">6</option>
-								<option value="07">7</option>
-								<option value="08">8</option>
-								<option value="09">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-								<option value="14">14</option>
-								<option value="15">15</option>
-								<option value="16">16</option>
-								<option value="17">17</option>
-								<option value="18">18</option>
-								<option value="19">19</option>
-								<option value="20">20</option>
-								<option value="21">21</option>
-								<option value="22">22</option>
-								<option value="23">23</option>
-								<option value="24">24</option>
-								<option value="25">25</option>
-								<option value="26">26</option>
-								<option value="27">27</option>
-								<option value="28">28</option>
-								<option value="29">29</option>
-								<option value="30">30</option>
-								<option value="31">31</option>
-						</select> 일</td>
-					</tr>
+.form_right {
+	text-align: center;
+	padding: 20px;
+}
 
+.button {
+	background-color: #343a40;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
 
+.button:hover {
+	background-color: #23272b;
+}
+</style>
+			</head>
+			<body>
 
-					<tr>
-						<!-- 자기소개  -->
-						<td class="division">자기소개:</td>
-						<td class="valuefield"><textarea id="Intro" name="intro"
-								cols="72" rows="10"></textarea></td>
-					</tr>
+				<form id="adminqna_replyaction" action="adminqna_replyaction" method="post">
 
-				</table>
+					<table>
+						<tr>
+							<td colspan="2" class="subtitle">Q&A Email Form</td>
+						</tr>
+						<input type="hidden" id="qnaId" name="qnaId" value="${qnaId.qnaId}" />
+						<input type="hidden" id="userEmail" name="userEmail" value="${qnaId.userEmail}" />
+						
+						<tr>
+							<td class="division">발송자명:</td>
+							<td class="valuefield">${qnaId.userId }</td>
+						</tr>
+						<tr>
+							<td class="division">발송이메일:</td>
+							<td class="valuefield">${qnaId.userEmail}</td>
+						</tr>
+						<tr>
+							<td class="division">문의내용:</td>
+							<td class="valuefield">${qnaId.content}</td>
+						</tr>
+						<tr>
+							<td class="division">답변:</td>
+							<td class="valuefield"><textarea id="answerContent"
+									name="answerContent" rows="5" required></textarea></td>
+						</tr>
+					</table>
 
-			</form>
-		
-		<p style="text-align: center;">
-			<button type="button" class="button-common" onclick="verification()">디자이너 등록</button>
-			&nbsp;&nbsp; <input type="reset" value="다시 입력">
-		</p>
-
-
-			<!-- <div class="sec1_btm">
-				<div class="join_form_wrap">
-
-					<div class="btn_group">
-						<ul>
-							<li class="member_submit"><a onclick="verification()">회원가입</a></li>
-							<li class="cancel"><a href="Login">취소</a></li>
-						</ul>
+					<div class="form_right">
+						<input type="submit" class="button" value="발송하기" />
 					</div>
-				</div>
-			</div> -->
-		
-		</br>		</br>		</br>
+
+				</form>
+
+
+				</br>
+				</br>
+				</br>
 		</div>
 	</div>
 	<!-- 						</div>

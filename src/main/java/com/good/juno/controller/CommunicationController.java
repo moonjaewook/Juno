@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.good.juno.command.reservation.Command;
+import com.good.juno.dao.AdminDao;
 import com.good.juno.dao.CommunicationIDao;
+import com.good.juno.dto.LoginDto;
 import com.good.juno.dto.NoticeDto;
 
 @Controller
@@ -46,25 +48,38 @@ public class CommunicationController {
 	}
 	
 	@RequestMapping("/qna")
-	public String qna() {
+	public String qna(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		System.out.println("로그인된 id : " + id);
+		
+		if (id == null) {
+			session.setAttribute("loginCheck", "로그인이 필요합니다.");
+			return "Join_Login/Login";
+		}
+		
+		AdminDao dao = sqlSession.getMapper(AdminDao.class);
+		LoginDto dto = dao.getInfo(id);
+		
+		model.addAttribute("userInfo", dto);
 		
 		return "communication/qna";
 	}
 	
-	@RequestMapping("/sendMail")
+	@RequestMapping("/sendQna")
 	public String sendMail(HttpServletRequest request, Model model) {
 		
+		//작업필요
+		String userId = request.getParameter("userId");
+		String userEmail = request.getParameter("userEmail");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		CommunicationIDao dao = sqlSession.getMapper(CommunicationIDao.class);
+		dao.sendQna(userId, userEmail, title, content);
+		
 		HttpSession session = request.getSession();
-		String senderID = (String) session.getAttribute("id");
-		//id 기준으로 보낸사람 email 찾는 로직, 찾았다치고
-		String email = "test@test.com";
-		
-		
-		
-		
-		
-		
-
+		session.setAttribute("qnaOk", "QNA가 전송되었습니다.");
 		
 		return "communication/qna";
 	}

@@ -76,8 +76,6 @@
 <script
 	src="https://www.junohair.com/static_resources/lib/axios/0.19.0/axios.min.js?rscVer=0333"></script>
 <script
-	src="https://www.junohair.com/static_resources/js/common.js?rscVer=0333"></script>
-<script
 	src="https://www.junohair.com/static_resources/js/common_vue.js?rscVer=0333"></script>
 
 <script
@@ -91,8 +89,10 @@
 </head>
 
 
-<!-- header.jsp 내용 -->
-<jsp:include page="/WEB-INF/views/common/header2.jsp" />
+		<jsp:include page="/WEB-INF/views/common/header2.jsp">
+			<jsp:param name="id" value="${sessionScope.id}" />
+			<jsp:param name="admin" value="${sessionScope.admin}" />
+		</jsp:include>
 
 <body class="join">
 	<div id="wrap">
@@ -127,57 +127,162 @@
 							<div class="sec1_top">
 								<div class="join_form_wrap"> -->
 
-			<form id="join" action="./JoinAction" method=post>
+			<style>
+body {
+	font-family: Arial, sans-serif !important;
+	margin: 20px !important;
+	background-color: #f0f2f5 !important;
+}
 
-				<table>
+#join {
+	width: 80% !important;
+	max-width: 800px !important;
+	margin: 20px auto !important;
+	background-color: #fff !important;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+	border-radius: 8px !important;
+	padding: 20px !important;
+}
 
+table {
+	width: 100% !important;
+	border-collapse: collapse !important;
+	margin: 20px 0 !important;
+}
+
+.subtitle {
+	background-color: #343a40 !important;
+	color: white !important;
+	text-align: left !important;
+	font-weight: bold !important;
+	padding: 10px !important;
+}
+
+.division {
+	background-color: #f8f8f8 !important;
+	width: 30% !important;
+	font-weight: bold !important;
+	padding: 12px 15px !important;
+}
+
+.valuefield {
+	background-color: #fff !important;
+	padding: 12px 15px !important;
+}
+
+input[type="text"], input[type="password"], input[type="file"], select,
+	textarea {
+	width: calc(100% - 20px) !important;
+	padding: 8px 10px !important;
+	border: 1px solid #ccc !important;
+	border-radius: 4px !important;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus,
+	textarea:focus {
+	border-color: #343a40 !important;
+	outline: none !important;
+	box-shadow: 0 0 5px rgba(52, 58, 64, 0.5) !important;
+}
+
+textarea {
+	resize: vertical !important;
+}
+
+.valuefield.datefield {
+	display: flex !important;
+	align-items: center !important;
+}
+
+.valuefield.datefield input[type="text"], .valuefield.datefield select {
+	width: auto !important;
+	margin-right: 10px !important;
+}
+
+.valuefield.datefield select:last-child {
+	margin-right: 0 !important;
+}
+
+.form_right {
+	text-align: center !important;
+	padding: 20px !important;
+}
+
+.button {
+	background-color: #343a40 !important;
+	color: #fff !important;
+	padding: 10px 20px !important;
+	border: none !important;
+	border-radius: 4px !important;
+	font-size: 16px !important;
+	cursor: pointer !important;
+	transition: background-color 0.3s !important;
+}
+
+.button:hover {
+	background-color: #23272b !important;
+}
+
+.form_right {
+	display: flex;
+	justify-content: center; /* 가로 가운데 정렬 */
+	align-items: center; /* 세로 가운데 정렬 */
+}
+
+.form_right button {
+	display: block;
+	color: #fff;
+	text-align: center;
+	background: #ed1c24;
+	font-size: 15px;
+	font-weight: 600;
+	height: 40px;
+	width: 130px;
+	border-radius: 5px;
+	border: none; /* 테두리 제거 */
+	cursor: pointer; /* 커서 모양 변경 */
+	margin: 0; /* 여백 제거 */
+	padding: 0; /* 내부 여백 제거 */
+}
+</style>
+
+			<form id="join" action="./JoinAction" method="post">
+				<table class="form-table">
 					<tr>
-						<!-- 기본정보-->
 						<td colspan="2" class="subtitle td">회원 기본 정보</td>
 					</tr>
 					<tr>
-						<!-- 아이디 -->
 						<td class="division">아이디:</td>
 						<td class="valuefield"><input type="text" id="ID" name="id"
-							size="12" maxlength="12"> &nbsp; 4~12자의 영문 대소문자와 숫자로만 입력</td>
+							size="12" maxlength="12"> &nbsp; 4~12자의 영문 대소문자와 숫자로만 입력
+						</td>
 					</tr>
-
 					<tr>
-						<!-- 비밀번호 -->
 						<td class="division">비밀번호:</td>
 						<td class="valuefield"><input type="password" id="PW"
 							name="pw" size="12" maxlength="12"> &nbsp; 4~12자의 영문
 							대소문자와 숫자로만 입력</td>
 					</tr>
-
 					<tr>
-						<!-- 비밀번호 확인 -->
 						<td class="division">비밀번호 확인:</td>
 						<td class="valuefield"><input type="password" id="PWconfirm"
 							name="pwconfirm" size="12" maxlength="12"></td>
 					</tr>
-
 					<tr>
-						<!-- 메일주소 -->
 						<td class="division">메일주소:</td>
 						<td class="valuefield"><input type="text" id="Email"
-							name="email" size="30"></input> &nbsp; 예) id@domain.com</td>
+							name="email" size="30"> &nbsp; 예) id@domain.com</td>
 					</tr>
-
 					<tr>
-						<!-- 이름 -->
 						<td class="division">이름:</td>
 						<td class="valuefield"><input type="text" id="Name"
 							name="name" size="30"></td>
 					</tr>
-
 					<tr>
-						<!-- 기본정보-->
 						<td colspan="7" class="subtitle">개인 신상 정보</td>
 					</tr>
 					<tr>
-						<!-- 생일 -->
-						<td class="division">생일:</td>
+						<td class="division">출생년도:</td>
 						<td class="valuefield"><input type="text" id="Year"
 							name="year" size="4" maxlength="4"> 년 <select id="Month"
 							name="month">
@@ -227,24 +332,17 @@
 								<option value="31">31</option>
 						</select> 일</td>
 					</tr>
-
-
-
 					<tr>
-						<!-- 자기소개  -->
 						<td class="division">자기소개:</td>
 						<td class="valuefield"><textarea id="Intro" name="intro"
 								cols="72" rows="10"></textarea></td>
 					</tr>
-
 				</table>
-
 			</form>
-		
-		<p style="text-align: center;">
-			<button type="button" class="button-common" onclick="verification()">회원가입</button>
-			&nbsp;&nbsp; <input type="reset" value="다시 입력">
-		</p>
+
+			<div class="form_right">
+				<button type="button" class="button-common" onclick="verification()">회원가입</button>
+			</div>
 
 
 			<!-- <div class="sec1_btm">
@@ -258,8 +356,8 @@
 					</div>
 				</div>
 			</div> -->
-		
-		</br>		</br>		</br>
+
+			</br> </br> </br>
 		</div>
 	</div>
 	<!-- 						</div>
