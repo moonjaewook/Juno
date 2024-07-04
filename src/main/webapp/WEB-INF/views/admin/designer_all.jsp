@@ -258,7 +258,7 @@ a:hover {
 								<div class="td consult-title">${member.designerName}</div>
 								<div class="td">${member.introduce}</div>
 								<div class="td">
-									<img src="./resources/designer/${member.designerPath}"
+									<img src="./resources/productupload/${member.designerPath}"
 										alt="프로필 사진">
 								</div>
 								<div class="td">${member.branchName}</div>

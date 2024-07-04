@@ -106,7 +106,7 @@
 		p.name, p.price, p.productImg1
 		FROM orderdetails od
 		JOIN
-		JunoProduct p ON od.producttype = p.productType AND od.productid =
+		junoProduct p ON od.producttype = p.productType AND od.productid =
 		p.productId
 		WHERE od.orderid = #{param}
 	</select>
@@ -142,11 +142,11 @@
 	</update>
 
 	<delete id="delete_workday">
-		DELETE FROM designerwork WHERE designerId = #{designerId}
+		DELETE FROM designerWork WHERE designerId = #{designerId}
 	</delete>
 
 	<update id="designer_modify_work">
-		INSERT INTO designerwork (designerId, workDay) VALUES (#{param1}, #{param2})
+		INSERT INTO designerWork (designerId, workDay) VALUES (#{param1}, #{param2})
 	</update>
 
 

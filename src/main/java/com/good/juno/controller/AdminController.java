@@ -59,7 +59,7 @@ public class AdminController {
 		dao.memberInsert(request.getParameter("id"), request.getParameter("pw"), request.getParameter("email"),
 				request.getParameter("name"),
 				request.getParameter("year") + request.getParameter("month") + request.getParameter("day"),
-				request.getParameter("intro"), "�씪諛�");
+				request.getParameter("intro"), "일반");
 		return "Join_Login/Login";
 	}
 
@@ -81,7 +81,7 @@ public class AdminController {
 			return "home";
 		} else {
 			System.out.println(2);
-			model.addAttribute("errorMessage", "ID �샊�� PW媛� �씪移섑븯吏� �븡�뒿�땲�떎!");
+			model.addAttribute("errorMessage", "ID 혹은 PW가 일치하지 않습니다!");
 			return "Join_Login/Login";
 		}
 	}
@@ -106,7 +106,7 @@ public class AdminController {
 	@RequestMapping("/RegisterBranchAction")
 	public String RegisterBranchAction(MultipartHttpServletRequest request,
 			@RequestParam("branch_img") MultipartFile branch_img, Model model) {
-		System.out.println("吏��젏 �벑濡� 而⑦듃濡ㅻ윭");
+		System.out.println("RegisterBranchAction");
 
 		model.addAttribute("request", request);
 		model.addAttribute("branch_img", branch_img);
@@ -128,7 +128,7 @@ public class AdminController {
 	@RequestMapping("/RegisterManagerAction")
 	public String RegisterManagerAction(MultipartHttpServletRequest request,
 			@RequestParam("profile") MultipartFile profile, Model model) {
-		System.out.println("�뵒�옄�씠�꼫 �벑濡� 而⑦듃濡ㅻ윭");
+		System.out.println("RegisterManagerAction");
 
 		model.addAttribute("request", request);
 		model.addAttribute("profile", profile);
@@ -193,8 +193,6 @@ public class AdminController {
 			
 		return "redirect:admin_designer";
 	}
-	
-	
 	
 	
 

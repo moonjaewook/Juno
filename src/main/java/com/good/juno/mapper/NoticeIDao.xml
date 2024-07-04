@@ -17,6 +17,6 @@
   
   <!-- QNA 인서트 -->
   <insert id="sendQna">
-  	  INSERT INTO QnA (userId, userEmail, title, content) VALUES (#{userId}, #{userEmail}, #{title}, #{content})
+  	  INSERT INTO qna (userId, userEmail, title, content) VALUES (#{userId}, #{userEmail}, #{title}, #{content})
   </insert>
 </mapper>

@@ -51,10 +51,10 @@ public class CommunicationController {
 	public String qna(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
-		System.out.println("·Î±×ÀÎµÈ id : " + id);
+		System.out.println("ï¿½Î±ï¿½ï¿½Îµï¿½ id : " + id);
 		
 		if (id == null) {
-			session.setAttribute("loginCheck", "·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.");
+			session.setAttribute("loginCheck", "ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤!");
 			return "Join_Login/Login";
 		}
 		
@@ -69,7 +69,7 @@ public class CommunicationController {
 	@RequestMapping("/sendQna")
 	public String sendMail(HttpServletRequest request, Model model) {
 		
-		//ÀÛ¾÷ÇÊ¿ä
+		//ï¿½Û¾ï¿½ï¿½Ê¿ï¿½
 		String userId = request.getParameter("userId");
 		String userEmail = request.getParameter("userEmail");
 		String title = request.getParameter("title");
@@ -79,7 +79,7 @@ public class CommunicationController {
 		dao.sendQna(userId, userEmail, title, content);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("qnaOk", "QNA°¡ Àü¼ÛµÇ¾ú½À´Ï´Ù.");
+		session.setAttribute("qnaOk", "QNAê°€ ì •ìƒì ìœ¼ë¡œ ì „ì†¡ë˜ì—ˆìŠµë‹ˆë‹¤!");
 		
 		return "communication/qna";
 	}
